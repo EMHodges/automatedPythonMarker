@@ -19,7 +19,7 @@ The app is packaged using Pyinstaller. The file ```automatedPythonMarker.spec```
 ```dist.py``` contains the command to be run to generate the executable. 
 
 To rename the executable change the ```name``` parameter in ```automatedPythonMarker.spec``` and re-run 
-```pyinstaller manage.py dist```.
+```pyinstaller manage.py dist_mac```.
 
 Generated executables will be created in the ``dist`` folder. This folder will be automatically created when running 
 the pyinstaller command below if it does not already exist.
@@ -28,7 +28,7 @@ the pyinstaller command below if it does not already exist.
 ### Windows
 To create a Windows executable you will need to run the following commands on a Windows machine.
 
-Run ```pyinstaller manage.py dist``` to create the executable # Note dist here is a custom command defined in  ```dist.py```
+Run ```pyinstaller manage.py dist_win``` to create the executable # Note dist here is a custom command defined in  ```dist.py```
 
 To execute the generated executable file navigate to the `dist` directory (`cd dist`) and run `.\pythonMarker.exe 
 runserver --noreload`
