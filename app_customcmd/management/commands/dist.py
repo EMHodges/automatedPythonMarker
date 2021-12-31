@@ -8,5 +8,5 @@ class Command(BaseCommand):
         PyInstaller.__main__.run([
             '-w',
             '--onefile',
-            'manage.spec'
+            'automatedPythonMarker.spec'
         ])
