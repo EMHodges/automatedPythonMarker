@@ -6,6 +6,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         PyInstaller.__main__.run([
-            'automatedPythonMarker.spec',
-            '--onefile'
+            '-w',
+            '--onefile',
+            'manage.spec'
         ])
