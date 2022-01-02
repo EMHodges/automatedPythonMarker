@@ -9,7 +9,7 @@ from collections import defaultdict
 
 
 class DuplicateQuestionNumberException(Exception):
-    """Raise for my specific kind of exception"""
+    """Raise when multiple question files have the same question number"""
 
     def __init__(self, error):
         self.error = error
