@@ -13,6 +13,14 @@ import os.path
 import sys
 from pathlib import Path
 
+from django.template.loaders.filesystem import Loader
+from django.template.loaders.app_directories import Loader
+
+import django.template.defaulttags
+import django.template.defaultfilters
+import django.template.loader_tags
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -72,7 +80,7 @@ def resource_path(relative_path):
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [resource_path("templates")]
+        'DIRS': [resource_path("templates"), resource_path("questions/templates")]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
