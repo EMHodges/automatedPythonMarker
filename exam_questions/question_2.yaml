@@ -1,0 +1,16 @@
+number: 2
+description: "The code for this question must be written in the provided file
+      question_2.py.\r\nIn information theory, the Hamming distance between two strings
+      of equal length is the number of positions at which the corresponding symbols
+      are different. In another words, it measures the minimum number of substitutions
+      required to change one string into the other, or the minimum number of errors
+      that could have transformed one string into the other. For example, the Hamming
+      distance between:\r\n• \"karolin\" and \"kathrin\" is 3. • \"karolin\" and \"kerstin\"
+      is 3. • 1011101 and 1001001 is 2.\r\nWrite a function hammingDistance(word1,
+      word2) which takes two string parameters and returns the Hamming distance between
+      the two strings word1 and word2. The function should raise a ValueError if the
+      strings are not of the same length. In addition, the result must be case sensitive."
+answer: null
+mark: '0.000'
+max_mark: 15
+method_name: hammingDistance
