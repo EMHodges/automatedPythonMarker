@@ -10,7 +10,7 @@ class QuestionForm(forms.ModelForm):
             attrs={
                 "placeholder": "Enter Your Answer Here",
                 "class": "new-class-name two",
-                "rows": 100,
+                "rows": 20,
                 "cols": 120
             }
         )

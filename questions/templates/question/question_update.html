@@ -11,4 +11,6 @@
 
 {% include "question/navigate_questions.html" with next_question=next_question previous_question=previous_question %}
 
+<a href="{% url 'questions:question-list' %}">All Questions</a>
+
 {% endblock %}
