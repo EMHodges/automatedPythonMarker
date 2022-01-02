@@ -2,7 +2,17 @@
 
 {% block content %}
 <form method='POST'> {% csrf_token %}
+    <h1>Question {{ object.number }}</h1>
+    <p>{{ object.description | linebreaks }}</p>
     {{ form.as_p }}
-    <input type='submit' value="'Save"/>
+    <input type='submit' value="Save"/>
 </form>
+
+{% if previous_question %}
+    <a href='{{ previous_question.get_absolute_url }}'>Previous Question</a>
+{% endif %}
+{% if next_question %}
+    <a href='{{ next_question.get_absolute_url }}'>Next Question</a>
+{% endif %}
+
 {% endblock %}
