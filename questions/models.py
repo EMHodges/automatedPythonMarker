@@ -14,7 +14,4 @@ class Question(models.Model):
     method_name = models.TextField(blank=True, null=True)
 
     def get_absolute_url(self):
-        # the first part "product-detail" revers to the name in urls, means in url can change the url path and this
-        # will still work okie
-        Question.objects.all()
         return reverse("questions:question-update", kwargs={"number": self.number})
