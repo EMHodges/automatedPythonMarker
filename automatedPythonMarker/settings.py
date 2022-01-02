@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os.path
+import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +27,6 @@ SECRET_KEY = 'django-insecure-d=m7*kc(4(tj)&uuk8ag8q162)nnehix6l=55z#4j_3qaip1^m
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -54,10 +54,25 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'automatedPythonMarker.urls'
 
+''' You need to add this in - this method essentially can be used to change the path that is used for resources
+especially important when disting, if you don't have this then will get tempate not found errors, note for this
+to work also need to add Tree('relative_path_to_templates', 'templates') to the spec folder in exe under the 
+a.binaries part and need to add this method to 'DIRS' in template below i.e. 'DIRS':[resource_path("templates")] '''
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")]
+        'DIRS': [resource_path("templates")]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -73,7 +88,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'automatedPythonMarker.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -83,7 +97,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -103,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -114,7 +126,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

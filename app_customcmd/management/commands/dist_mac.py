@@ -7,6 +7,6 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         PyInstaller.__main__.run([
             'automatedPythonMarker.spec',
-            '--w', # Creates a .app executable
+            '-w', # Creates a .app executable
             '--onefile'
         ])

@@ -13,4 +13,4 @@ def question_update_view(request, number):
     context = {
         'form': form
     }
-    return render(request, "question/question_update.html", context)
+    return render(request, "../templates/question_update.html", context)
