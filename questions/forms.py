@@ -19,8 +19,3 @@ class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
         fields = ['answer']
-
-    def clean_answer(self, *args, **kwargs):
-        answer = self.cleaned_data.get("answer")
-        print("cleaned")
-        return answer

@@ -62,7 +62,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'automatedPythonMarker.urls'
 
-''' You need to add this in - this method essentially can be used to change the path that is used for resources
+''' This method essentially can be used to change the path that is used for resources
 especially important when disting, if you don't have this then will get tempate not found errors, note for this
 to work also need to add Tree('relative_path_to_templates', 'templates') to the spec folder in exe under the 
 a.binaries part and need to add this method to 'DIRS' in template below i.e. 'DIRS':[resource_path("templates")] '''
