@@ -41,18 +41,18 @@ class Command(BaseCommand):
         self._validate_question_numbers(question_numbers)
 
         Question.objects.all().delete()
+
         for question in questions:
             Question.save(question)
 
-    @staticmethod
-    def _load_question(file: str) -> Question | None:
+    def _load_question(self, file: str) -> Question | None:
         fixture_file = os.path.join("exam_questions", file)
 
         with open(fixture_file) as stream:
             try:
                 question_values = yaml.safe_load(stream)
                 question = Question(**question_values)
-                Command._set_defaults(question)
+                self._set_defaults(question)
                 return question
             except yaml.YAMLError as exc:
                 print(exc)
