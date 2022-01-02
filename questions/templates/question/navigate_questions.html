@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+{% if previous_question %}
+    <a href='{{ previous_question.get_absolute_url }}'>Previous Question</a>
+{% endif %}
+{% if next_question %}
+    <a href='{{ next_question.get_absolute_url }}'>Next Question</a>
+{% endif %}
+</div>
+{% endblock %}

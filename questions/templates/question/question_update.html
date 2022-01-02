@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <form method='POST'> {% csrf_token %}
+    <h1>Question {{ object.number }}</h1>
+    <p>{{ object.description | linebreaks }}</p>
     {{ form.as_p }}
-    <input type='submit' value="'Save"/>
+    <input type='submit' value="Save"/>
 </form>
+
+{% include "question/navigate_questions.html" with next_question=next_question previous_question=previous_question %}
+
+<a href="{% url 'questions:question-list' %}">All Questions</a>
+
 {% endblock %}
