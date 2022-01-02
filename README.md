@@ -14,6 +14,12 @@
 6. To deactive run: ```deactivate```
 
 
+
+### Adding templates to executable
+To add templates from a new app to the executable:
+1. Add `resource_path("{APP_NAME}/templates")` to the `DIRS` list in `TEMPLATES` in `settings.py`
+2. Add `Tree('{APP_NAME}', prefix='APP_NAME'),` to `exe` under the other `Tree` configs in `automatedPythonMarker.spec`
+
 ## Distributing automatedPythonMarker
 The app is packaged using Pyinstaller. The file ```automatedPythonMarker.spec``` contains configuration options. The file
 ```dist.py``` contains the command to be run to generate the executable. 
@@ -41,4 +47,3 @@ Run ```pyinstaller manage.py dist``` # Note dist here is a custom command define
 
 To execute the generated Unix file 
 cd to ```dist``` folder and run ```./pythonMarker runserver --noreload```.
-
