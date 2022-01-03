@@ -81,7 +81,7 @@ def resource_path(relative_path):
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [resource_path("templates"), resource_path("questions/templates"), resource_path("static_lint/templates")]
+        'DIRS': [resource_path("templates"), resource_path("questions/templates"), resource_path("questions/static_lint")]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
