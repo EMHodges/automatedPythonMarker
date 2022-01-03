@@ -108,12 +108,20 @@ evaluation=10.0 - ((float(5 * error + warning + refactor + convention) / stateme
 
 # Template used to display messages. This is a python new-style format string
 # used to format the message information. See doc for all details.
+<<<<<<< HEAD
 msg-template='{line}'
+=======
+msg-template=
+>>>>>>> 9b01758 (getting static error messages in exe)
 
 # Set the output format. Available formats are text, parseable, colorized, json
 # and msvs (visual studio). You can also give a reporter class, e.g.
 # mypackage.mymodule.MyReporterClass.
+<<<<<<< HEAD
 output-format=json
+=======
+output-format=text
+>>>>>>> 9b01758 (getting static error messages in exe)
 
 # Tells whether to display a full report or only the messages.
 reports=no
