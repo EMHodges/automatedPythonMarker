@@ -12,7 +12,7 @@
 {% include "static_list/static_lint_detail_view.html" with object=static_errors %}
 
 {% include "question/navigate_questions.html" with next_question=next_question previous_question=previous_question %}
-{% include "static_lint/static_lint_detail_view.html" with object=static_error %}
+
 <a href="{% url 'questions:question-list' %}">All Questions</a>
 
 {% endblock %}

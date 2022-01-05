@@ -14,7 +14,7 @@ def question_update_view(request, number):
     next_question = Question.objects.filter(number__gt=obj.number).order_by('number').first()
     previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').first()
 
-    static_errors = None
+    static_errors = StaticLint.objects.get_or_none(question_number=number)
 
     if form.is_valid():
         form.save()
