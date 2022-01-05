@@ -1,39 +1,28 @@
 import importlib
 import unittest
-from functools import wraps
-
 from automatedPythonMarker.settings import resource_path
-
-from .QuestionTestRunner import QuestionsTestRunner
 
 QUESTION_RUNNERS = {}
 
+
 def run_tests_for_file(module_name, file_name='results/test_question_1.py'):
-    question_runner = QuestionsTestRunner(1)
-    print(QUESTION_RUNNERS)
-    print('in run tests for file')
-    spec = importlib.util.spec_from_file_location('yo', file_name)
-    print(spec)
+    question_runner = QUESTION_RUNNERS[1]
+    spec = importlib.util.spec_from_file_location('yo', resource_path('results/test_question_1.py'))
     module = importlib.util.module_from_spec(spec)
+    print(spec)
     print(module)
     try:
         spec.loader.exec_module(module)
     except ImportError:
         suite = unittest.TestLoader().loadTestsFromModule(module)
-        print(suite)
         print('not implemented')
-    print(module)
     suite = unittest.TestLoader().loadTestsFromModule(module)
     print(suite)
-    x = run_suite(question_runner, suite)
-    print(x)
-
-
+    run_suite(question_runner, suite)
 
 
 def run_suite(question_runner, suite):
     question_runner.run(suite)
-
 
 
 if __name__ == "__main__":

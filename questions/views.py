@@ -18,8 +18,6 @@ def question_update_view(request, number):
 
     static_errors = StaticLint.objects.get_or_none(question_number=number)
     test_results = Result.objects.filter(question_number=number)
-    print('IN VIEW')
-    print(test_results)
 
     if form.is_valid():
         form.save()
@@ -29,6 +27,7 @@ def question_update_view(request, number):
         lint_answer(form_answer, number)
         run_tests_for_file('')
         static_errors = StaticLint.objects.get(question_number=number)
+        test_results = Result.objects.filter(question_number=number)
 
     context = {
         'form': form,

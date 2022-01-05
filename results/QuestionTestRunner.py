@@ -11,5 +11,4 @@ class QuestionsTestRunner(unittest.TextTestRunner):
         super(QuestionsTestRunner, self).__init__()
 
     def _makeResult(self):
-        print('in here')
         return QuestionsTextTestResult(self.question_number, self.stream, self.descriptions, self.verbosity)

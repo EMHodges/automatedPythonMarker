@@ -13,7 +13,6 @@ class QuestionsTestCase(unittest.TestCase):
 
         self.mark = 0
 
-        print(self.max_mark)
         self.testMethodName = self._getTestMethodName()
         self.questionNumber = 1
 
