@@ -48,7 +48,8 @@ INSTALLED_APPS = [
 
     'app_customcmd',
     'questions',
-    'static_lint'
+    'static_lint',
+    'results'
 ]
 
 MIDDLEWARE = [

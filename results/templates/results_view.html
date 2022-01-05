@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table>
+    <tr>
+        <td>Test Name</td>
+        <td>Test Result</td>
+    </tr>
+    {% for result in test_results %}
+        <tr>
+            <td>{{ result.test_name }}</td>
+            <td>{{ result.test_result }}</td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

@@ -4,6 +4,8 @@ from static_lint.lint_answer import lint_answer
 from static_lint.models import StaticLint
 from .forms import QuestionForm
 from .models import Question
+from results.main import run_tests_for_file
+from results.models import Result
 
 
 # Create your views here.
@@ -15,6 +17,9 @@ def question_update_view(request, number):
     previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').first()
 
     static_errors = StaticLint.objects.get_or_none(question_number=number)
+    test_results = Result.objects.filter(question_number=number)
+    print('IN VIEW')
+    print(test_results)
 
     if form.is_valid():
         form.save()
@@ -22,6 +27,7 @@ def question_update_view(request, number):
     if request.method == "POST":
         form_answer = request.POST.get("answer")
         lint_answer(form_answer, number)
+        run_tests_for_file('')
         static_errors = StaticLint.objects.get(question_number=number)
 
     context = {
@@ -29,7 +35,8 @@ def question_update_view(request, number):
         'object': obj,
         'next_question': next_question,
         'previous_question': previous_question,
-        'static_errors': static_errors
+        'static_errors': static_errors,
+        'test_results': test_results
     }
     return render(request, "question/question_update.html", context)
 
