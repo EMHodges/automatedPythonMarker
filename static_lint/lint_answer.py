@@ -1,43 +1,34 @@
 import os
 import re
 from io import StringIO
+from pathlib import Path
+
+from pylint.reporters.text import TextReporter
+from pylint.reporters.json_reporter import JSONReporter
 from automatedPythonMarker.settings import resource_path
 from static_lint.models import StaticLint
 from pylint import lint
 from pylint.reporters import text
+from astroid import MANAGER
 
 TMP_FILE = os.path.join('static_lint', 'code_to_lint.py')
-LINT_RULES_FILE = os.path.join('static_lint', '../questions/.pylintrc')
+LINT_RULES_FILE = os.path.join('static_lint', '.pylintrc')
 
 
 def write_answer_to_tmp_file(answer):
-    with open('code_to_lint.py', 'w') as tmp_file:
+    with open(TMP_FILE, 'w') as tmp_file:
         tmp_file.write(answer)
-    with open('code_to_lint.py', 'r') as tmp_file:
+    with open(TMP_FILE, 'r') as tmp_file:
         print(tmp_file.read())
+
 
 def lint_answer(answer, number):
     write_answer_to_tmp_file(answer)
 
+    MANAGER.astroid_cache.clear()
     pylint_output = StringIO()  # need a StringIO object where the output will be stored
-    reporter = text.ColorizedTextReporter(pylint_output)
-    args = [TMP_FILE, f"--rcfile='{'questions/.pylintrc'}'"]
-    run = lint.Run(args, reporter=reporter, exit=False)  # exit=False means don't exit when the run is over
-    print(run)
-    print(pylint_output.getvalue())
-   # (pylint_stdout, pylint_stderr) = lint.py_run("code_to_lint.py", return_std=True)
-
-   # print(lint.py_run)
-   # print(pylint_stdout.getvalue())
-   # print('error')
-   # print(pylint_stderr.getvalue())
-   # print('end error')
-   # print(type(pylint_stdout.getvalue()))
-   # modified_outputs = pylint_stdout.getvalue().split("\n", 1)[1]
-   # unknown_line = re.compile(r"\(<unknown>, line \d*\)")
-   # modified_outputs = unknown_line.sub('', modified_outputs)
-   # print(modified_outputs, end="")
-
+    args = [TMP_FILE, '--errors-only']
+    lint.Run(args, reporter=JSONReporter(pylint_output), exit=False)  # exit=False means don't exit when the run is over
     StaticLint.objects.update_or_create(question_number=number, defaults={'feedback': pylint_output.getvalue()})
 
 
