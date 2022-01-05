@@ -9,15 +9,12 @@ def run_tests_for_file(module_name, file_name='results/test_question_1.py'):
     question_runner = QUESTION_RUNNERS[1]
     spec = importlib.util.spec_from_file_location('yo', resource_path('results/test_question_1.py'))
     module = importlib.util.module_from_spec(spec)
-    print(spec)
-    print(module)
     try:
         spec.loader.exec_module(module)
     except ImportError:
         suite = unittest.TestLoader().loadTestsFromModule(module)
         print('not implemented')
     suite = unittest.TestLoader().loadTestsFromModule(module)
-    print(suite)
     run_suite(question_runner, suite)
 
 
