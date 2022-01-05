@@ -7,7 +7,7 @@ from pylint import epylint as lint
 from .models import StaticLint
 
 TMP_FILE = os.path.join('static_lint', 'code_to_lint.py')
-LINT_RULES_FILE = os.path.join('static_lint', '.pylintrc')
+LINT_RULES_FILE = os.path.join('static_lint', '../questions/.pylintrc')
 
 
 def lint_answer(answer: str, question_number: int) -> None:

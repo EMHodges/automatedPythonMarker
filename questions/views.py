@@ -1,10 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 
-<<<<<<< HEAD
-from static_lint.lint import lint_answer
-=======
 from static_lint.lint_answer import lint_answer
->>>>>>> 32b5e96 (adding static lint display)
 from static_lint.models import StaticLint
 from .forms import QuestionForm
 from .models import Question
@@ -18,7 +14,6 @@ def question_update_view(request, number):
     next_question = Question.objects.filter(number__gt=obj.number).order_by('number').first()
     previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').first()
 
-<<<<<<< HEAD
     static_errors = StaticLint.objects.get(question_number=number)
 
     if form.is_valid():
@@ -28,26 +23,13 @@ def question_update_view(request, number):
         form_answer = request.POST.get("answer")
         lint_answer(form_answer, number)
         static_errors = StaticLint.objects.get(question_number=number)
-=======
-    static_error = StaticLint.objects.get(question_number=number)
-
-    if request.method == "POST":
-        if form.is_valid():
-            answer = form['answer'].value()
-            lint_answer(answer, number)
-            static_error = StaticLint.objects.get(question_number=number)
->>>>>>> 32b5e96 (adding static lint display)
 
     context = {
         'form': form,
         'object': obj,
         'next_question': next_question,
         'previous_question': previous_question,
-<<<<<<< HEAD
         'static_errors': static_errors
-=======
-        'static_error': static_error
->>>>>>> 32b5e96 (adding static lint display)
     }
     return render(request, "question/question_update.html", context)
 

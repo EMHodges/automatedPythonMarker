@@ -1,9 +1,13 @@
+import os
 import re
 from io import StringIO
-
+from automatedPythonMarker.settings import resource_path
 from static_lint.models import StaticLint
 from pylint import lint
 from pylint.reporters import text
+
+TMP_FILE = os.path.join('static_lint', 'code_to_lint.py')
+LINT_RULES_FILE = os.path.join('static_lint', '../questions/.pylintrc')
 
 
 def write_answer_to_tmp_file(answer):
@@ -12,13 +16,12 @@ def write_answer_to_tmp_file(answer):
     with open('code_to_lint.py', 'r') as tmp_file:
         print(tmp_file.read())
 
-
 def lint_answer(answer, number):
     write_answer_to_tmp_file(answer)
 
     pylint_output = StringIO()  # need a StringIO object where the output will be stored
     reporter = text.ColorizedTextReporter(pylint_output)
-    args = ["code_to_lint.py", "--enable=W,E,F"]
+    args = [TMP_FILE, f"--rcfile='{'questions/.pylintrc'}'"]
     run = lint.Run(args, reporter=reporter, exit=False)  # exit=False means don't exit when the run is over
     print(run)
     print(pylint_output.getvalue())
