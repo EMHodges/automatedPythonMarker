@@ -1,8 +1,17 @@
 import importlib
 import unittest
 from automatedPythonMarker.settings import resource_path
+from static_lint.lint_answer import lint_answer
+from static_lint.models import StaticLint
 
 QUESTION_RUNNERS = {}
+
+
+def run_tests(answer, question_number):
+    lint_answer(answer, question_number)
+    lint_errors = StaticLint.objects.get(question_number=question_number).feedback
+    if not lint_errors:
+        run_tests_for_file('')
 
 
 def run_tests_for_file(module_name, file_name='results/test_question_1.py'):
