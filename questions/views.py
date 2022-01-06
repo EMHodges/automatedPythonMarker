@@ -22,6 +22,7 @@ def question_update_view(request, number):
     if form.is_valid():
         form.save()
 
+    # Todo make it only run the tests if there are no syntax errors
     if request.method == "POST":
         form_answer = request.POST.get("answer")
         lint_answer(form_answer, number)

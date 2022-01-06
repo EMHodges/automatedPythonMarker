@@ -5,7 +5,7 @@ from results import QuestionsTestCase
 
 from static_lint.code_to_lint import calculateFine
 
-
+# Todo move this into exam_questions and move exam_questions into a configs folder
 class TestQuestion1(QuestionsTestCase.QuestionsTestCase):
 
 

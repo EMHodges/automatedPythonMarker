@@ -6,6 +6,8 @@ from results.models import Result
 from static_lint.models import StaticLint
 import shutil
 
+
+# ToDo make this and dist_win one command and add command options e.g. python manage.py dist mac or python manage.py dist win
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
@@ -14,7 +16,7 @@ class Command(BaseCommand):
 
         PyInstaller.__main__.run([
             'automatedPythonMarker.spec',
-            '-w', # Creates a .app executable
+            '-w',  # Creates a .app executable
             '--onefile'
         ])
 
