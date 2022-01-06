@@ -5,18 +5,19 @@ from static_lint.lint_answer import lint_answer
 from static_lint.models import StaticLint
 
 QUESTION_RUNNERS = {}
+QUESTION_TEST_FILES = {}
 
 
 def run_tests(answer, question_number):
     lint_answer(answer, question_number)
     lint_errors = StaticLint.objects.get(question_number=question_number).feedback
     if not lint_errors:
-        run_tests_for_file('')
+        run_tests_for_question(question_number)
 
 
-def run_tests_for_file(module_name, file_name='results/test_question_1.py'):
-    question_runner = QUESTION_RUNNERS[1]
-    spec = importlib.util.spec_from_file_location('yo', resource_path('results/test_question_1.py'))
+def run_tests_for_question(question_number):
+    question_runner = QUESTION_RUNNERS[question_number]
+    spec = importlib.util.spec_from_file_location('yo', QUESTION_TEST_FILES[question_number])
     module = importlib.util.module_from_spec(spec)
     try:
         spec.loader.exec_module(module)
@@ -32,4 +33,4 @@ def run_suite(question_runner, suite):
 
 
 if __name__ == "__main__":
-    run_tests_for_file('yo', 'test_question_1.py')
+    run_tests_for_question('yo', 'test_question_1.py')

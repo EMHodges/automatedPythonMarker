@@ -4,7 +4,7 @@ from static_lint.lint_answer import lint_answer
 from static_lint.models import StaticLint
 from .forms import QuestionForm
 from .models import Question
-from results.main import run_tests_for_file, run_tests
+from results.main import run_tests_for_question, run_tests
 from results.models import Result
 
 
