@@ -1,15 +1,18 @@
 import importlib
 import unittest
 
+import static_lint.code_to_lint
 from results import QuestionsTestCase
 
 from static_lint.code_to_lint import calculateFine
 
-# Todo move this into exam_questions and move exam_questions into a configs folder
 class TestQuestion1(QuestionsTestCase.QuestionsTestCase):
 
+    def setUp(self) -> None:
+        importlib.reload(static_lint.code_to_lint)
 
     def testNoSpee(self):
+        from static_lint.code_to_lint import calculateFine
         """ Test that a value of 0 is returned when the speed is less than
         or equal to the speed limit.
         """
@@ -18,6 +21,7 @@ class TestQuestion1(QuestionsTestCase.QuestionsTestCase):
         self.assertAlmostEqual(0, calculateFine(70, 70), delta=0.000001)
 
     def testSpeedLower90(self):
+        from static_lint.code_to_lint import calculateFine
         """ Test that fines are calculated correctly for speed below 90 mph.
         """
         self.assertAlmostEqual(150, calculateFine(60, 50), delta=0.000001)
@@ -25,6 +29,7 @@ class TestQuestion1(QuestionsTestCase.QuestionsTestCase):
         self.assertAlmostEqual(200, calculateFine(70, 50), delta=0.000001)
 
     def testSpeedOver90(self):
+        from static_lint.code_to_lint import calculateFine
         """ Test that fines are calculated correctly for speed of 90 mph or
         over. That is an additional penalty of 200 pounds should be added.
         """
