@@ -1,6 +1,11 @@
+import functools
 import importlib
 import unittest
+
+import timeout_decorator
+
 from automatedPythonMarker.settings import resource_path
+from results import QuestionsTestCase
 from static_lint.lint_answer import lint_answer
 from static_lint.models import StaticLint
 
@@ -30,6 +35,17 @@ def run_tests_for_question(question_number):
 
 def run_suite(question_runner, suite):
     question_runner.run(suite)
+
+
+def setup_test(max_mark):
+    def decorator(func):
+        @functools.wraps(func)
+        def decorated(*args, **kwargs):
+            test_case_instance: QuestionsTestCase = args[0]
+            func(*args, **kwargs)
+            test_case_instance.mark = max_mark
+        return decorated
+    return decorator
 
 
 if __name__ == "__main__":
