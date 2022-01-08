@@ -6,8 +6,10 @@ import timeout_decorator
 
 from automatedPythonMarker.settings import resource_path
 from results import QuestionsTestCase
+from results.resultsEnum import ResultsEnum
 from static_lint.lint_answer import lint_answer
 from static_lint.models import StaticLint
+from .models import Result
 
 QUESTION_RUNNERS = {}
 QUESTION_TEST_FILES = {}
@@ -27,8 +29,9 @@ def run_tests_for_question(question_number):
     try:
         spec.loader.exec_module(module)
     except ImportError:
-        suite = unittest.TestLoader().loadTestsFromModule(module)
-        print('not implemented')
+        Result.objects.filter(question_number=question_number).update(mark=0,
+                                                                      test_result=ResultsEnum.ERROR,
+                                                                      test_feedback='Not implemented')
     suite = unittest.TestLoader().loadTestsFromModule(module)
     run_suite(question_runner, suite)
 
