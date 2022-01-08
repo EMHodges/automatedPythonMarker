@@ -18,6 +18,7 @@ def run_tests(answer, question_number):
     run_tests_for_question(question_number)
 
 
+# Todo debug in EXE it won't go into the Import or Syntax Error
 def run_tests_for_question(question_number):
     question_runner = QUESTION_RUNNERS[question_number]
     spec = importlib.util.spec_from_file_location('yo', QUESTION_TEST_FILES[question_number])
