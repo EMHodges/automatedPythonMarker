@@ -20,7 +20,6 @@ def lint_answer(answer, number):
 
 
 def write_answer_to_tmp_file(answer):
-    print(TMP_FILE)
     with open(TMP_FILE, 'w') as tmp_file:
         tmp_file.write(answer)
 
