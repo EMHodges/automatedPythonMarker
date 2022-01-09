@@ -1,0 +1,13 @@
+number: 1
+description: "The code must be written in the provided file question_1.py, failing
+      to do so will result in loss of marks.\r\nThe speeding ticket fine policy in
+      Blotsland is £100 plus £5 for each mile per hour (mph) over the limit. If the
+      speed recorded is 90 mph or more, then an additional penalty of £200 is added
+      to the fine. We assume the maximum speed limit is 70 mph.\r\nWrite a function
+      calculateFine(speed,limit) where speed is the recorded speed in mph (positive
+      int), and limit is the speed limit in mph (also a positive int). The function
+      returns the total amount of the fine as an int. For example:\r\n    >>> calculateFine(60,50)\r\n
+      \   150\r\n    >>> calculateFine(90,70)\r\n    400\r\n    >>> calculateFine(70,70)\r\n
+      \   0"
+max_mark: 15
+method_name: calculateFine

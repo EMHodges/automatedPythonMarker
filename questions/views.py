@@ -4,6 +4,8 @@ from static_lint.lint_answer import lint_answer
 from static_lint.models import StaticLint
 from .forms import QuestionForm
 from .models import Question
+from results.main import run_tests_for_question, run_tests
+from results.models import Result
 
 
 # Create your views here.
@@ -15,21 +17,25 @@ def question_update_view(request, number):
     previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').first()
 
     static_errors = StaticLint.objects.get_or_none(question_number=number)
+    test_results = Result.objects.filter(question_number=number)
 
     if form.is_valid():
         form.save()
 
+    # Todo make it only run the tests if there are no syntax errors
     if request.method == "POST":
         form_answer = request.POST.get("answer")
-        lint_answer(form_answer, number)
+        run_tests(form_answer, number)
         static_errors = StaticLint.objects.get(question_number=number)
+        test_results = Result.objects.filter(question_number=number)
 
     context = {
         'form': form,
         'object': obj,
         'next_question': next_question,
         'previous_question': previous_question,
-        'static_errors': static_errors
+        'static_errors': static_errors,
+        'test_results': test_results
     }
     return render(request, "question/question_update.html", context)
 
