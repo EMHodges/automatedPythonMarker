@@ -3,17 +3,16 @@ import unittest
 
 import timeout_decorator
 
-import static_lint.code_to_lint
-from results import QuestionsTestCase
-from results.main import setup_test
+from results.questions_test_case import QuestionsTestCase
+from results.utils import setup_test
 
-from static_lint.code_to_lint import calculateFine
 
 # Todo error when run in exe it's not picking up import or syntax errors, also if you write the correct code and then
 # change the name of the function it will still show that the result is correct
-class TestQuestion1(QuestionsTestCase.QuestionsTestCase):
+class TestQuestion1(QuestionsTestCase):
 
     def setUp(self) -> None:
+        import static_lint.code_to_lint
         importlib.reload(static_lint.code_to_lint)
 
     @setup_test(max_mark=6)

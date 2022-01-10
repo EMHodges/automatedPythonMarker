@@ -2,7 +2,7 @@ import importlib
 import unittest
 
 import static_lint.code_to_lint
-from results import QuestionsTestCase
+from results import questions_test_case
 
 from static_lint.code_to_lint import calculateFine
 

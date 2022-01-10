@@ -5,14 +5,11 @@ class QuestionsTestCase(unittest.TestCase):
     '''
     classdocs
     '''
-    def __init__(self, methodName='runTest', max_mark=None):
-        self.max_mark = max_mark
+    def __init__(self, methodName='o'):
         super(QuestionsTestCase, self).__init__(methodName)
 
         self.mark = 0
-
         self.methodName = self._testMethodName
-        self.questionNumber = 1
 
     def __call__(self, *args, **kwds):
         return self.run(*args, **kwds)

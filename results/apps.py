@@ -13,7 +13,7 @@ class ResultsConfig(AppConfig):
 
     def _setup_testRunner_for_questions(self):
         from .main import QUESTION_RUNNERS
-        from .QuestionTestRunner import QuestionsTestRunner
+        from .question_test_runner import QuestionsTestRunner
         from questions.models import Question
 
         number_of_questions = Question.objects.values_list('number', flat=True)

@@ -1,15 +1,15 @@
 import unittest
 
-from results.QuestionsTestCase import QuestionsTestCase
+from results.questions_test_case import QuestionsTestCase
 from results.models import Result
-from results.resultsEnum import ResultsEnum
+from results.results_enum import ResultsEnum
 
 
 class QuestionsTextTestResult(unittest.TextTestResult):
     '''
     classdocs
     '''
-    def __init__(self, question_number, stream='yo.txt', descriptions=True, verbosity=None):
+    def __init__(self, question_number, stream=None, descriptions=True, verbosity=1):
         """Construct a TextTestRunner.
 
         Subclasses should accept **kwargs to ensure

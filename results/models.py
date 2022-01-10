@@ -2,7 +2,7 @@ from django.db import models
 
 from GetOrNoneManager import GetOrNoneManager
 from .utils import extractTestNames
-from .resultsEnum import ResultsEnum
+from .results_enum import ResultsEnum
 
 
 class ResultManager(GetOrNoneManager, models.Manager):
