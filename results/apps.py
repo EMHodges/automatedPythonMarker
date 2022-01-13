@@ -4,6 +4,7 @@ from django.apps import AppConfig
 
 QUESTION_TEST_FILES = {}
 
+
 class ResultsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'results'
@@ -22,9 +23,8 @@ class ResultsConfig(AppConfig):
             QUESTION_RUNNERS[question_number] = QuestionsTestRunner(question_number)
             self._add_test_file_paths(question_number)
 
-
     def _add_test_file_paths(self, question_number):
-      #  from .main import QUESTION_TEST_FILES
+        #  from .main import QUESTION_TEST_FILES
         from automatedPythonMarker.settings import resource_path
 
         file_path = resource_path(os.path.join("results", f"test_question_{str(question_number)}.py"))
