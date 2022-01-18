@@ -1,0 +1,4 @@
+number: 3
+description: "The code for this question"
+max_mark: 20
+method_name: getWordsIndices

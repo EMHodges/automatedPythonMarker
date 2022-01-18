@@ -5,9 +5,8 @@ class QuestionsTestCase(unittest.TestCase):
     '''
     classdocs
     '''
-    def __init__(self, methodName='o'):
+    def __init__(self, methodName='runTest'):
         super(QuestionsTestCase, self).__init__(methodName)
-
         self._mark = 0
         self.methodName = self._testMethodName
 

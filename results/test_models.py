@@ -13,8 +13,8 @@ class ResultManagerTestCase(TestCase):
 
         # When
         Result.objects.update_or_creates(question_number=question_number, test_name=test_name,
-                                        test_result=ResultsEnums.FAIL, test_feedback='error',
-                                        mark=0)
+                                         test_result=ResultsEnums.FAIL, test_feedback='error',
+                                         mark=0)
         result = Result.objects.get(question_number=1)
 
         # Then
