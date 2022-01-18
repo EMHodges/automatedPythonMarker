@@ -25,8 +25,7 @@ class ResultManager(GetOrNoneManager, models.Manager):
 class Result(models.Model):
     question_number = models.IntegerField()
     test_name = models.TextField()
-    test_result = models.CharField(max_length=2, choices=ResultsEnums.choices,
-                                   default=ResultsEnums.ERROR)
+    test_result = models.CharField(max_length=2, choices=ResultsEnums.choices, default=ResultsEnums.ERROR)
     test_feedback = models.TextField()
     mark = models.IntegerField()
     objects = ResultManager()

@@ -36,7 +36,7 @@ def question_update_view(request, number):
         'static_errors': static_errors,
         'test_results': test_results
     }
-    return render(request, "question/question_yo.html", context)
+    return render(request, "question/question.html", context)
 
 
 def question_list_view(request):
