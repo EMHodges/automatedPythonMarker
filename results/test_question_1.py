@@ -1,14 +1,10 @@
 import importlib
 import unittest
 
-import timeout_decorator
-
 from results.questions_test_case import QuestionsTestCase
 from results.utils import setup_test
 
 
-# Todo error when run in exe it's not picking up import or syntax errors, also if you write the correct code and then
-# change the name of the function it will still show that the result is correct
 class TestQuestion1(QuestionsTestCase):
 
     def setUp(self) -> None:

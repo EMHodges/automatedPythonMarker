@@ -2,8 +2,7 @@
 
 from django.db import migrations, models
 
-import results
-from results.results_enum import ResultsEnum
+from results.results_enum import ResultsEnums
 
 
 class Migration(migrations.Migration):
@@ -16,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='result',
             name='test_result',
-            field=models.CharField(choices=[(ResultsEnum['SUCCESS'], ResultsEnum['SUCCESS']), (ResultsEnum['FAIL'], ResultsEnum['FAIL']), (ResultsEnum['ERROR'], ResultsEnum['ERROR'])], max_length=10),
+            field=models.CharField(choices=ResultsEnums.choices, max_length=10),
         ),
     ]

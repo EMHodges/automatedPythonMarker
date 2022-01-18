@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-from results.models import Result, ResultManager
-from results.results_enum import ResultsEnum
+from results.models import Result
+from results.results_enum import ResultsEnums
 
 
 class ResultManagerTestCase(TestCase):
@@ -13,7 +13,7 @@ class ResultManagerTestCase(TestCase):
 
         # When
         Result.objects.update_or_creates(question_number=question_number, test_name=test_name,
-                                        test_result=ResultsEnum.FAIL, test_feedback='error',
+                                        test_result=ResultsEnums.FAIL, test_feedback='error',
                                         mark=0)
         result = Result.objects.get(question_number=1)
 
@@ -27,11 +27,11 @@ class ResultManagerTestCase(TestCase):
         test_name = 'test'
 
         Result.objects.create(question_number=question_number, test_name=test_name,
-                              test_result=ResultsEnum.SUCCESS, test_feedback='feedback', mark=3)
+                              test_result=ResultsEnums.SUCCESS, test_feedback='feedback', mark=3)
 
         # When
         Result.objects.update_or_creates(question_number=question_number, test_name=test_name,
-                                         test_result=ResultsEnum.FAIL, test_feedback='error',
+                                         test_result=ResultsEnums.FAIL, test_feedback='error',
                                          mark=0)
         result = Result.objects.get(question_number=1)
 

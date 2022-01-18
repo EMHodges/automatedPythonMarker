@@ -2,7 +2,7 @@ import unittest
 
 from results.questions_test_case import QuestionsTestCase
 from results.models import Result
-from results.results_enum import ResultsEnum
+from results.results_enum import ResultsEnums
 
 
 class QuestionsTextTestResult(unittest.TextTestResult):
@@ -16,22 +16,29 @@ class QuestionsTextTestResult(unittest.TextTestResult):
          compatibility as the
         interface changes.
         """
+        if not isinstance(question_number, int):
+            raise TypeError("question_number must be an integer")
+
         self.question_number = question_number
         super(QuestionsTextTestResult, self).__init__(stream, descriptions, verbosity)
 
     def addSuccess(self, test: QuestionsTestCase) -> None:
         unittest.TestResult.addSuccess(self, test)
-        self.create_result(test, ResultsEnum.SUCCESS, "Success")
+        self.create_result(test, ResultsEnums.SUCCESS, "Success")
 
     def addError(self, test: QuestionsTestCase, err) -> None:
-        self.create_result(test, ResultsEnum.ERROR, "ERROR!\\newline " + format_err(str(err[1])))
+        print('adding error')
+        print(err)
+        if isinstance(err, SyntaxError):
+            print(True)
+        self.create_result(test, ResultsEnums.ERROR, "ERROR!\\newline " + format_err(str(err[1])))
 
     def addFailure(self, test: QuestionsTestCase, err) -> None:
         unittest.TestResult.addFailure(self, test, err)
-        self.create_result(test, ResultsEnum.FAIL, "Failed!\\newline " + format_err(str(err[1])))
+        self.create_result(test, ResultsEnums.FAIL, "Failed!\\newline " + format_err(str(err[1])))
 
-    def create_result(self, test: QuestionsTestCase, test_result: ResultsEnum, test_feedback: str) -> None:
-        Result.objects.update_or_creates(self.question_number, test.methodName, test_result, test_feedback, test.mark)
+    def create_result(self, test: QuestionsTestCase, test_result: ResultsEnums, test_feedback: str) -> None:
+        Result.objects.update_or_creates(self.question_number, test.methodName, test_result, test_feedback, test.getMark())
 
 
 def format_err(err) -> str:

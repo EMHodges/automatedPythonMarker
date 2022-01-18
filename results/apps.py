@@ -3,6 +3,7 @@ import os.path
 from django.apps import AppConfig
 
 QUESTION_TEST_FILES = {}
+QUESTION_RUNNERS = {}
 
 
 class ResultsConfig(AppConfig):
@@ -13,7 +14,6 @@ class ResultsConfig(AppConfig):
         self._setup_testRunner_for_questions()
 
     def _setup_testRunner_for_questions(self):
-        from .main import QUESTION_RUNNERS
         from .question_test_runner import QuestionsTestRunner
         from questions.models import Question
 
@@ -24,7 +24,6 @@ class ResultsConfig(AppConfig):
             self._add_test_file_paths(question_number)
 
     def _add_test_file_paths(self, question_number):
-        #  from .main import QUESTION_TEST_FILES
         from automatedPythonMarker.settings import resource_path
 
         file_path = resource_path(os.path.join("results", f"test_question_{str(question_number)}.py"))

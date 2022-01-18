@@ -1,13 +1,13 @@
 from django.test import TestCase
 from results.models import Result
-from results.results_enum import ResultsEnum
+from results.results_enum import ResultsEnums
 
 
 class GetOrNoneManagerTestCase(TestCase):
 
     def test_get_or_none_returns_object_when_object_exists(self):
         # Given
-        result = Result(question_number=1, test_name='test', test_result=ResultsEnum,
+        result = Result(question_number=1, test_name='test', test_result=ResultsEnums.SUCCESS,
                         test_feedback='feedback', mark=1)
         result.save()
 

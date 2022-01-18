@@ -1,7 +1,10 @@
 from enum import Enum
 
+from django.db import models
+from django.utils.translation import gettext_lazy as _
 
-class ResultsEnum(Enum):
-    SUCCESS = "SUCCESS",
-    FAIL = "FAIL",
-    ERROR = "ERROR"
+
+class ResultsEnums(models.TextChoices):
+    SUCCESS = 'SU', _('Success')
+    FAIL = 'F', _('Fail')
+    ERROR = 'E', _('Error')
