@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'questions',
     'static_lint',
     'results',
+    'configs'
 ]
 
 MIDDLEWARE = [

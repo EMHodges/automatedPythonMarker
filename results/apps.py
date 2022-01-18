@@ -26,7 +26,7 @@ class ResultsConfig(AppConfig):
     def _add_test_file_paths(self, question_number):
         from automatedPythonMarker.settings import resource_path
 
-        file_path = resource_path(os.path.join("results", f"test_question_{str(question_number)}.py"))
+        file_path = resource_path(os.path.join("configs", f"test_question_{str(question_number)}.py"))
         is_valid_file_path = os.path.isfile(file_path)
 
         if not is_valid_file_path:
