@@ -29,7 +29,9 @@ class DuplicateQuestionNumberException(Exception):
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
-        path, dirs, question_files = next(os.walk("exam_questions"))
+        path, dirs, config_files = next(os.walk("configs"))
+
+        question_files = self._get_question_files(config_files)
         questions = []
         question_numbers = defaultdict(list)
 
@@ -46,7 +48,8 @@ class Command(BaseCommand):
             Question.save(question)
 
     def _load_question(self, file: str) -> Question | None:
-        fixture_file = os.path.join("exam_questions", file)
+
+        fixture_file = os.path.join("configs", file)
 
         with open(fixture_file) as stream:
             try:
@@ -59,6 +62,10 @@ class Command(BaseCommand):
             except TypeError as exc:
                 print(f"Error creating object from file {fixture_file}")
                 print(exc)
+
+    @staticmethod
+    def _get_question_files(config_files):
+        return [file for file in config_files if file.startswith('question_')]
 
     @staticmethod
     def _set_defaults(question: Question) -> None:
@@ -74,5 +81,6 @@ class Command(BaseCommand):
             is_question_number_duplicated = len(question_path) > 1
             if is_question_number_duplicated:
                 duplicate_question_numbers[question_number] = question_path
+
         if duplicate_question_numbers:
             raise DuplicateQuestionNumberException(duplicate_question_numbers)
