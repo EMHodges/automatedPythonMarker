@@ -1,8 +1,7 @@
 import importlib
-import os
 import unittest
 
-from automatedPythonMarker.settings import resource_path
+from configs.utils.utils import absolute_test_data_path
 from results.questions_test_case import QuestionsTestCase
 from results.utils import setup_test
 
@@ -42,9 +41,8 @@ class TestQuestion3(QuestionsTestCase):
         """ Test that given an input containing only one word, the correct
         result is returned.
         """
-        c = resource_path(os.path.join("configs", "data", "oneWord.txt"))
-        self.assertTrue(self.sameIndices({'one': [0]},
-                                         getWordsIndices(c)))
+        test_data = absolute_test_data_path('data//oneWord.txt')
+        self.assertTrue(self.sameIndices({'one': [0]}, getWordsIndices(test_data)))
 
     @setup_test(max_mark=2)
     def testNonExistingFile(self):
@@ -61,8 +59,8 @@ class TestQuestion3(QuestionsTestCase):
         a blank space, the correct result is returned. Watch out for the shift
         in the indices.
         """
-        self.assertTrue(self.sameIndices({'one': [1]},
-                                         getWordsIndices('data//oneSpaceAndOneWord.txt')))
+        test_data = absolute_test_data_path('data//oneSpaceAndOneWord.txt')
+        self.assertTrue(self.sameIndices({'one': [1]}, getWordsIndices(test_data)))
 
     @setup_test(max_mark=3)
     def testTwoWordsSingleSpace(self):
@@ -70,8 +68,8 @@ class TestQuestion3(QuestionsTestCase):
         """ Test that the correct output is returned when there is no duplicate
         words and a single blank space between words.
         """
-        self.assertTrue(self.sameIndices({'one': [0], 'two': [4]},
-                                         getWordsIndices('data//twoWords.txt')))
+        test_data = absolute_test_data_path('data//twoWords.txt')
+        self.assertTrue(self.sameIndices({'one': [0], 'two': [4]}, getWordsIndices(test_data)))
 
     @setup_test(max_mark=3)
     def testTwoWordsMultipleSpace(self):
@@ -79,8 +77,8 @@ class TestQuestion3(QuestionsTestCase):
         """ Test that the correct output is returned when there is no duplicate
         words and multiple blank spaces between words.
         """
-        self.assertTrue(self.sameIndices({'one': [0], 'two': [6]},
-                                         getWordsIndices('data//twoWordsTwoSpaces.txt')))
+        test_data = absolute_test_data_path('data//twoWordsTwoSpaces.txt')
+        self.assertTrue(self.sameIndices({'one': [0], 'two': [6]}, getWordsIndices(test_data)))
 
     @setup_test(max_mark=8)
     def testMultipleWordsMultipleIndicies(self):
@@ -90,8 +88,9 @@ class TestQuestion3(QuestionsTestCase):
         should be case incensitive, for example 'One' and 'one' are considered
         to be the same word.
         """
+        test_data = absolute_test_data_path('data//multipleWords.txt')
         self.assertTrue(self.sameIndices({'one': [0, 14], 'two': [4], 'three': [8, 19]},
-                                         getWordsIndices('data//multipleWords.txt')))
+                                         getWordsIndices(test_data)))
 
 
 if __name__ == '__main__':
