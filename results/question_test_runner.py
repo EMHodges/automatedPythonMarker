@@ -1,5 +1,5 @@
 import unittest
-from .QuestionsTextTestResult import QuestionsTextTestResult
+from .questions_text_test_result import QuestionsTextTestResult
 
 
 class QuestionsTestRunner(unittest.TextTestRunner):

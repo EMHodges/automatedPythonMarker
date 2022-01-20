@@ -1,0 +1,93 @@
+import importlib
+import unittest
+
+from configs.utils.utils import absolute_test_data_path
+from results.new_file import RegisterTestClass
+from results.questions_test_case import QuestionsTestCase
+from results.utils import setup_test
+
+
+@RegisterTestClass(question_number=3)
+class TestQuestion3(QuestionsTestCase):
+
+    def sameIndices(self, expected, actual):
+        """ This is a convenience function to compare the two dictionaries passed
+        in parameters. It is needed to ensure that the word passed as keys of
+        the dictionary are not case sensitive.
+
+        For example, given:
+        expected = {'One': [2,7]} and actual = {'one':[2, 7]} the function call
+        sameIndices(expected, actual) would return True.
+
+        On the other hand, given:
+        expected = {'One': [2]} and actual = {'one':[3]} the function call
+        sameIndices(expected, actual) would raise an AssertionError meaning
+        the test has failed.
+        """
+        self.assertEqual(len(expected), len(actual))
+        for word in actual:
+            self.assertListEqual(expected[word.lower()], actual[word])
+
+        return True
+
+    @setup_test(max_mark=2)
+    def testSingleWord(self):
+        from static_lint.code_to_lint import getWordsIndices
+        """ Test that given an input containing only one word, the correct
+        result is returned.
+        """
+        test_data = absolute_test_data_path('data//oneWord.txt')
+        self.assertTrue(self.sameIndices({'one': [0]}, getWordsIndices(test_data)))
+
+    @setup_test(max_mark=2)
+    def testNonExistingFile(self):
+        from static_lint.code_to_lint import getWordsIndices
+        """ Test that the function returns None if the file does not exist or
+        there is an exception whilst reading the file.
+        """
+        self.assertIsNone(getWordsIndices('doesNotExist.txt'))
+
+    @setup_test(max_mark=2)
+    def testSingleWordStartWithSpace(self):
+        from static_lint.code_to_lint import getWordsIndices
+        """ Test that given an input containing only one word and starting with
+        a blank space, the correct result is returned. Watch out for the shift
+        in the indices.
+        """
+        test_data = absolute_test_data_path('data//oneSpaceAndOneWord.txt')
+        self.assertTrue(self.sameIndices({'one': [1]}, getWordsIndices(test_data)))
+
+    @setup_test(max_mark=3)
+    def testTwoWordsSingleSpace(self):
+        from static_lint.code_to_lint import getWordsIndices
+        """ Test that the correct output is returned when there is no duplicate
+        words and a single blank space between words.
+        """
+        test_data = absolute_test_data_path('data//twoWords.txt')
+        self.assertTrue(self.sameIndices({'one': [0], 'two': [4]}, getWordsIndices(test_data)))
+
+    @setup_test(max_mark=3)
+    def testTwoWordsMultipleSpace(self):
+        from static_lint.code_to_lint import getWordsIndices
+        """ Test that the correct output is returned when there is no duplicate
+        words and multiple blank spaces between words.
+        """
+        test_data = absolute_test_data_path('data//twoWordsTwoSpaces.txt')
+        self.assertTrue(self.sameIndices({'one': [0], 'two': [6]}, getWordsIndices(test_data)))
+
+    @setup_test(max_mark=8)
+    def testMultipleWordsMultipleIndicies(self):
+        from static_lint.code_to_lint import getWordsIndices
+        """ Test that the correct output is returned when there are duplicate 
+        words and multiple indices for the same word. Note that the function 
+        should be case incensitive, for example 'One' and 'one' are considered
+        to be the same word.
+        """
+        test_data = absolute_test_data_path('data//multipleWords.txt')
+        self.assertTrue(self.sameIndices({'one': [0, 14], 'two': [4], 'three': [8, 19]},
+                                         getWordsIndices(test_data)))
+
+
+if __name__ == '__main__':
+    unittest.main()
+

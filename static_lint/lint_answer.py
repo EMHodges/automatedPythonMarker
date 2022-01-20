@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import shutil
 from io import StringIO
 from automatedPythonMarker.settings import resource_path
 from pylint.reporters.json_reporter import JSONReporter
@@ -20,6 +21,7 @@ def lint_answer(answer, number):
 
 
 def write_answer_to_tmp_file(answer):
+    shutil.rmtree(TMP_FILE, ignore_errors=True)
     with open(TMP_FILE, 'w') as tmp_file:
         tmp_file.write(answer)
 

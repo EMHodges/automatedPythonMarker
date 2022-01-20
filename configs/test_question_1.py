@@ -1,23 +1,15 @@
-import importlib
 import unittest
 
-import timeout_decorator
+from results.new_file import RegisterTestClass
+from results.questions_test_case import QuestionsTestCase
+from results.utils import setup_test
 
-import static_lint.code_to_lint
-from results import QuestionsTestCase
-from results.main import setup_test
 
-from static_lint.code_to_lint import calculateFine
-
-# Todo error when run in exe it's not picking up import or syntax errors, also if you write the correct code and then
-# change the name of the function it will still show that the result is correct
-class TestQuestion1(QuestionsTestCase.QuestionsTestCase):
-
-    def setUp(self) -> None:
-        importlib.reload(static_lint.code_to_lint)
+@RegisterTestClass(question_number=1)
+class TestQuestion1(QuestionsTestCase):
 
     @setup_test(max_mark=6)
-    def testNoSpee(self):
+    def testNoSpeed(self):
         from static_lint.code_to_lint import calculateFine
         """ Test that a value of 0 is returned when the speed is less than
         or equal to the speed limit.
