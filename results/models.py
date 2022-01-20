@@ -8,7 +8,7 @@ from .results_enum import ResultsEnums
 
 class ResultManager(GetOrNoneManager, models.Manager):
 
-    def error_tests_for_question(self, question_number, reason):
+    def error_tests(self, question_number, reason):
         test_names = RegisterTestClass.test_method_names_for_question[question_number]
         for test_name in test_names:
             self.update_or_creates(question_number, test_name, ResultsEnums.ERROR, reason, 0)
