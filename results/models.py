@@ -21,6 +21,10 @@ class ResultManager(GetOrNoneManager, models.Manager):
                                   'mark': mark
                               })
 
+    def total_mark_for_question(self, question_number):
+        marks_for_question = self.filter(question_number=question_number).values_list('mark', flat=True)
+        return sum(marks_for_question)
+
 
 # Create your models here.
 class Result(models.Model):

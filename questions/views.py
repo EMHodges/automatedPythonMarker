@@ -12,6 +12,8 @@ def question_update_view(request, number):
     obj = get_object_or_404(Question, id=number)
     form = QuestionForm(request.POST or None, instance=obj)
 
+    question = Question.objects.get(number=number)
+    Result.objects.all().delete()
     next_question = Question.objects.filter(number__gt=obj.number).order_by('number').first()
     previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').last()
 
@@ -34,7 +36,9 @@ def question_update_view(request, number):
         'next_question': next_question,
         'previous_question': previous_question,
         'static_errors': static_errors,
-        'test_results': test_results
+        'test_results': test_results,
+        'mark': Result.objects.total_mark_for_question(question_number=number),
+        'question': question
     }
     return render(request, "question/question.html", context)
 
