@@ -28,4 +28,5 @@ def check_import_error(test_case: QuestionsTestCase) -> None:
     question_number = test_case.get_question_number()
     method_under_test = Question.objects.get(number=question_number).method_name
     if method_under_test not in module_method_names:
-        test_case.fail("@Import error")
+        test_case.fail(f"@Import error - ensure method is called {method_under_test} "
+                       f"and has the expected number of arguments")
