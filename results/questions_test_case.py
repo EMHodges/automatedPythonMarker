@@ -1,6 +1,7 @@
 import importlib
 import unittest
-import re
+
+from results.new_file import RegisterTestClass
 
 
 class QuestionsTestCase(unittest.TestCase):
@@ -30,6 +31,4 @@ class QuestionsTestCase(unittest.TestCase):
         return self._questionNumber
 
     def _get_question_number(self):
-        test_case_class_name = self.__class__.__name__
-        test_case_question_number = re.split('TestQuestion', test_case_class_name)[-1]
-        return int(test_case_question_number)
+        return RegisterTestClass.get_test_question_number(self.methodName)

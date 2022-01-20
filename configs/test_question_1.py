@@ -1,7 +1,8 @@
 import unittest
 
+from results.new_file import RegisterTestClass
 from results.questions_test_case import QuestionsTestCase
-from results.utils import setup_test, RegisterTestClass
+from results.utils import setup_test
 
 
 @RegisterTestClass(question_number=1)

@@ -11,7 +11,7 @@ from results.models import Result
 def question_update_view(request, number):
     obj = get_object_or_404(Question, id=number)
     form = QuestionForm(request.POST or None, instance=obj)
-    Result.objects.all().delete()
+
     next_question = Question.objects.filter(number__gt=obj.number).order_by('number').first()
     previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').last()
 
