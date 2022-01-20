@@ -13,14 +13,12 @@ def question_update_view(request, number):
     form = QuestionForm(request.POST or None, instance=obj)
 
     question = Question.objects.get(number=number)
-
+    Result.objects.all().delete()
     next_question = Question.objects.filter(number__gt=obj.number).order_by('number').first()
     previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').last()
 
     static_errors = StaticLint.objects.get_or_none(question_number=number)
     test_results = Result.objects.filter(question_number=number)
-
-    print(Result.objects.total_mark_for_question(question_number=number))
 
     if form.is_valid():
         form.save()
@@ -31,7 +29,6 @@ def question_update_view(request, number):
         run_tests(form_answer, number)
         static_errors = StaticLint.objects.get(question_number=number)
         test_results = Result.objects.filter(question_number=number)
-        mark = Result.objects.total_mark_for_question(question_number=number)
 
     context = {
         'form': form,
