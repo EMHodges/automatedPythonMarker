@@ -1,14 +1,14 @@
 from django.db import models
 
 from GetOrNoneManager import GetOrNoneManager
-from .utils import extractTestNames
+from .utils import extract_test_names
 from .results_enum import ResultsEnums
 
 
 class ResultManager(GetOrNoneManager, models.Manager):
 
     def error_tests_for_question(self, question_number, reason):
-        test_names = extractTestNames(question_number)
+        test_names = extract_test_names(question_number)
         for test_name in test_names:
             self.update_or_creates(question_number, test_name, ResultsEnums.ERROR, reason, 0)
 

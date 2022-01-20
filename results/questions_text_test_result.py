@@ -38,7 +38,7 @@ class QuestionsTextTestResult(unittest.TextTestResult):
         self.create_result(test, ResultsEnums.FAIL, "Failed!\\newline " + format_err(str(err[1])))
 
     def create_result(self, test: QuestionsTestCase, test_result: ResultsEnums, test_feedback: str) -> None:
-        Result.objects.update_or_creates(self.question_number, test.methodName, test_result, test_feedback, test.getMark())
+        Result.objects.update_or_creates(self.question_number, test.methodName, test_result, test_feedback, test.get_mark())
 
 
 def format_err(err) -> str:

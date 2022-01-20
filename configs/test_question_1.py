@@ -2,9 +2,10 @@ import importlib
 import unittest
 
 from results.questions_test_case import QuestionsTestCase
-from results.utils import setup_test
+from results.utils import setup_test, register_test_cases, class_register, makeRegistrar, my_deco
 
 
+@my_deco(gp=1)
 class TestQuestion1(QuestionsTestCase):
 
     def setUp(self) -> None:

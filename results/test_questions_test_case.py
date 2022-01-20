@@ -1,3 +1,5 @@
+from unittest.mock import patch, MagicMock
+
 from django.test import TestCase
 
 from results.questions_test_case import QuestionsTestCase
@@ -12,14 +14,17 @@ class QuestionsTestCaseTestClass(TestCase):
         question_test_case = QuestionsTestCase(methodName='runTest')
 
         # Then
-        self.assertEqual(question_test_case.getMark(), 0)
+        self.assertEqual(question_test_case.get_mark(), 0)
 
-    def test_set_mark(self):
+    @patch('results.questions_test_case')
+    def test_set_mark(self, mocky):
         # Given
+        mocky.__class__.__name__ = 'upup'
+        mocky.__class__.__name__ = 'TestQuestion1'
         question_test_case = QuestionsTestCase(methodName='runTest')
 
         # When
-        question_test_case.setMark(20)
+        question_test_case.set_mark(20)
 
         # Then
-        self.assertEqual(question_test_case.getMark(), 20)
+        self.assertEqual(question_test_case.get_mark(), 20)

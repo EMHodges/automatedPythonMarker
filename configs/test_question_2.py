@@ -2,9 +2,10 @@ import importlib
 import unittest
 
 from results.questions_test_case import QuestionsTestCase
-from results.utils import setup_test
+from results.utils import setup_test, class_register, my_deco
 
 
+@my_deco(gp=2)
 class TestQuestion2(QuestionsTestCase):
 
     def setUp(self) -> None:
@@ -51,4 +52,3 @@ class TestQuestion2(QuestionsTestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

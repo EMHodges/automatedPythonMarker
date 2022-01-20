@@ -18,7 +18,6 @@ class ResultsConfig(AppConfig):
         from questions.models import Question
 
         number_of_questions = Question.objects.values_list('number', flat=True)
-
         for question_number in number_of_questions:
             QUESTION_RUNNERS[question_number] = QuestionsTestRunner(question_number)
             self._add_test_file_paths(question_number)
@@ -34,3 +33,4 @@ class ResultsConfig(AppConfig):
             raise FileNotFoundError(f"The test file for question: {question_number} cannot be found - looked for: "
                                     f"{file_path}. The test file should be called: 'test_question_{question_number}")
         QUESTION_TEST_FILES[question_number] = file_path
+

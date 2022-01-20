@@ -5,13 +5,16 @@ from .forms import QuestionForm
 from .models import Question
 from results.main import run_tests
 from results.models import Result
+from results.utils import class_register, my_deco
 
 
 # Create your views here.
 def question_update_view(request, number):
+    print('in view')
+    print(my_deco.all_results)
     obj = get_object_or_404(Question, id=number)
     form = QuestionForm(request.POST or None, instance=obj)
-
+    Result.objects.all().delete()
     next_question = Question.objects.filter(number__gt=obj.number).order_by('number').first()
     previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').last()
 
