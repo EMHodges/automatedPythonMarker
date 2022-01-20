@@ -31,17 +31,17 @@ class QuestionsTextTestResult(unittest.TextTestResult):
         if err_name == 'SyntaxError':
             self._addSyntaxError(test)
         else:
-            self.create_result(test, ResultsEnums.ERROR, "ERROR!" + format_err(str(err[1])))
+            self.create_result(test, ResultsEnums.ERROR, f"ERROR! {format_err(str(err[1]))}")
 
     def addFailure(self, test: QuestionsTestCase, err) -> None:
         unittest.TestResult.addFailure(self, test, err)
-        self.create_result(test, ResultsEnums.FAIL, "Failed! " + format_err(str(err[1])))
+        self.create_result(test, ResultsEnums.FAIL, f"Failed! {format_err(str(err[1]))}")
 
     def create_result(self, test: QuestionsTestCase, test_result: ResultsEnums, test_feedback: str) -> None:
         Result.objects.update_or_creates(self.question_number, test.methodName, test_result, test_feedback, test.get_mark())
 
     def _addSyntaxError(self, test:QuestionsTestCase):
-        self.create_result(test, ResultsEnums.ERROR, "ERROR!" + ' Syntax Error')
+        self.create_result(test, ResultsEnums.ERROR, "ERROR! Syntax Error")
 
 
 def format_err(err) -> str:
