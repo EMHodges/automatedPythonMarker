@@ -27,10 +27,6 @@ class QuestionsTextTestResult(unittest.TextTestResult):
         self.create_result(test, ResultsEnums.SUCCESS, "Success")
 
     def addError(self, test: QuestionsTestCase, err) -> None:
-        print('adding error')
-        print(err)
-        if isinstance(err, SyntaxError):
-            print(True)
         self.create_result(test, ResultsEnums.ERROR, "ERROR!\\newline " + format_err(str(err[1])))
 
     def addFailure(self, test: QuestionsTestCase, err) -> None:

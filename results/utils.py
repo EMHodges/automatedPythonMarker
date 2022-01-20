@@ -13,13 +13,10 @@ def setup_test(max_mark):
         @functools.wraps(func)
         def decorated(*args, **kwargs):
             test_case_instance: QuestionsTestCase = args[0]
-
             check_import_error(test_case_instance)
             func(*args, **kwargs)
             test_case_instance.set_mark(max_mark)
-
         return decorated
-
     return decorator
 
 

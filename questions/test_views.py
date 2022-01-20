@@ -4,6 +4,7 @@ from django.urls import reverse
 
 from questions.models import Question
 
+
 class QuestionsViewsTestCase(TestCase):
 
     def setUp(self) -> None:
@@ -127,5 +128,3 @@ class QuestionsViewsTestCase(TestCase):
         self.assertTemplateUsed(test_response, 'question/question_list.html')
         self.assertEqual(test_response.context['object_list'][0], self.question_1)
         self.assertEqual(test_response.context['object_list'][1], self.question_2)
-
-

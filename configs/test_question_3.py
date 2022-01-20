@@ -2,20 +2,15 @@ import importlib
 import unittest
 
 from configs.utils.utils import absolute_test_data_path
+from results.new_file import RegisterTestClass
 from results.questions_test_case import QuestionsTestCase
 from results.utils import setup_test
 
 
+@RegisterTestClass(question_number=3)
 class TestQuestion3(QuestionsTestCase):
 
-    def setUp(self) -> None:
-        import static_lint.code_to_lint
-        importlib.reload(static_lint.code_to_lint)
-
-
     def sameIndices(self, expected, actual):
-        print('in same indices')
-        print(actual)
         """ This is a convenience function to compare the two dictionaries passed
         in parameters. It is needed to ensure that the word passed as keys of
         the dictionary are not case sensitive.
