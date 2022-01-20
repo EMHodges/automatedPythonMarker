@@ -2,7 +2,6 @@ import unittest
 
 from static_lint.lint_answer import lint_answer
 from .apps import QUESTION_RUNNERS
-from .utils import class_registers, class_register
 
 
 def run_tests(answer, question_number):

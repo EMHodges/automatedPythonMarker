@@ -1,16 +1,11 @@
-import importlib
 import unittest
 
 from results.questions_test_case import QuestionsTestCase
-from results.utils import setup_test, class_register, my_deco
+from results.utils import setup_test, RegisterTestClass
 
 
-@my_deco(gp=2)
+@RegisterTestClass(question_number=2)
 class TestQuestion2(QuestionsTestCase):
-
-    def setUp(self) -> None:
-        import static_lint.code_to_lint
-        importlib.reload(static_lint.code_to_lint)
 
     @setup_test(max_mark=2)
     def testSameSequences(self):

@@ -1,3 +1,4 @@
+import importlib
 import unittest
 import re
 
@@ -10,12 +11,14 @@ class QuestionsTestCase(unittest.TestCase):
         super(QuestionsTestCase, self).__init__(methodName)
         self._mark = 0
         self.methodName = self._testMethodName
-        print(self.__class__)
-        print(self.__class__.__name__)
         self._questionNumber = self._get_question_number()
 
     def __call__(self, *args, **kwds):
         return self.run(*args, **kwds)
+
+    def setUp(self) -> None:
+        import static_lint.code_to_lint
+        importlib.reload(static_lint.code_to_lint)
 
     def set_mark(self, mark):
         self._mark = mark

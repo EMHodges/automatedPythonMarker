@@ -1,5 +1,6 @@
 import ast
 import functools
+import importlib
 
 from automatedPythonMarker.settings import resource_path
 from questions.models import Question
@@ -9,85 +10,18 @@ from static_lint.models import StaticLint
 import re
 
 
-class my_deco:
-    all_results = {}
+class RegisterTestClass:
+    test_method_names_for_question = {}
 
-    def __init__(self, gp=None, *args, **kwargs):
+    def __init__(self, question_number, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs
-        self.gp = gp
+        self._question_number = question_number
 
     def __call__(self, cls):
-        method_list = [method for method in dir(cls) if method.startswith('test')]
-        self.all_results[self.gp] = method_list
+        test_methods = [method for method in dir(cls) if method.startswith('test')]
+        self.test_method_names_for_question[self._question_number] = test_methods
         return cls
-
-
-def class_registers(cls):
-    print(cls)
-    for name in dir(cls):
-        method = getattr(cls, )
-        method
-
-    method_list = [method for method in dir(cls) if method.startswith('test')]
-    cls._yo = method_list
-    return cls
-
-
-# Could either add method list to question itself, or define a
-# dict on class_register and access it that way - maybe better other way may need funny db
-
-def class_register(no):
-    def yo(cls):
-        print('call')
-        method_list = [method for method in dir(cls) if method.startswith('test')]
-        class_register.dic[no] = method_list
-        print(class_register.dic)
-        return cls
-
-    return yo
-
-
-class_register.dic = {}
-
-
-def class_registerss(cls):
-    method_list = [method for method in dir(cls) if method.startswith('test')]
-    class_register._yo = method_list
-    return cls
-
-
-def makeRegistrar(cls):
-    registry = {}
-
-    def registrar(clss):
-        method_list = [method for method in dir(clss) if method.startswith('test')]
-        registry[clss.__name__] = method_list
-        return clss  # normally a decorator returns a wrapped function,
-        # but here we return func unmodified, after registering it
-
-    registrar.all = registry
-    return registrar
-
-
-def register(*args):
-    def wrapper(func):
-        func._prop = args
-        return func
-
-    return wrapper
-
-
-def register_test_cases():
-    def decorator(func):
-        @functools.wraps(func)
-        def decorated(*args, **kwargs):
-            print('in reg')
-            print(func)
-
-        return decorated
-
-    return decorator
 
 
 def setup_test(max_mark):
@@ -97,7 +31,6 @@ def setup_test(max_mark):
             test_case_instance: QuestionsTestCase = args[0]
 
             check_import_error(test_case_instance)
-
             func(*args, **kwargs)
             test_case_instance.set_mark(max_mark)
 

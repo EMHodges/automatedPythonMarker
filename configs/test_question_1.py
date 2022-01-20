@@ -1,19 +1,14 @@
-import importlib
 import unittest
 
 from results.questions_test_case import QuestionsTestCase
-from results.utils import setup_test, register_test_cases, class_register, makeRegistrar, my_deco
+from results.utils import setup_test, RegisterTestClass
 
 
-@my_deco(gp=1)
+@RegisterTestClass(question_number=1)
 class TestQuestion1(QuestionsTestCase):
 
-    def setUp(self) -> None:
-        import static_lint.code_to_lint
-        importlib.reload(static_lint.code_to_lint)
-
     @setup_test(max_mark=6)
-    def testNoSpee(self):
+    def testNoSpeed(self):
         from static_lint.code_to_lint import calculateFine
         """ Test that a value of 0 is returned when the speed is less than
         or equal to the speed limit.
