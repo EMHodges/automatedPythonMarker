@@ -13,7 +13,6 @@ def question_update_view(request, number):
     form = QuestionForm(request.POST or None, instance=obj)
 
     question = Question.objects.get(number=number)
-    Result.objects.all().delete()
     next_question = Question.objects.filter(number__gt=obj.number).order_by('number').first()
     previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').last()
 

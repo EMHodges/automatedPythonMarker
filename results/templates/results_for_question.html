@@ -1,0 +1,9 @@
+{% block content %}
+
+{% if test_results %}
+    {% include "results_view.html" with test_results=test_results %}
+{% endif %}
+
+Total Mark: {{ mark }} / {{ question.max_mark }}
+
+{% endblock %}

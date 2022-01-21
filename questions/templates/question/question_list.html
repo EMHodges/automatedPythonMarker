@@ -8,4 +8,6 @@
     <p><a href='{{ instance.get_absolute_url }}'>Question {{ instance.number }}</a></p>
 {% endfor %}
 
+<h1>Results</h1>
+<a href="{% url 'results:results-page-view' %}">Results</a>
 {% endblock %}
