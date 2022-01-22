@@ -14,6 +14,7 @@ class QuestionsTestCase(unittest.TestCase):
         self.methodName = self._testMethodName
         self._questionNumber = self._get_question_number()
 
+
     def __call__(self, *args, **kwds):
         return self.run(*args, **kwds)
 
