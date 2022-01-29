@@ -6,6 +6,19 @@ from questions.models import Question
 from results.questions_test_case import QuestionsTestCase
 
 
+def setup(max_mark, test_params):
+    def decorator(func):
+        @functools.wraps(func)
+        def decorated(*args, **kwargs):
+            test_case_instance: QuestionsTestCase = args[0]
+            check_import_error(test_case_instance)
+            for i in test_params:
+                func(*args, **kwargs, a=i[0], b=i[1], c=i[2])
+            test_case_instance.set_mark(max_mark)
+        return decorated
+    return decorator
+
+
 def setup_test(max_mark):
     def decorator(func):
         @functools.wraps(func)
