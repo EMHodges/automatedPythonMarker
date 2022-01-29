@@ -1,4 +1,5 @@
 import importlib
+import random
 import unittest
 
 from results.new_file import RegisterTestClass
@@ -13,7 +14,6 @@ class QuestionsTestCase(unittest.TestCase):
         self._mark = 0
         self.methodName = self._testMethodName
         self._questionNumber = self._get_question_number()
-
 
     def __call__(self, *args, **kwds):
         return self.run(*args, **kwds)
@@ -33,3 +33,18 @@ class QuestionsTestCase(unittest.TestCase):
 
     def _get_question_number(self):
         return RegisterTestClass.get_test_question_number(self.methodName)
+
+    # ToDo override all of these methods add message which includes the input of the
+    # function so that this can be outputted, maybe add mark here?
+    def expectEqual(self, first, second, msg=None):
+        with self.subTest():
+            self.assertEqual(first, second, msg)
+
+    def expectAlmostEqual(self, first, second, places=None, msg=None,
+                          delta=None):
+        g = random.randint(0, 909090)
+        with self.subTest(msg=g):
+            print('new sub test')
+            self.assertAlmostEqual(first, second, places=places, msg=msg,
+                          delta=delta)
+            self.set_mark(4)
