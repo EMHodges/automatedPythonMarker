@@ -13,7 +13,7 @@ def setup(max_mark, test_params):
             test_case_instance: QuestionsTestCase = args[0]
             check_import_error(test_case_instance)
             for i in test_params:
-                func(*args, **kwargs, a=i[0], b=i[1], c=i[2])
+                func(*args, i, **kwargs)
             test_case_instance.set_mark(max_mark)
         return decorated
     return decorator

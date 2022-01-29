@@ -2,22 +2,26 @@ import unittest
 
 from results.new_file import RegisterTestClass
 from results.questions_test_case import QuestionsTestCase
+from configs.utils.test_case_parameters import TestCaseParameter
 from results.utils import setup_test, setup
 
 
 @RegisterTestClass(question_number=1)
 class TestQuestion1(QuestionsTestCase):
 
-    @setup(max_mark=6, test_params=[(0, 0, 0), (8, 2, 10)])
+    @setup(max_mark=6, test_params=[
+        TestCaseParameter(inputs={'a': 0, 'b': 0}, result=0, msg="hi"),
+        TestCaseParameter(inputs={'a': 0, 'b': 0}, result=0, msg="hi"),
+    ])
    # @setup(max_mark=6, test_params=[
-   #     TestCase(inputs=(7,2), output=4, msg='up')
-   # ])
-    def testNoSpeed(self, a, b, c):
+   #     TestCase(inputs=(7,2), output=4, msg
+    def testNoSpeed(self, test_param: TestCaseParameter):
         from static_lint.code_to_lint import calculateFine
+        print(test_param)
         """ Test that a value of 0 is returned when the speed is less than
         or equal to the speed limit.
         """
-        self.assertAlmostEqual(c, calculateFine(a, b), delta=0.000001, msg='hi')
+        self.assertAlmostEqual(test_param.result, calculateFine(test_param.inputs['a'], test_param.inputs['b']), delta=0.000001, msg=test_param.message)
 
     @setup_test(max_mark=6)
     def testSpeedLower90(self):
