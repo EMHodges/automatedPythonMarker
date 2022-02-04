@@ -1,7 +1,7 @@
 import unittest
 
+from results.apps import QUESTION_RUNNERS
 from static_lint.lint_answer import lint_answer
-from .apps import QUESTION_RUNNERS
 
 
 def run_tests(answer, question_number):

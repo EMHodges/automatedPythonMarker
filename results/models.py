@@ -26,11 +26,17 @@ class ResultManager(GetOrNoneManager, models.Manager):
         return sum(marks_for_question)
 
 
+class Subtest(models.Model):
+    message = models.TextField()
+    test_result = models.CharField(max_length=2, choices=ResultsEnums.choices, default=ResultsEnums.ERROR)
+
+
 # Create your models here.
 class Result(models.Model):
     question_number = models.IntegerField()
     test_name = models.TextField()
     test_result = models.CharField(max_length=2, choices=ResultsEnums.choices, default=ResultsEnums.ERROR)
     test_feedback = models.TextField()
+    subtest = models.ForeignKey(Subtest, on_delete=models.CASCADE, null=True, blank=True)
     mark = models.IntegerField()
     objects = ResultManager()
