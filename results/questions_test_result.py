@@ -1,5 +1,7 @@
 import unittest
 
+from results.questions_test_case import QuestionsTestCase
+
 
 class QuestionsTestResult(unittest.TestResult):
 
@@ -7,8 +9,20 @@ class QuestionsTestResult(unittest.TestResult):
         super(QuestionsTestResult, self).__init__(stream, descriptions, verbosity)
 
     # ToDo add these to the results database
-    def addSubTest(self, test, subtest, err):
+    def addSubTest(self, test: QuestionsTestCase, subtest, err):
         print('adding sub test dail')
+        print('typezzzzzz')
+        print(type(test))
+        print(test.get_question_number())
+        print(test.methodName)
+        print(type(subtest))
+        print(subtest)
+        print(subtest._subDescription())
+        print(subtest.id())
+        print('message')
+        print(subtest._message)
+        print(subtest.params)
+        print('finish dail')
         if err is not None:
             if getattr(self, 'failfast', False):
                 self.stop()

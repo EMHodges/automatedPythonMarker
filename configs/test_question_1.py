@@ -25,8 +25,8 @@ class TestQuestion1(QuestionsTestCase):
         from static_lint.code_to_lint import calculateFine
         """ Test that fines are calculated correctly for speed below 90 mph.
         """
-        self.assertAlmostEqual(150, calculateFine(60, 50), delta=0.000001)
-        self.assertAlmostEqual(205, calculateFine(71, 50), delta=0.000001)
+        self.expectAlmostEqual(150, calculateFine(60, 50), delta=0.000001, msg='60, 50')
+        self.expectAlmostEqual(205, calculateFine(71, 50), delta=0.000001, msg='71, 50')
 
     @setup_test(max_mark=6)
     def testSpeedOver90(self):
@@ -34,8 +34,8 @@ class TestQuestion1(QuestionsTestCase):
         """ Test that fines are calculated correctly for speed of 90 mph or
         over. That is an additional penalty of 200 pounds should be added.
         """
-        self.expectAlmostEqual(400, calculateFine(90, 70), delta=0.000001)
-        self.expectAlmostEqual(505, calculateFine(91, 50), delta=0.000001)
+        self.expectAlmostEqual(400, calculateFine(90, 70), delta=0.000001, msg='90, 70')
+        self.expectAlmostEqual(505, calculateFine(91, 50), delta=0.000001, msg='91, 50')
 
 
 if __name__ == '__main__':

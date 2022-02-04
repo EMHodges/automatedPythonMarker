@@ -34,7 +34,7 @@ class QuestionsTextTestResult(QuestionsTestResult):
         else:
             self.create_result(test, ResultsEnums.ERROR, f"ERROR! {format_err(str(err[1]))}")
 
-    # ToDo add failures from subtests to the overall test
+    # ToDo add failures from subtests to the overall test or add a new custom method to call from addSubTest to handle it
     def addFailure(self, test: QuestionsTestCase, err) -> None:
         print('failzzz')
         unittest.TestResult.addFailure(self, test, err)
