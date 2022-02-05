@@ -4,7 +4,7 @@
 
 {% include "question/question_update.html" with object=object %}
 {% include "static_lint/static_lint_detail_view.html" with object=static_errors %}
-{% include "results_for_question.html" with results=test_results %}
+{% include "results_for_question.html" with results=test_results subtests=subtest %}
 {% include "question/navigate_questions.html" with next_question=next_question previous_question=previous_question %}
 
 <a href="{% url 'questions:question-list' %}">All Questions</a>

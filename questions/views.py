@@ -11,7 +11,7 @@ from results.models import Result
 def question_update_view(request, number):
     obj = get_object_or_404(Question, id=number)
     form = QuestionForm(request.POST or None, instance=obj)
-    Result.objects.all().delete()
+
     question = Question.objects.get(number=number)
     next_question = Question.objects.filter(number__gt=obj.number).order_by('number').first()
     previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').last()
@@ -29,6 +29,14 @@ def question_update_view(request, number):
         static_errors = StaticLint.objects.get(question_number=number)
         test_results = Result.objects.filter(question_number=number)
 
+    r = []
+    g = Result.objects.filter(question_number=number)
+    for i in g:
+        x = i.subtest_set.all().values_list('message', flat=True)
+        for c in x:
+            r.append(c)
+    print(r)
+
     context = {
         'form': form,
         'object': obj,
@@ -37,6 +45,7 @@ def question_update_view(request, number):
         'static_errors': static_errors,
         'test_results': test_results,
         'mark': Result.objects.total_mark_for_question(question_number=number),
+        'subtest': r,
         'question': question
     }
     return render(request, "question/question.html", context)

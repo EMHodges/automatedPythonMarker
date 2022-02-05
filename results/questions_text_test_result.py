@@ -40,6 +40,7 @@ class QuestionsTextTestResult(QuestionsTestResult):
         unittest.TestResult.addFailure(self, test, err)
         self.create_result(test, ResultsEnums.FAIL, f"Failed! {format_err(str(err[1]))}")
 
+
     def create_result(self, test: QuestionsTestCase, test_result: ResultsEnums, test_feedback: str) -> None:
         Result.objects.update_or_creates(self.question_number, test.methodName, test_result, test_feedback, test.get_mark())
 
