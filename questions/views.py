@@ -4,14 +4,14 @@ from static_lint.models import StaticLint
 from .forms import QuestionForm
 from .models import Question
 from results.main import run_tests
-from results.models import Result
+from results.models import Result, Subtest
 
 
 # Create your views here.
 def question_update_view(request, number):
     obj = get_object_or_404(Question, id=number)
     form = QuestionForm(request.POST or None, instance=obj)
-
+    Result.objects.all().delete()
     question = Question.objects.get(number=number)
     next_question = Question.objects.filter(number__gt=obj.number).order_by('number').first()
     previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').last()
@@ -32,11 +32,20 @@ def question_update_view(request, number):
     r = []
     g = Result.objects.filter(question_number=number)
     for i in g:
-        x = i.subtest_set.all().values_list('message', flat=True)
+        print(i.test_result)
+        x = i.subtest_set.all().values_list('test_result', flat=True)
         for c in x:
             r.append(c)
     print(r)
-
+    print(test_results)
+    for i in test_results:
+        print(i.test_name)
+        print(i.subtest_set.all())
+        for j in i.subtest_set.all():
+            print(j.message)
+    print('views')
+    print(Result.objects.all())
+    print(Subtest.objects.all())
     context = {
         'form': form,
         'object': obj,

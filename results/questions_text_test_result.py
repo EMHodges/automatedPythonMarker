@@ -34,12 +34,9 @@ class QuestionsTextTestResult(QuestionsTestResult):
         else:
             self.create_result(test, ResultsEnums.ERROR, f"ERROR! {format_err(str(err[1]))}")
 
-    # ToDo add failures from subtests to the overall test or add a new custom method to call from addSubTest to handle it
     def addFailure(self, test: QuestionsTestCase, err) -> None:
-        print('failzzz')
         unittest.TestResult.addFailure(self, test, err)
         self.create_result(test, ResultsEnums.FAIL, f"Failed! {format_err(str(err[1]))}")
-
 
     def create_result(self, test: QuestionsTestCase, test_result: ResultsEnums, test_feedback: str) -> None:
         Result.objects.update_or_creates(self.question_number, test.methodName, test_result, test_feedback, test.get_mark())
@@ -49,7 +46,7 @@ class QuestionsTextTestResult(QuestionsTestResult):
 
 
 def format_err(err) -> str:
-    message_index = err.rfind(':')
+    message_index = err.rfind('@')
     if message_index < 0 or message_index >= len(err) - 1:
         return ""
     else:

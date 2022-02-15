@@ -25,6 +25,8 @@ class ResultManager(GetOrNoneManager, models.Manager):
         marks_for_question = self.filter(question_number=question_number).values_list('mark', flat=True)
         return sum(marks_for_question)
 
+    def reset_mark(self, question_number, test_name):
+        self.update_or_creates(question_number, test_name, ResultsEnums.SUCCESS, 'Success', 0)
 
 # Create your models here.
 class Result(models.Model):

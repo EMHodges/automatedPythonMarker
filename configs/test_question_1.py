@@ -27,8 +27,8 @@ class TestQuestion1(QuestionsTestCase):
         from static_lint.code_to_lint import calculateFine
         """ Test that fines are calculated correctly for speed below 90 mph.
         """
-        self.expectAlmostEqual(205, calculateFine(71, 50), delta=0.000001, msg='71, 50')
-        self.expectAlmostEqual(0, calculateFine(0, 0), delta=0.000001, msg='60, 50')
+        self.expectAlmostEqual(0, calculateFine(0, 0), delta=0.000001, msg='71, 50')
+        self.expectAlmostEqual('0', calculateFine(0, 0), delta=0.000001, msg='60, 50')
 
     @setup_test(max_mark=6)
     def testSpeedOver90(self):

@@ -72,4 +72,3 @@ class QuestionsTestCase(unittest.TestCase):
     def expectListEqual(self, list1, list2, msg):
         with self.subTest(msg=msg):
             super().assertListEqual(list1, list2, msg)
-
