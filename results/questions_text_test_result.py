@@ -3,9 +3,10 @@ import unittest
 from results.questions_test_case import QuestionsTestCase
 from results.models import Result
 from results.results_enum import ResultsEnums
+from results.questions_test_result import QuestionsTestResult
 
 
-class QuestionsTextTestResult(unittest.TextTestResult):
+class QuestionsTextTestResult(QuestionsTestResult):
     '''
     classdocs
     '''
@@ -34,7 +35,6 @@ class QuestionsTextTestResult(unittest.TextTestResult):
             self.create_result(test, ResultsEnums.ERROR, f"ERROR! {format_err(str(err[1]))}")
 
     def addFailure(self, test: QuestionsTestCase, err) -> None:
-        print(format_err(str(err[1])))
         unittest.TestResult.addFailure(self, test, err)
         self.create_result(test, ResultsEnums.FAIL, f"Failed! {format_err(str(err[1]))}")
 
@@ -46,7 +46,7 @@ class QuestionsTextTestResult(unittest.TextTestResult):
 
 
 def format_err(err) -> str:
-    message_index = err.rfind(':')
+    message_index = err.rfind('@')
     if message_index < 0 or message_index >= len(err) - 1:
         return ""
     else:

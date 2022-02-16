@@ -3,7 +3,9 @@
 {% if test_results %}
     {% include "results_view.html" with test_results=test_results %}
 {% endif %}
-
+{% for subtest in subtests %}
+    <p>{{ subtest }}</p>
+{% endfor %}
 Total Mark: {{ mark }} / {{ question.max_mark }}
 
 {% endblock %}

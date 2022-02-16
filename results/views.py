@@ -20,7 +20,7 @@ def results_page_view(request):
     context = {
         "test_result": results_dict,
         "mark_questions": mark_questions,
-        "max_mark": max_mark
+        "max_mark": max_mark,
     }
 
     return render(request, "results.html", context)
