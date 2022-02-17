@@ -14,3 +14,4 @@ class Question(models.Model):
 
     def get_absolute_url(self):
         return reverse("questions:question-update", kwargs={"number": self.number})
+

@@ -7,7 +7,7 @@ from .results_enum import ResultsEnums
 
 class ResultManager(GetOrNoneManager, models.Manager):
 
-    def update_or_creates(self, question_number, test_name, test_result, test_feedback, mark):
+    def update_or_creates(self, question_number, test_name, test_feedback, mark):
         self.update_or_create(question_number=question_number, test_name=test_name,
                               defaults={
                                   'test_feedback': test_feedback,
@@ -19,15 +19,7 @@ class ResultManager(GetOrNoneManager, models.Manager):
         return sum(marks_for_question)
 
     def reset_mark(self, question_number, test_name):
-        self.update_or_creates(question_number, test_name, ResultsEnums.SUCCESS, 'Success', 0)
-
-    def get_test_result(self, question_number, test_name):
-        tests = self.get(question_number=question_number, test_name=test_name).subtest_set.values_list('test_result')
-        return ResultsEnums.get_ordered(tests)
-
-    def get_failing_subtest_params(self, question_number):
-        failing = self.get(question_number=question_number).subtest_set.exclude(test_result=ResultsEnums.SUCCESS)
-        return [message for message in failing.values_list('params_failing', flat=True)]
+        self.update_or_creates(question_number, test_name, 'Success', 0)
 
 
 # Create your models here.
@@ -37,6 +29,14 @@ class Result(models.Model):
     test_feedback = models.TextField()
     mark = models.IntegerField()
     objects = ResultManager()
+
+    def get_test_result(self):
+        tests = self.subtest_set.values_list('test_result')
+        return ResultsEnums.get_ordered(tests)
+
+    def get_failing_subtest_params(self):
+        failing = self.subtest_set.exclude(test_result=ResultsEnums.SUCCESS)
+        return [message for message in failing.values_list('params_failing', flat=True)]
 
 
 class Subtest(models.Model):
