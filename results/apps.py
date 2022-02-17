@@ -30,7 +30,7 @@ class ResultsConfig(AppConfig):
 
         if not is_valid_file_path:
             QUESTION_TEST_FILES.clear()
-            raise FileNotFoundError(f"The test file for question: {question_number} cannot be found - looked for: "
-                                    f"{file_path}. The test file should be called: 'test_question_{question_number}")
+         #   raise FileNotFoundError(f"The test file for question: {question_number} cannot be found - looked for: "
+         #                           f"{file_path}. The test file should be called: 'test_question_{question_number}")
         QUESTION_TEST_FILES[question_number] = file_path
 

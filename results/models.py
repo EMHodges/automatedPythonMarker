@@ -1,22 +1,15 @@
 from django.db import models
 
 from GetOrNoneManager import GetOrNoneManager
-from .new_file import RegisterTestClass
 
 from .results_enum import ResultsEnums
 
 
 class ResultManager(GetOrNoneManager, models.Manager):
 
-    def error_tests(self, question_number, reason):
-        test_names = RegisterTestClass.test_method_names_for_question[question_number]
-        for test_name in test_names:
-            self.update_or_creates(question_number, test_name, ResultsEnums.ERROR, reason, 0)
-
     def update_or_creates(self, question_number, test_name, test_result, test_feedback, mark):
         self.update_or_create(question_number=question_number, test_name=test_name,
                               defaults={
-                                  'test_result': test_result,
                                   'test_feedback': test_feedback,
                                   'mark': mark
                               })
@@ -28,11 +21,19 @@ class ResultManager(GetOrNoneManager, models.Manager):
     def reset_mark(self, question_number, test_name):
         self.update_or_creates(question_number, test_name, ResultsEnums.SUCCESS, 'Success', 0)
 
+    def get_test_result(self, question_number, test_name):
+        tests = self.get(question_number=question_number, test_name=test_name).subtest_set.values_list('test_result')
+        return ResultsEnums.get_ordered(tests)
+
+    def get_failing_subtest_params(self, question_number):
+        failing = self.get(question_number=question_number).subtest_set.exclude(test_result=ResultsEnums.SUCCESS)
+        return [message for message in failing.values_list('params_failing', flat=True)]
+
+
 # Create your models here.
 class Result(models.Model):
     question_number = models.IntegerField()
     test_name = models.TextField()
-    test_result = models.CharField(max_length=2, choices=ResultsEnums.choices, default=ResultsEnums.ERROR)
     test_feedback = models.TextField()
     mark = models.IntegerField()
     objects = ResultManager()
@@ -40,6 +41,6 @@ class Result(models.Model):
 
 class Subtest(models.Model):
     identifier = models.TextField()
-    message = models.TextField()
+    params_failing = models.TextField()
     test_result = models.CharField(max_length=2, choices=ResultsEnums.choices, default=ResultsEnums.ERROR)
     test = models.ForeignKey(Result, on_delete=models.CASCADE, null=True, blank=True)

@@ -12,4 +12,9 @@ def get_item(dictionary, key):
 @register.filter
 def get_failing_subtest_params(result: Result):
     failing = result.subtest_set.all().exclude(test_result=ResultsEnums.SUCCESS)
-    return [message for message in failing.values_list('message', flat=True)]
+    return [message for message in failing.values_list('params_failing', flat=True)]
+
+
+@register.filter
+def get_test_feedback(result: Result):
+    return Result.objects.get_test_result(1, result.test_name)
