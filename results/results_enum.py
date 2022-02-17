@@ -9,10 +9,9 @@ class ResultsEnums(models.TextChoices):
     ERROR = 'E', _('Error')
 
     @staticmethod
-    def get_ordered(results: QuerySet):
-        g = [i[0] for i in results]
-        if ResultsEnums.ERROR in g:
+    def get_yo(existing_results_enum, new_results_enum):
+        if existing_results_enum == ResultsEnums.ERROR or new_results_enum == ResultsEnums.ERROR:
             return ResultsEnums.ERROR
-        if ResultsEnums.FAIL in g:
+        if existing_results_enum == ResultsEnums.FAIL or new_results_enum == ResultsEnums.FAIL:
             return ResultsEnums.FAIL
         return ResultsEnums.SUCCESS

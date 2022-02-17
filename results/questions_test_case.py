@@ -63,7 +63,6 @@ class QuestionsTestCase(unittest.TestCase):
     def expectAlmostEqual(self, first, second, msg, places=None, delta=None):
         with self.subTest(msg=msg):
             super().assertAlmostEqual(first, second, places=places, msg=msg, delta=delta)
-            self.set_mark(4) # maybe??
 
     def expectNotAlmostEqual(self, first, second, msg, places=None, delta=None):
         with self.subTest(msg=msg):

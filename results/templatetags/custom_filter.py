@@ -11,8 +11,3 @@ def get_item(dictionary, key):
 @register.filter
 def get_failing_subtest_params(result: Result):
     return result.get_failing_subtest_params()
-
-
-@register.filter
-def get_test_result(result: Result):
-    return result.get_test_result()
