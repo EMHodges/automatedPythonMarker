@@ -2,19 +2,13 @@ import unittest
 
 from results.new_file import RegisterTestClass
 from results.questions_test_case import QuestionsTestCase
-from configs.utils.test_case_parameters import TestCaseParameter
-from results.utils import setup_test, setup
+from results.utils import setup_test
 
 
 @RegisterTestClass(question_number=1)
 class TestQuestion1(QuestionsTestCase):
 
- #   @setup(max_mark=6, test_params=[
- #       TestCaseParameter(inputs={'a': 0, 'b': 0}, result=0, msg="hi"),
- #       TestCaseParameter(inputs={'a': 0, 'b': 0}, result=0, msg="hi2"),
- #   ])
     @setup_test(max_mark=6)
-  #  def testNoSpeed(self, test_param: TestCaseParameter):
     def testNoSpeed(self):
         from static_lint.code_to_lint import calculateFine
         """ Test that a value of 0 is returned when the speed is less than

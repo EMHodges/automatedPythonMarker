@@ -7,24 +7,6 @@ from results.models import Result
 from results.questions_test_case import QuestionsTestCase
 
 
-def setup(max_mark, test_params):
-    def decorator(func):
-        @functools.wraps(func)
-        def decorated(*args, **kwargs):
-            test_case_instance: QuestionsTestCase = args[0]
-            Result.objects.get_or_create(question_number=test_case_instance.get_question_number(),
-                                         test_name=test_case_instance.methodName)
-
-            check_import_error(test_case_instance)
-            for i in test_params:
-                func(*args, i, **kwargs)
-            test_case_instance.set_mark(max_mark)
-
-        return decorated
-
-    return decorator
-
-
 def setup_test(max_mark):
     def decorator(func):
         @functools.wraps(func)
