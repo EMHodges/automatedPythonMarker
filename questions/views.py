@@ -57,7 +57,7 @@ def question_list_view(request):
 
 def submit_view(request):
     response = HttpResponse(content_type='text/plain')
-    response['Content-Disposition'] = 'attachment; filename=submission.txt'
+    response['Content-Disposition'] = 'attachment; filename=submission.yaml'
 
     lines = []
 
