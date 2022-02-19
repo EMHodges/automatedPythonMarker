@@ -1,10 +1,16 @@
+import json
+
+import yaml
+from django.core import serializers
 from django.shortcuts import render, get_object_or_404
+from yaml import serializer
 
 from static_lint.models import StaticLint
 from .forms import QuestionForm
 from .models import Question
 from results.main import run_tests
 from results.models import Result
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -47,3 +53,23 @@ def question_list_view(request):
         "object_list": queryset
     }
     return render(request, "question/question_list.html", context)
+
+
+def submit_view(request):
+    response = HttpResponse(content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename=submission.txt'
+
+    lines = []
+
+    questions = Question.objects.all()
+
+    for question in questions:
+        lines.append(f'question-number: {question.number} \n')
+        lines.append(question.answer)
+        lines.append('\n')
+        lines.append('\n')
+    response.writelines(lines)
+
+    data = serializers.serialize("yaml", Question.objects.all())
+    response.writelines(data)
+    return response
