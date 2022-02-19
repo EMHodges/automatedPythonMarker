@@ -13,8 +13,8 @@ from django.http import HttpResponse
 def question_update_view(request, number):
     obj = get_object_or_404(Question, id=number)
     obj2 = get_object_or_404(Question, id=2)
-    form = QuestionForm(request.POST or None, instance=obj)
-    form2 = QuestionForm(request.POST or None, instance=obj2)
+    form = QuestionForm(request.POST or None, instance=obj, prefix='1')
+    form2 = QuestionForm(request.POST or None, instance=obj2, prefix='2')
     forms = {obj: form, obj2: form2}
     question = Question.objects.get(number=number)
     next_question = Question.objects.filter(number__gt=obj.number).order_by('number').first()
@@ -22,32 +22,50 @@ def question_update_view(request, number):
 
     static_errors = StaticLint.objects.get_or_none(question_number=number)
     test_results = Result.objects.filter(question_number=number)
-
+    yo = {}
+    questions = [question, Question.objects.get(number=2)]
     for obg, form in forms.items():
         print(obg)
         print(form)
         if form.is_valid():
             form.save()
-    print(request.POST)
-    if request.method == "POST":
-        form_answer = request.POST.get("answer")
-        run_tests(form_answer, number)
-        static_errors = StaticLint.objects.get(question_number=number)
-        test_results = Result.objects.filter(question_number=number)
+    print('POSTY')
+    print(request.POST.get('3-answer'))
+    if request.method == "POST" and request.POST.get('1-answer'):
+        print('1-answer')
+        form_answer = request.POST.get('1-answer')
+        run_tests(form_answer, 1)
+        static_errors = StaticLint.objects.get(question_number=1)
+        test_results = Result.objects.filter(question_number=1)
 
+    if request.method == "POST" and request.POST.get('2-answer'):
+        print('2-answer')
+        form_answer = request.POST.get('2-answer')
+        run_tests(form_answer, 2)
+        static_errors = StaticLint.objects.get(question_number=2)
+        test_results = Result.objects.filter(question_number=2)
+        yo[obj] = Result.objects.filter(question_number=2)
+
+    yo[obj] = Result.objects.filter(question_number=1)
+    yo[obj2] = Result.objects.filter(question_number=2)
+
+    print('RESULTS')
+    print(Result.objects.filter(question_number=1))
+    print(Result.objects.filter(question_number=2))
+    print(test_results)
+    print('yops')
+    print(yo)
     context = {
         'form': forms,
         'object': obj,
         'next_question': next_question,
         'previous_question': previous_question,
         'static_errors': static_errors,
-        'test_results': test_results,
+        'test_results': yo,
+        'question': questions,
         'mark': Result.objects.total_mark_for_question(question_number=number),
-        'question': question
     }
     return render(request, "question/question.html", context)
-
-def yo(request, u):
 
 
 def question_list_view(request):
