@@ -7,6 +7,8 @@ from django.core.management.base import BaseCommand
 from questions.models import Question
 from collections import defaultdict
 
+from results.models import Result
+
 
 class DuplicateQuestionNumberException(Exception):
     """Raise when multiple question files have the same question number"""
@@ -22,7 +24,7 @@ class DuplicateQuestionNumberException(Exception):
         for question_number, file_paths in error.items():
             file_paths = ', '.join(file_paths)
             error_message.append(f"The files: \"{file_paths}\" define questions with question number {question_number} "
-                                  f"\n")
+                                 f"\n")
         return ''.join(error_message)
 
 
@@ -41,8 +43,12 @@ class Command(BaseCommand):
             question_numbers[question.number].append(file)
 
         self._validate_question_numbers(question_numbers)
+        print(questions)
+        Result.objects.all().delete()
+        print('deleted results')
 
         Question.objects.all().delete()
+        print('deleted questions')
 
         for question in questions:
             Question.save(question)
