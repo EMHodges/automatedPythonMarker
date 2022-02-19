@@ -1,9 +1,5 @@
-import json
-
-import yaml
 from django.core import serializers
 from django.shortcuts import render, get_object_or_404
-from yaml import serializer
 
 from static_lint.models import StaticLint
 from .forms import QuestionForm
@@ -16,8 +12,10 @@ from django.http import HttpResponse
 # Create your views here.
 def question_update_view(request, number):
     obj = get_object_or_404(Question, id=number)
+    obj2 = get_object_or_404(Question, id=2)
     form = QuestionForm(request.POST or None, instance=obj)
-
+    form2 = QuestionForm(request.POST or None, instance=obj2)
+    forms = {obj: form, obj2: form2}
     question = Question.objects.get(number=number)
     next_question = Question.objects.filter(number__gt=obj.number).order_by('number').first()
     previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').last()
@@ -25,9 +23,12 @@ def question_update_view(request, number):
     static_errors = StaticLint.objects.get_or_none(question_number=number)
     test_results = Result.objects.filter(question_number=number)
 
-    if form.is_valid():
-        form.save()
-
+    for obg, form in forms.items():
+        print(obg)
+        print(form)
+        if form.is_valid():
+            form.save()
+    print(request.POST)
     if request.method == "POST":
         form_answer = request.POST.get("answer")
         run_tests(form_answer, number)
@@ -35,7 +36,7 @@ def question_update_view(request, number):
         test_results = Result.objects.filter(question_number=number)
 
     context = {
-        'form': form,
+        'form': forms,
         'object': obj,
         'next_question': next_question,
         'previous_question': previous_question,
@@ -45,6 +46,8 @@ def question_update_view(request, number):
         'question': question
     }
     return render(request, "question/question.html", context)
+
+def yo(request, u):
 
 
 def question_list_view(request):
