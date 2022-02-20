@@ -13,9 +13,13 @@ from django.http import HttpResponse
 def question_update_view(request, number):
     obj = get_object_or_404(Question, id=number)
     obj2 = get_object_or_404(Question, id=2)
-    form = QuestionForm(request.POST or None, instance=obj, prefix='1')
-    form2 = QuestionForm(request.POST or None, instance=obj2, prefix='2')
-    forms = {obj: form, obj2: form2}
+    form = QuestionForm(None, instance=obj, prefix='1')
+    form2 = QuestionForm(None, instance=obj2, prefix='2')
+
+    print('first formz')
+    print(form)
+    print('second formz')
+    print(form2)
     question = Question.objects.get(number=number)
     next_question = Question.objects.filter(number__gt=obj.number).order_by('number').first()
     previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').last()
@@ -24,47 +28,49 @@ def question_update_view(request, number):
     test_results = Result.objects.filter(question_number=number)
     yo = {}
     questions = [question, Question.objects.get(number=2)]
-    for obg, form in forms.items():
-        print(obg)
-        print(form)
-        if form.is_valid():
-            form.save()
+
+
     print('POSTY')
     print(request.POST.get('3-answer'))
     if request.method == "POST" and request.POST.get('1-answer'):
         print('1-answer')
+        form = QuestionForm(request.POST or None, instance=obj, prefix='1')
         form_answer = request.POST.get('1-answer')
         run_tests(form_answer, 1)
         static_errors = StaticLint.objects.get(question_number=1)
-        test_results = Result.objects.filter(question_number=1)
+        if form.is_valid():
+            form.save()
+        if not form.is_valid():
+            print(form.errors)
 
     if request.method == "POST" and request.POST.get('2-answer'):
         print('2-answer')
+        form2 = QuestionForm(request.POST or None, instance=obj2, prefix='2')
+
         form_answer = request.POST.get('2-answer')
         run_tests(form_answer, 2)
         static_errors = StaticLint.objects.get(question_number=2)
-        test_results = Result.objects.filter(question_number=2)
-        yo[obj] = Result.objects.filter(question_number=2)
+        if form2.is_valid():
+            form2.save()
 
     yo[obj] = Result.objects.filter(question_number=1)
     yo[obj2] = Result.objects.filter(question_number=2)
+    print('formz')
+    forms = {obj: form, obj2: form2}
+    print(forms)
 
-    print('RESULTS')
-    print(Result.objects.filter(question_number=1))
-    print(Result.objects.filter(question_number=2))
-    print(test_results)
-    print('yops')
-    print(yo)
     context = {
         'form': forms,
-        'object': obj,
         'next_question': next_question,
         'previous_question': previous_question,
         'static_errors': static_errors,
         'test_results': yo,
-        'question': questions,
         'mark': Result.objects.total_mark_for_question(question_number=number),
     }
+    print('lolol')
+
+    for i,j in forms.items():
+        print(i.answer)
     return render(request, "question/question.html", context)
 
 
