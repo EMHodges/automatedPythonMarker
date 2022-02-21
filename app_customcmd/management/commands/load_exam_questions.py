@@ -1,4 +1,5 @@
 import os
+import re
 from typing import Dict, List
 
 import yaml
@@ -70,7 +71,7 @@ class Command(BaseCommand):
 
     @staticmethod
     def _get_question_files(config_files):
-        return [file for file in config_files if file.startswith('question_')]
+        return [file for file in config_files if re.match(r'question_\d*.yaml', file)]
 
     @staticmethod
     def _set_defaults(question: Question) -> None:
