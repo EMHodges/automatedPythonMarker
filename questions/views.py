@@ -78,7 +78,10 @@ def question_update_views(request, number):
                 form = QuestionForm(request.POST or None, instance=sub_question, prefix=str(first_letter))
                 if form.is_valid():
                     form.save()
-                    fords[sub_question] = form
+                    x = get_object_or_404(QuestionComposite, number=number).subquestioncomposite_set.get(part=first_letter)
+                    fords.pop(sub_question)
+                    fords[x] = form
+
 
                  #   form = QuestionForm(request.POST or None, instance=obj, prefix='1')
                  #   form_answer = request.POST.get('1-answer')
