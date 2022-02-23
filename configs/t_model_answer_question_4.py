@@ -2,6 +2,7 @@ from results.utils import RegisterModelAnswer
 
 
 def yo(x, y, z):
+    """ Part 1"""
     return x + y + z
 
 

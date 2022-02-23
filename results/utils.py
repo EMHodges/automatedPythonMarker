@@ -33,6 +33,7 @@ def extract_model_functions():
     source = open(resource_path('configs/t_model_answer_question_4.py')).read()
     x = [node for node in ast.parse(source).body if isinstance(node, ast.FunctionDef)]
     for i in x:
+        docstring = ast.get_docstring(i)
         write_answer_to_tmp_file(ast.get_source_segment(source, i))
 
 
