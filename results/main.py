@@ -2,6 +2,7 @@ import unittest
 
 from results.apps import QUESTION_RUNNERS
 from results.models import Result
+from results.utils import extract_model_functions
 from static_lint.lint_answer import lint_answer
 
 
@@ -12,6 +13,7 @@ def run_tests(answer, question_number):
 
 def run_testing(answer, question_number, question_part):
     print('hi')
+    extract_model_functions()
 
 
 
