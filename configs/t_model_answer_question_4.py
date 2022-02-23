@@ -8,4 +8,5 @@ def yo(x, y, z):
 
 # @RegisterModelAnswer(question_number=4, question_part=2)
 def yop(x):
+    """ Part 2"""
     return yo(x, x, x)
