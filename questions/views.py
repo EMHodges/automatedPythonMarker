@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from static_lint.models import StaticLint
 from .forms import QuestionForm
 from .models import Question, QuestionComposite, SubQuestionComposite
-from results.main import run_tests
+from results.main import run_tests, run_testing
 from results.models import Result
 from django.http import HttpResponse
 
@@ -16,7 +16,7 @@ def question_update_view(request, number):
     obj = get_object_or_404(Question, id=number)
     obj2 = get_object_or_404(Question, id=2)
     form = QuestionForm(None, instance=obj, prefix=int(number))
-    form2 = QuestionForm(None, instance=obj2, prefix=int(number)+1)
+    form2 = QuestionForm(None, instance=obj2, prefix=int(number) + 1)
 
     next_question = Question.objects.filter(number__gt=obj.number).order_by('number').first()
     previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').last()
@@ -76,19 +76,20 @@ def question_update_views(request, number):
                 first_letter = int(key[0])
                 sub_question = SubQuestionComposite.objects.get(part=first_letter)
                 form = QuestionForm(request.POST or None, instance=sub_question, prefix=str(first_letter))
+                form_answer = request.POST.get(key)
+                run_testing(form_answer, number, first_letter)
                 if form.is_valid():
                     form.save()
-                    x = get_object_or_404(QuestionComposite, number=number).subquestioncomposite_set.get(part=first_letter)
+                    x = get_object_or_404(QuestionComposite, number=number).subquestioncomposite_set.get(
+                        part=first_letter)
                     fords.pop(sub_question)
                     fords[x] = form
-
-
-                 #   form = QuestionForm(request.POST or None, instance=obj, prefix='1')
-                 #   form_answer = request.POST.get('1-answer')
-                 #   run_tests(form_answer, 1)
-                 #   static_errors = StaticLint.objects.get(question_number=1)
-                 #   if form.is_valid():
-                 #       form.save()
+                #   form = QuestionForm(request.POST or None, instance=obj, prefix='1')
+                #   form_answer = request.POST.get('1-answer')
+                #   run_tests(form_answer, 1)
+                #   static_errors = StaticLint.objects.get(question_number=1)
+                #   if form.is_valid():
+                #       form.save()
 
     yo[obj] = Result.objects.filter(question_number=1)
 

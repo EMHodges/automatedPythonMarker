@@ -10,6 +10,11 @@ def run_tests(answer, question_number):
     run_tests_for_question(question_number)
 
 
+def run_testing(answer, question_number, question_part):
+    print('hi')
+
+
+
 def run_tests_for_question(question_number):
     Result.objects.filter(question_number=question_number).delete()
     loader = unittest.TestLoader()
