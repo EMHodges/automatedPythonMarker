@@ -40,6 +40,14 @@ class RegisterCompositeTestClass:
     # Todo update this method
     @staticmethod
     def get_test_question_number(test_name):
-        for key, value in RegisterTestClass.test_method_names_for_question.items():
-            if test_name in value:
-                return key
+        for key, value in RegisterCompositeTestClass.test_method_names_for_question.items():
+            for k, v in value.items():
+                if test_name in v:
+                    return key
+
+    @staticmethod
+    def get_test_question_part(test_name):
+        for key, value in RegisterCompositeTestClass.test_method_names_for_question.items():
+            for k, v in value.items():
+                if test_name in v:
+                    return k
