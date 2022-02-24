@@ -84,12 +84,8 @@ def question_update_views(request, number):
                         part=first_letter)
                     fords.pop(sub_question)
                     fords[x] = form
-                #   form = QuestionForm(request.POST or None, instance=obj, prefix='1')
-                #   form_answer = request.POST.get('1-answer')
-                #   run_tests(form_answer, 1)
-                #   static_errors = StaticLint.objects.get(question_number=1)
-                #   if form.is_valid():
-                #       form.save()
+                    run_testing(form_answer, number, first_letter)
+                    static_errors = StaticLint.objects.get(question_number=number)
 
     yo[obj] = Result.objects.filter(question_number=1)
 
