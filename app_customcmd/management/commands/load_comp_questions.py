@@ -52,7 +52,7 @@ def question_update_view(request, number):
         'mark': Result.objects.total_mark_for_question(question_number=number),
     }
     return render(request, "question/question.html", context)
-v
+
 
 
 
@@ -110,7 +110,7 @@ class Command(BaseCommand):
             SubQuestionComposite.save(x)
             print(SubQuestionComposite.objects.all())
 
-    def _load_question(self, file: str) -> Question | None:
+    def _load_question(self, file: str) -> Question:
         fixture_file = os.path.join("configs", file)
         print(fixture_file)
         with open(fixture_file) as stream:
@@ -126,7 +126,7 @@ class Command(BaseCommand):
                 print(f"Error creating object from file {fixture_file}")
                 print(exc)
 
-    def _load_part_question(self, file: str) -> SubQuestionComposite | None:
+    def _load_part_question(self, file: str) -> SubQuestionComposite:
         fixture_file = os.path.join("configs", file)
         print(fixture_file)
 

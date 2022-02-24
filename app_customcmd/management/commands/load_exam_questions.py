@@ -54,7 +54,7 @@ class Command(BaseCommand):
         for question in questions:
             Question.save(question)
 
-    def _load_question(self, file: str) -> Question | None:
+    def _load_question(self, file: str) -> Question:
         fixture_file = os.path.join("configs", file)
 
         with open(fixture_file) as stream:

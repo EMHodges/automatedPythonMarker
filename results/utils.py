@@ -53,14 +53,3 @@ def check_import_error(test_case: QuestionsTestCase):
     if method_under_test not in module_method_names:
         test_case.fail(f"@Import error - ensure method is called {method_under_test} "
                        f"and has the expected number of arguments")
-
-
-def RegisterModelAnswer(question_number, question_part):
-    def decorator(func):
-        @functools.wraps(func)
-        def decorated(*args, **kwargs):
-            print('registering')
-            func(*args, **kwargs)
-            return decorated
-
-        return decorator
