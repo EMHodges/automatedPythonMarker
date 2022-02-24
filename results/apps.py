@@ -24,13 +24,28 @@ class ResultsConfig(AppConfig):
 
     def _setup_testRunner_for_questions(self):
         from .question_test_runner import QuestionsTestRunner
-        from questions.models import Question
+        from questions.models import QuestionComposite
 
-        number_of_questions = Question.objects.values_list('number', flat=True)
-        for question_number in number_of_questions:
-            QUESTION_RUNNERS[question_number] = QuestionsTestRunner(question_number)
-            self._add_test_file_paths(question_number)
+        questions = QuestionComposite.objects.all()
+        for question in questions:
+            sub_questions = question.subquestioncomposite_set.all()
+            for sub_question in sub_questions:
+                keys = []
+                for key, value in QUESTION_RUNNERS.items():
+                    keys.append(key)
+                if question.number in keys:
+                    exists = QUESTION_RUNNERS[question.number]
+                    exists[sub_question.part] = QuestionsTestRunner(question.number, sub_question.part)
+                else:
+                    QUESTION_RUNNERS[question.number] = {sub_question.part: QuestionsTestRunner(question.number, sub_question.part)}
+
+    #     number_of_questions = Question.objects.values_list('number', flat=True)
+    #     for question_number in number_of_questions:
+    #        sub_questions = Question.objects.get()
+    #        QUESTION_RUNNERS[question_number] = QuestionsTestRunner(question_number)
+            self._add_test_file_paths(question.number)
         self._extract_model_functions(4)
+        print(QUESTION_RUNNERS)
 
     def _add_test_file_paths(self, question_number):
         from automatedPythonMarker.settings import resource_path

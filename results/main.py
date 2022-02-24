@@ -22,7 +22,7 @@ def run_testing(answer, question_number, question_part):
     construct_test_file(answer, question_number, question_part)
     linting_answer(question_number)
     run_tests_for_question_part(question_number, question_part)
- #   extract_model_functions()
+    extract_model_functions()
 
 
 def construct_test_file(answer, question_number, question_part):
@@ -47,13 +47,11 @@ def write_answer_to_tmp_file(answer):
 def run_tests_for_question_part(question_number, question_part):
     Result.objects.filter(question_number=question_number).delete()
     loader = unittest.TestLoader()
-    print('question part')
-    print(question_part)
     question_part_roman = roman.toRoman(question_part).lower()
-    print(f't_test_question_{question_number}{question_part_roman}.py')
     suite = loader.discover('configs', pattern=f't_test_question_{question_number}{question_part_roman}.py')
-    question_runner = QUESTION_RUNNERS[question_number]
-    question_runner.run(suite)
+    question_runner = QUESTION_RUNNERS[question_number][question_part]
+    print(question_runner)
+   # question_runner.run(suite)
 
 
 def run_tests_for_question(question_number):

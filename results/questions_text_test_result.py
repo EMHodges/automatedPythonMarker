@@ -11,7 +11,7 @@ class QuestionsTextTestResult(QuestionsTestResult):
     classdocs
     '''
 
-    def __init__(self, question_number, stream=None, descriptions=True, verbosity=1):
+    def __init__(self, question_number, question_part, stream=None, descriptions=True, verbosity=1):
         """Construct a TextTestRunner.
 
         Subclasses should accept **kwargs to ensure
