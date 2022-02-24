@@ -14,7 +14,7 @@ class TestQuestion4i(QuestionsTestCase):
         """ Test that a value of 0 is returned when the speed is less than
         or equal to the speed limit.
         """
-        self.expectAlmostEqual(0, yoyo(0,0,0), delta=0.000001, msg='0, 0')
+        self.expectAlmostEqual(1, yoyo(0,0,0), delta=0.000001, msg='0, 0')
 
     @setup_test(max_mark=6)
     def testSpeedLower90(self):
