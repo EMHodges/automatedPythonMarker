@@ -11,40 +11,35 @@ class TestQuestion4ii(QuestionsTestCase):
 
     @setup_test(max_mark=2)
     def testSameSequences(self):
-        from static_lint.code_to_lint import hammingDistance
+        from static_lint.code_to_lint import yop
         """ Test if a distance of 0 is returned when the sequences are 
         identical.
         """
-        self.expectAlmostEqual(0, hammingDistance('lilian', 'lilian'), delta=0.000001, msg='lilian lilian')
-        self.expectAlmostEqual(0, hammingDistance('1011001', '1011001'), delta=0.000001, msg='1011001 1011001')
+        self.expectAlmostEqual(0, yop(0), delta=0.000001, msg='lilian lilian')
 
     @setup_test(max_mark=2)
     def testCaseSensitive(self):
-        from static_lint.code_to_lint import hammingDistance
-        """ Test that the function is case sensitive. That is, the lower 
-        case and upper case characters are considered different.
+        from static_lint.code_to_lint import yop
+        """ Test if a distance of 0 is returned when the sequences are 
+        identical.
         """
-        self.expectAlmostEqual(0, hammingDistance('Lilian', 'lilian'), delta=0.000001, msg='Lilian lilian')
-        self.expectAlmostEqual(0, hammingDistance('Lilian', 'liLian'), delta=0.000001, msg='Lilian liLian')
+        self.expectAlmostEqual(3, yop(1), delta=0.000001, msg='lilian lilian')
 
     @setup_test(max_mark=2)
     def testGeneralCase(self):
-        from static_lint.code_to_lint import hammingDistance
-        """ Test that the function calculates the right distance for 
-        different sequences.
+        from static_lint.code_to_lint import yop
+        """ Test if a distance of 0 is returned when the sequences are 
+        identical.
         """
-        self.expectAlmostEqual(3, hammingDistance('karolin', 'kathrin'), delta=0.000001, msg='karolin Kathrin')
-        self.expectAlmostEqual(5, hammingDistance('10101', '01010'), delta=0.000001, msg='10101 01010')
+        self.expectAlmostEqual(0, yop(0), delta=0.000001, msg='lilian lilian')
 
     @setup_test(max_mark=2)
     def testInvalidSequencesLength(self):
-        from static_lint.code_to_lint import hammingDistance
-        """ Test that the function raise a ValueError if the sequences 
-        provided are not comparable, that is do not have the same length.
+        from static_lint.code_to_lint import yop
+        """ Test if a distance of 0 is returned when the sequences are 
+        identical.
         """
-        self.expectRaises(ValueError, hammingDistance, 'caroline', 'catherine', msg='caroline catherine')
-        self.expectRaises(ValueError, hammingDistance, 'catherine', 'caroline', msg='catherine caroline')
-
+        self.expectAlmostEqual(6, yop(2), delta=0.000001, msg='lilian lilian')
 
 if __name__ == '__main__':
     unittest.main()

@@ -2,6 +2,8 @@ import os
 import shutil
 import unittest
 
+import roman
+
 from automatedPythonMarker.settings import resource_path
 from results.apps import QUESTION_RUNNERS, MODEL_ANSWERS
 from results.models import Result
@@ -19,6 +21,7 @@ def run_tests(answer, question_number):
 def run_testing(answer, question_number, question_part):
     construct_test_file(answer, question_number, question_part)
     linting_answer(question_number)
+    run_tests_for_question_part(question_number, question_part)
  #   extract_model_functions()
 
 
@@ -40,6 +43,17 @@ def write_answer_to_tmp_file(answer):
     with open(TMP_FILE, 'w') as tmp_file:
         tmp_file.write(answer)
 
+
+def run_tests_for_question_part(question_number, question_part):
+    Result.objects.filter(question_number=question_number).delete()
+    loader = unittest.TestLoader()
+    print('question part')
+    print(question_part)
+    question_part_roman = roman.toRoman(question_part).lower()
+    print(f't_test_question_{question_number}{question_part_roman}.py')
+    suite = loader.discover('configs', pattern=f't_test_question_{question_number}{question_part_roman}.py')
+    question_runner = QUESTION_RUNNERS[question_number]
+    question_runner.run(suite)
 
 
 def run_tests_for_question(question_number):

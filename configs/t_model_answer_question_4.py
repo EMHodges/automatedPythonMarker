@@ -1,11 +1,11 @@
-def yo(x, y, z):
+def yoyo(x, y, z):
     """ Part 1"""
     return x + y + z
 
 
 def yop(x):
     """ Part 2"""
-    return yo(x, x, x)
+    return yoyo(x, x, x)
 
 def g(x,y):
     """Part 2"""

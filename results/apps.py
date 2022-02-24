@@ -1,6 +1,10 @@
 import ast
 import os.path
 import re
+from os import listdir
+from os.path import isfile, join
+
+import roman
 
 from django.apps import AppConfig
 
@@ -31,14 +35,22 @@ class ResultsConfig(AppConfig):
     def _add_test_file_paths(self, question_number):
         from automatedPythonMarker.settings import resource_path
 
-        file_path = resource_path(os.path.join("configs", f"test_question_{str(question_number)}.py"))
-        is_valid_file_path = os.path.isfile(file_path)
+        onlyfiles = [f for f in listdir("configs") if isfile(join("configs", f)) and f.startswith('t_test')]
 
-        if not is_valid_file_path:
-            QUESTION_TEST_FILES.clear()
-         #   raise FileNotFoundError(f"The test file for question: {question_number} cannot be found - looked for: "
-         #                           f"{file_path}. The test file should be called: 'test_question_{question_number}")
-        QUESTION_TEST_FILES[question_number] = file_path
+        for i in onlyfiles:
+            if i.startswith(f't_test_question_{str(question_number)}'):
+                j = i.removeprefix(f't_test_question_{str(question_number)}').removesuffix('.py').upper()
+                j = roman.fromRoman(j)
+                keys = []
+                i = os.path.join("configs", i)
+                for key, value in QUESTION_TEST_FILES.items():
+                    keys.append(key)
+
+                if question_number in keys:
+                    exists = QUESTION_TEST_FILES[question_number]
+                    exists[j] = i
+                else:
+                    QUESTION_TEST_FILES[question_number] = {j: i}
 
     def _extract_model_functions(self, question_number):
         source = open(resource_path('configs/t_model_answer_question_4.py')).read()
