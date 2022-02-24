@@ -88,7 +88,14 @@ def question_update_views(request, number):
                     static_errors = StaticLint.objects.get(question_number=number)
 
     yo[obj] = Result.objects.filter(question_number=1)
-
+    d = Result.objects.filter(question_number=4).all()
+    print('resultz')
+    for i in d:
+        print(i.question_part)
+        print(i.mark)
+        print(i.test_feedback)
+        print(i.test_result)
+        print(i.test_name)
     context = {
         'form': fords,
         'next_question': None,

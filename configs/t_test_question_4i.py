@@ -9,7 +9,7 @@ from results.utils import setup_test
 class TestQuestion4i(QuestionsTestCase):
 
     @setup_test(max_mark=6)
-    def testNoSpeed(self):
+    def testquestion4i(self):
         from static_lint.code_to_lint import yoyo
         """ Test that a value of 0 is returned when the speed is less than
         or equal to the speed limit.

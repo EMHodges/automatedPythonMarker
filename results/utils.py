@@ -14,8 +14,8 @@ def setup_test(max_mark):
         @functools.wraps(func)
         def decorated(*args, **kwargs):
             test_case: QuestionsTestCase = args[0]
-            Result.objects.reset_mark(question_number=test_case.get_question_number(), test_name=test_case.methodName)
-            check_import_error(test_case)
+            Result.objects.reset_mark(question_number=test_case.get_question_number(), question_part=test_case._get_question_part(), test_name=test_case.methodName)
+           # check_import_error(test_case)
             func(*args, **kwargs)
             test_case.set_mark(max_mark)
 

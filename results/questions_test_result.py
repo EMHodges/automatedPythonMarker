@@ -24,10 +24,13 @@ class QuestionsTestResult(unittest.TestResult):
 
 
 def addSubTestResult(test: QuestionsTestCase, subtest, feedback, result: ResultsEnums):
-    r = Result.objects.get(question_number=test.get_question_number(), test_name=test.methodName)
+    r = Result.objects.get(question_number=test.get_question_number(),
+                           question_part=test._get_question_part(),
+                           test_name=test.methodName)
     r.update_test_result(result, feedback)
     Subtest.objects.update_or_create(identifier=subtest.id(), defaults={
         'params_failing': subtest._message,
+        'part': test._get_question_part(),
         'test_result': result,
         'test': r
     })

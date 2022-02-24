@@ -42,6 +42,7 @@ class QuestionsTextTestResult(QuestionsTestResult):
 
     def create_result(self, test: QuestionsTestCase, test_result, test_feedback: str) -> None:
         Result.objects.update_or_create(question_number=self.question_number,
+                                        question_part=self.question_part,
                                         test_name=test.methodName,
                                         defaults={
                                             'test_feedback': test_feedback,
