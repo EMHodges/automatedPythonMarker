@@ -27,11 +27,12 @@ def construct_test_file(answer, question_number, question_part):
 
     shutil.rmtree(TMP_FILE, ignore_errors=True)
     with open(TMP_FILE, 'w') as tmp_file:
-        tmp_file.write(answer + '\n \n')
-
         for key, value in model_answers.items():
-            for i in value:
-                tmp_file.write(i + '\n \n')
+            if key == question_part:
+                tmp_file.write(answer + '\n \n')
+            else:
+                for i in value:
+                    tmp_file.write(i + '\n \n')
 
 
 def write_answer_to_tmp_file(answer):
