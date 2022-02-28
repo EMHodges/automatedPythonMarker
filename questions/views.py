@@ -7,7 +7,7 @@ from static_lint.models import StaticLint
 from .forms import QuestionForm
 from .models import Question, QuestionComposite, SubQuestionComposite
 from results.main import run_tests, run_testing
-from results.models import Result
+from results.models import Result, Subtest
 from django.http import HttpResponse
 
 
@@ -91,8 +91,8 @@ def question_update_views(request, number):
         for objz in sub_objs:
             fords[objz] = QuestionForm(None, instance=objz, prefix=int(objz.part))
 
-
-    yo[obj] = Result.objects.filter(question_number=4)
+    for objz in sub_objs:
+        yo[objz] = Result.objects.filter(question_number=number, question_part=objz.part)
 
     context = {
         'form': fords,
