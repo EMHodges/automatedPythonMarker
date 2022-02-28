@@ -37,7 +37,6 @@ class RegisterCompositeTestClass:
             existing[self._question_part] = test_methods
         return cls
 
-    # Todo update this method
     @staticmethod
     def get_test_question_number(test_name):
         for key, value in RegisterCompositeTestClass.test_method_names_for_question.items():

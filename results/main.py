@@ -33,6 +33,7 @@ def construct_test_file(answer, question_number, question_part):
         for key, value in model_answers.items():
             if key == question_part:
                 tmp_file.write(answer + '\n \n')
+                break
             else:
                 for i in value:
                     tmp_file.write(i + '\n \n')
