@@ -31,9 +31,6 @@ class QuestionsTextTestResult(QuestionsTestResult):
 
     def addError(self, test: QuestionsTestCase, err) -> None:
         err_name = err[0].__name__
-        print('poop')
-        print(err[0])
-        print(err[1])
         if err_name == 'SyntaxError':
             self._addSyntaxError(test)
         else:

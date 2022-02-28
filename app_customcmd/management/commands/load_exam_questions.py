@@ -44,12 +44,9 @@ class Command(BaseCommand):
             question_numbers[question.number].append(file)
 
         self._validate_question_numbers(question_numbers)
-        print(questions)
-        Result.objects.all().delete()
-        print('deleted results')
 
+        Result.objects.all().delete()
         Question.objects.all().delete()
-        print('deleted questions')
 
         for question in questions:
             Question.save(question)

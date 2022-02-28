@@ -45,12 +45,11 @@ class ResultsConfig(AppConfig):
     #        QUESTION_RUNNERS[question_number] = QuestionsTestRunner(question_number)
             self._add_test_file_paths(question.number)
         self._extract_model_functions(4)
-        print(QUESTION_RUNNERS)
 
     def _add_test_file_paths(self, question_number):
         from automatedPythonMarker.settings import resource_path
 
-        onlyfiles = [f for f in listdir("configs") if isfile(join("configs", f)) and f.startswith('t_test')]
+        onlyfiles = [f for f in listdir(resource_path("configs")) if isfile(join(resource_path("configs"), f)) and f.startswith('t_test')]
 
         for i in onlyfiles:
             if i.startswith(f't_test_question_{str(question_number)}'):
@@ -68,7 +67,7 @@ class ResultsConfig(AppConfig):
                     QUESTION_TEST_FILES[question_number] = {j: i}
 
     def _extract_model_functions(self, question_number):
-        source = open(resource_path('configs/t_model_answer_question_4.py')).read()
+        source = open(resource_path(os.path.join('configs','t_model_answer_question_4.py'))).read()
         x = [node for node in ast.parse(source).body if isinstance(node, ast.FunctionDef)]
         for i in x:
             docstring = ast.get_docstring(i)
@@ -88,6 +87,5 @@ class ResultsConfig(AppConfig):
             else:
                 x = {c: [ast.get_source_segment(source, i)]}
                 MODEL_ANSWERS[question_number] = x
-        print(MODEL_ANSWERS)
 
 

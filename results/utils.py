@@ -1,8 +1,9 @@
 import ast
 import functools
+import os
 
 from automatedPythonMarker.settings import resource_path
-from questions.models import Question, QuestionComposite
+from questions.models import QuestionComposite
 from results.models import Result
 from results.questions_test_case import QuestionsTestCase
 
@@ -23,7 +24,7 @@ def setup_test(max_mark):
 
 
 def extract_method_names():
-    source = open(resource_path('static_lint/code_to_lint.py')).read()
+    source = open(resource_path(os.path.join('static_lint','code_to_lint.py'))).read()
     return [node.name for node in ast.parse(source).body if isinstance(node, ast.FunctionDef)]
 
 

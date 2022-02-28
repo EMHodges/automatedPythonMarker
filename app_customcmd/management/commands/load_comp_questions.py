@@ -10,53 +10,6 @@ from collections import defaultdict
 
 from results.models import Result
 
-def question_update_view(request, number):
-    obj = get_object_or_404(Question, id=number)
-    obj2 = get_object_or_404(Question, id=2)
-    form = QuestionForm(None, instance=obj, prefix=int(number))
-    form2 = QuestionForm(None, instance=obj2, prefix=int(number)+1)
-
-    next_question = Question.objects.filter(number__gt=obj.number).order_by('number').first()
-    previous_question = Question.objects.filter(number__lt=obj.number).order_by('number').last()
-
-    static_errors = StaticLint.objects.get_or_none(question_number=number)
-    yo = {}
-
-    if request.method == "POST" and request.POST.get('1-answer'):
-        form = QuestionForm(request.POST or None, instance=obj, prefix='1')
-        form_answer = request.POST.get('1-answer')
-        run_tests(form_answer, 1)
-        static_errors = StaticLint.objects.get(question_number=1)
-        if form.is_valid():
-            form.save()
-
-    if request.method == "POST" and request.POST.get('2-answer'):
-        form2 = QuestionForm(request.POST or None, instance=obj2, prefix='2')
-
-        form_answer = request.POST.get('2-answer')
-        run_tests(form_answer, 2)
-        static_errors = StaticLint.objects.get(question_number=2)
-        if form2.is_valid():
-            form2.save()
-
-    yo[obj] = Result.objects.filter(question_number=1)
-    yo[obj2] = Result.objects.filter(question_number=2)
-    forms = {obj: form, obj2: form2}
-
-    context = {
-        'form': forms,
-        'next_question': next_question,
-        'previous_question': previous_question,
-        'static_errors': static_errors,
-        'test_results': yo,
-        'mark': Result.objects.total_mark_for_question(question_number=number),
-    }
-    return render(request, "question/question.html", context)
-
-
-
-
-
 
 class DuplicateQuestionNumberException(Exception):
     """Raise when multiple question files have the same question number"""
@@ -83,8 +36,6 @@ class Command(BaseCommand):
 
         question_files = self._get_question_files(config_files)
         comp_files = self._get_comp_files(config_files)
-        print(question_files)
-        print(comp_files)
         questions = []
         question_numbers = defaultdict(list)
 
@@ -93,14 +44,10 @@ class Command(BaseCommand):
             questions.append(question)
             question_numbers[question.number].append(file)
 
-
         self._validate_question_numbers(question_numbers)
-        print(questions)
         Result.objects.all().delete()
-        print('deleted results')
 
         QuestionComposite.objects.all().delete()
-        print('deleted questions')
 
         for question in questions:
             QuestionComposite.save(question)
@@ -108,15 +55,12 @@ class Command(BaseCommand):
         for file in comp_files:
             x = self._load_part_question(file)
             SubQuestionComposite.save(x)
-            print(SubQuestionComposite.objects.all())
 
     def _load_question(self, file: str) -> Question:
         fixture_file = os.path.join("configs", file)
-        print(fixture_file)
         with open(fixture_file) as stream:
             try:
                 question_values = yaml.safe_load(stream)
-                print(question_values)
                 question = QuestionComposite(**question_values)
                 # self._set_defaults(question)
                 return question
@@ -128,17 +72,14 @@ class Command(BaseCommand):
 
     def _load_part_question(self, file: str) -> SubQuestionComposite:
         fixture_file = os.path.join("configs", file)
-        print(fixture_file)
 
         with open(fixture_file) as stream:
             try:
                 question_values = yaml.safe_load(stream)
-                print(question_values)
                 q = QuestionComposite.objects.get(number=question_values['number'])
                 question_values['question'] = q
                 question_values.pop('number')
                 question = SubQuestionComposite(**question_values)
-                print(question)
                 # self._set_defaults(question)
                 return question
             except yaml.YAMLError as exc:
