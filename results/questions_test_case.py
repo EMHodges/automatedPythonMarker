@@ -1,7 +1,7 @@
 import importlib
 import unittest
 
-from results.new_file import RegisterTestClass
+from results.new_file import RegisterCompositeTestClass
 
 
 class QuestionsTestCase(unittest.TestCase):
@@ -14,6 +14,7 @@ class QuestionsTestCase(unittest.TestCase):
         self._mark = 0
         self.methodName = self._testMethodName
         self._questionNumber = self._get_question_number()
+        self._questionPart = self._get_question_part()
 
     def __call__(self, *args, **kwds):
         return self.run(*args, **kwds)
@@ -32,7 +33,10 @@ class QuestionsTestCase(unittest.TestCase):
         return self._questionNumber
 
     def _get_question_number(self):
-        return RegisterTestClass.get_test_question_number(self.methodName)
+        return RegisterCompositeTestClass.get_test_question_number(self.methodName)
+
+    def _get_question_part(self):
+        return RegisterCompositeTestClass.get_test_question_part(self.methodName)
 
     def expectTrue(self, expr, msg):
         with self.subTest(msg=msg):

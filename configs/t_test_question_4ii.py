@@ -15,7 +15,7 @@ class TestQuestion4ii(QuestionsTestCase):
         """ Test if a distance of 0 is returned when the sequences are 
         identical.
         """
-        self.expectAlmostEqual(0, yop(0), delta=0.000001, msg='lilian lilian')
+        self.expectAlmostEqual(0, yop(0,0,0), delta=0.000001, msg='lilian lilian')
 
     @setup_test(max_mark=2)
     def testCaseSensitive(self):
@@ -23,7 +23,7 @@ class TestQuestion4ii(QuestionsTestCase):
         """ Test if a distance of 0 is returned when the sequences are 
         identical.
         """
-        self.expectAlmostEqual(3, yop(1), delta=0.000001, msg='lilian lilian')
+        self.expectAlmostEqual(3, yop(1,0,0), delta=0.000001, msg='lilian lilian')
 
     @setup_test(max_mark=2)
     def testGeneralCase(self):
@@ -31,7 +31,7 @@ class TestQuestion4ii(QuestionsTestCase):
         """ Test if a distance of 0 is returned when the sequences are 
         identical.
         """
-        self.expectAlmostEqual(0, yop(0), delta=0.000001, msg='lilian lilian')
+        self.expectAlmostEqual(0, yop(0,0,0), delta=0.000001, msg='lilian lilian')
 
     @setup_test(max_mark=2)
     def testInvalidSequencesLength(self):
@@ -39,7 +39,7 @@ class TestQuestion4ii(QuestionsTestCase):
         """ Test if a distance of 0 is returned when the sequences are 
         identical.
         """
-        self.expectAlmostEqual(6, yop(2), delta=0.000001, msg='lilian lilian')
+        self.expectAlmostEqual(6, yop(2,0,0), delta=0.000001, msg='lilian lilian')
 
 if __name__ == '__main__':
     unittest.main()

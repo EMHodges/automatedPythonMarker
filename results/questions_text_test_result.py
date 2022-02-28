@@ -22,6 +22,7 @@ class QuestionsTextTestResult(QuestionsTestResult):
             raise TypeError("question_number must be an integer")
 
         self.question_number = question_number
+        self.question_part = question_part
         super(QuestionsTextTestResult, self).__init__(stream, descriptions, verbosity)
 
     def addSuccess(self, test: QuestionsTestCase) -> None:
@@ -30,6 +31,9 @@ class QuestionsTextTestResult(QuestionsTestResult):
 
     def addError(self, test: QuestionsTestCase, err) -> None:
         err_name = err[0].__name__
+        print('poop')
+        print(err[0])
+        print(err[1])
         if err_name == 'SyntaxError':
             self._addSyntaxError(test)
         else:
@@ -40,7 +44,9 @@ class QuestionsTextTestResult(QuestionsTestResult):
         self.create_result(test, ResultsEnums.FAIL, f"Failed! {format_err(str(err[1]))}")
 
     def create_result(self, test: QuestionsTestCase, test_result, test_feedback: str) -> None:
-        Result.objects.update_or_create(question_number=self.question_number, test_name=test.methodName,
+        Result.objects.update_or_create(question_number=self.question_number,
+                                        question_part=self.question_part,
+                                        test_name=test.methodName,
                                         defaults={
                                             'test_feedback': test_feedback,
                                             'test_result': test_result,
