@@ -1,3 +1,4 @@
+import roman
 from django.template.defaulttags import register
 
 from results.models import Result
@@ -23,3 +24,8 @@ def get_failing_subtest_params(result: Result):
     print('failing subtest')
     print(result)
     return result.get_failing_subtest_params()
+
+
+@register.filter
+def get_roman_numeral(number: int):
+    return roman.toRoman(number).lower()

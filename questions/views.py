@@ -58,6 +58,7 @@ def question_update_view(request, number):
 
 def question_update_views(request, number):
     obj = get_object_or_404(QuestionComposite, number=number)
+    print(obj)
     sub_objs = obj.subquestioncomposite_set.all()
 
     fords = {}
@@ -100,6 +101,7 @@ def question_update_views(request, number):
         'previous_question': None,
         'static_errors': static_errors,
         'test_results': yo,
+        'question': obj,
         'mark': Result.objects.total_mark_for_question(question_number=number),
     }
     return render(request, "question/questions.html", context)
