@@ -1,7 +1,5 @@
 import ast
 import functools
-import os
-import shutil
 
 from automatedPythonMarker.settings import resource_path
 from questions.models import Question
@@ -15,7 +13,7 @@ def setup_test(max_mark):
         def decorated(*args, **kwargs):
             test_case: QuestionsTestCase = args[0]
             Result.objects.reset_mark(question_number=test_case.get_question_number(), question_part=test_case._get_question_part(), test_name=test_case.methodName)
-           # check_import_error(test_case)
+            check_import_error(test_case)
             func(*args, **kwargs)
             test_case.set_mark(max_mark)
 
@@ -27,23 +25,6 @@ def setup_test(max_mark):
 def extract_method_names():
     source = open(resource_path('static_lint/code_to_lint.py')).read()
     return [node.name for node in ast.parse(source).body if isinstance(node, ast.FunctionDef)]
-
-
-def extract_model_functions():
-    source = open(resource_path('configs/t_model_answer_question_4.py')).read()
-    x = [node for node in ast.parse(source).body if isinstance(node, ast.FunctionDef)]
-    for i in x:
-        docstring = ast.get_docstring(i)
-        write_answer_to_tmp_file(ast.get_source_segment(source, i))
-
-
-TMP_FILE = resource_path(os.path.join('static_lint', 'code_to_lin.py'))
-
-
-def write_answer_to_tmp_file(answer):
-    shutil.rmtree(TMP_FILE, ignore_errors=True)
-    with open(TMP_FILE, 'w') as tmp_file:
-        tmp_file.write(answer)
 
 
 def check_import_error(test_case: QuestionsTestCase):
