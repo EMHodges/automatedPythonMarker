@@ -7,7 +7,6 @@ import roman
 from automatedPythonMarker.settings import resource_path
 from results.apps import QUESTION_RUNNERS, MODEL_ANSWERS
 from results.models import Result
-from results.utils import extract_model_functions
 from static_lint.lint_answer import lint_answer, linting_answer
 
 TMP_FILE = resource_path(os.path.join('static_lint', 'code_to_lint.py'))
@@ -22,7 +21,6 @@ def run_testing(answer, question_number, question_part):
     construct_test_file(answer, question_number, question_part)
     linting_answer(question_number)
     run_tests_for_question_part(question_number, question_part)
-    extract_model_functions()
 
 
 def construct_test_file(answer, question_number, question_part):
