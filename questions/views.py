@@ -58,12 +58,9 @@ def question_update_view(request, number):
 
 def question_update_views(request, number):
     obj = get_object_or_404(QuestionComposite, number=number)
-    sub_obj = obj.subquestioncomposite_set.all()
+    sub_objs = obj.subquestioncomposite_set.all()
 
     fords = {}
-
-    for obj in sub_obj:
-        fords[obj] = QuestionForm(None, instance=obj, prefix=int(obj.part))
 
     static_errors = StaticLint.objects.get_or_none(question_number=number)
     yo = {}
@@ -74,30 +71,29 @@ def question_update_views(request, number):
             answer_key = re.match(r'\d+-answer', key)
             if answer_key:
                 first_letter = int(key[0])
-                sub_question = SubQuestionComposite.objects.get(part=first_letter)
-                form = QuestionForm(request.POST or None, instance=sub_question, prefix=str(first_letter))
-                form_answer = request.POST.get(key)
-                run_testing(form_answer, number, first_letter)
-                if form.is_valid():
-                    form.save()
-                    x = get_object_or_404(QuestionComposite, number=number).subquestioncomposite_set.get(
-                        part=first_letter)
-                    fords.pop(sub_question)
-                    fords[x] = form
-                    run_testing(form_answer, number, first_letter)
-                    static_errors = StaticLint.objects.get(question_number=number)
 
-    yo[obj] = Result.objects.filter(question_number=1)
-    print('resultzzz')
-    print(yo)
-    d = Result.objects.filter(question_number=4).all()
-    print('resultz')
-    for i in d:
-        print(i.question_part)
-        print(i.mark)
-        print(i.test_feedback)
-        print(i.test_result)
-        print(i.test_name)
+                for sub_obj in sub_objs:
+                    if first_letter == sub_obj.part:
+                        sub_question = SubQuestionComposite.objects.get(part=first_letter)
+                        form = QuestionForm(request.POST or None, instance=sub_question, prefix=str(first_letter))
+                        form_answer = request.POST.get(key)
+
+                        if form.is_valid():
+                            form.save()
+                            x = get_object_or_404(QuestionComposite, number=number).subquestioncomposite_set.get(
+                                part=first_letter)
+                            fords[x] = form
+                            run_testing(form_answer, number, first_letter)
+                            static_errors = StaticLint.objects.get(question_number=number)
+                    else:
+                        fords[sub_obj] = QuestionForm(None, instance=sub_obj, prefix=int(sub_obj.part))
+    else:
+        for objz in sub_objs:
+            fords[objz] = QuestionForm(None, instance=objz, prefix=int(objz.part))
+
+
+    yo[obj] = Result.objects.filter(question_number=4)
+
     context = {
         'form': fords,
         'next_question': None,
