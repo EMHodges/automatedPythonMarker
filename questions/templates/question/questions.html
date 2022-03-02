@@ -5,6 +5,9 @@
 <h1>Question {{ question.number }}</h1>
 {{ question.description }}
 {% for ob, for in form.items %}
+    {%  if form|is_composite_question %}
+        <h1>Part {{ ob.part|get_roman_numeral }}</h1>
+    {% endif %}
     {% include "question/question_update.html" with object=ob fo=for %}
     {% include "static_lint/static_lint_detail_view.html" with object=static_errors %}
     {% include "results_for_question.html" with results=test_results|get_item:ob %}

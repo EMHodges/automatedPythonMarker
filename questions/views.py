@@ -94,7 +94,6 @@ def question_update_views(request, number):
 
     for objz in sub_objs:
         yo[objz] = Result.objects.filter(question_number=number, question_part=objz.part)
-
     context = {
         'form': fords,
         'next_question': None,
@@ -116,6 +115,34 @@ def question_list_view(request):
 
 
 def submit_view(request):
+    response = HttpResponse(content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename=submission.yaml'
+
+    lines = []
+
+    questions = QuestionComposite.objects.all()
+    print(questions)
+
+    for question in questions:
+        subquestions = question.subquestioncomposite_set.all()
+
+        lines.append(serialize(subquestions))
+        lines.append(serialize(Result.objects.filter(question_number=question.number)))
+        lines.append(serialize(Result.objects.filter(question_number=question.number)))
+
+        for result in Result.objects.filter(question_number=question.number):
+                result_subtests = result.subtest_set.all()
+                lines.append(serialize(result_subtests) + '\n')
+
+    response.writelines(lines)
+
+    return response
+
+
+def serialize(object):
+    return serializers.serialize("yaml", object)
+
+def submit_views(request):
     response = HttpResponse(content_type='text/plain')
     response['Content-Disposition'] = 'attachment; filename=submission.yaml'
 

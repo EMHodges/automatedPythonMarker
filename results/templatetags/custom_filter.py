@@ -24,3 +24,8 @@ def get_roman_numeral(number: int):
 @register.filter
 def get_mark(results):
     return sum(results.values_list('mark', flat=True))
+
+
+@register.filter
+def is_composite_question(dictionary):
+    return len(dictionary) > 1
