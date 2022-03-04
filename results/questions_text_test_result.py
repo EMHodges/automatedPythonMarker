@@ -51,7 +51,7 @@ class QuestionsTextTestResult(QuestionsTestResult):
                                         })
 
     def _addSyntaxError(self, test: QuestionsTestCase):
-        self.create_result(test, "ERROR! Syntax Error")
+        self.create_result(test, ResultsEnums.ERROR, "ERROR! Syntax Error")
 
 
 def format_err(err) -> str:
