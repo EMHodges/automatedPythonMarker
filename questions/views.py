@@ -1,8 +1,12 @@
+import os
 import re
+import sys
+from pathlib import Path
 
 from django.core import serializers
 from django.shortcuts import render, get_object_or_404
 
+from automatedPythonMarker.settings import resource_path, yo
 from static_lint.models import StaticLint
 from .forms import QuestionForm
 from .models import Question, QuestionComposite, SubQuestionComposite
@@ -59,6 +63,10 @@ def question_update_view(request, number):
 def question_update_views(request, number):
     obj = get_object_or_404(QuestionComposite, number=number)
     print(obj)
+    print('sys')
+    print(sys.executable)
+    print(sys.argv)
+
     sub_objs = obj.subquestioncomposite_set.all()
 
     fords = {}
@@ -103,6 +111,7 @@ def question_update_views(request, number):
         'question': obj,
         'mark': Result.objects.total_mark_for_question(question_number=number),
     }
+    print(Path(__file__).stem)
     return render(request, "question/questions.html", context)
 
 
@@ -117,7 +126,9 @@ def question_list_view(request):
 def submit_view(request):
     response = HttpResponse(content_type='text/plain')
     response['Content-Disposition'] = 'attachment; filename=submission.yaml'
-
+    print('yo')
+    print(yo)
+    print('after yo')
     lines = []
 
     questions = QuestionComposite.objects.all()
@@ -144,7 +155,7 @@ def serialize(object):
 
 def submit_views(request):
     response = HttpResponse(content_type='text/plain')
-    response['Content-Disposition'] = 'attachment; filename=submission.yaml'
+    response['Content-Disposition'] = 'attachment; filename=submissio.txt'
 
     lines = []
 

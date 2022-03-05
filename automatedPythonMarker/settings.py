@@ -65,6 +65,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'automatedPythonMarker.urls'
+yo = sys.argv[0]
 
 ''' This method essentially can be used to change the path that is used for resources
 especially important when disting, if you don't have this then will get tempate not found errors, note for this
