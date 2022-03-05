@@ -124,11 +124,18 @@ def question_list_view(request):
 
 
 def submit_view(request):
+    p = re.compile(r'(python-marker\d*).exe')
+    z = p.search(yo)
+
+    if z:
+        filename = z.group(1)
+    else:
+        filename = 'pythonMarker'
+
     response = HttpResponse(content_type='text/plain')
-    response['Content-Disposition'] = 'attachment; filename=submission.yaml'
-    print('yo')
-    print(yo)
-    print('after yo')
+    response['Content-Disposition'] = f'attachment; filename={filename}.txt'
+
+
     lines = []
 
     questions = QuestionComposite.objects.all()
