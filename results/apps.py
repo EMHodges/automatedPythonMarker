@@ -53,7 +53,9 @@ class ResultsConfig(AppConfig):
 
         for i in onlyfiles:
             if i.startswith(f't_test_question_{str(question_number)}'):
-                j = i.removeprefix(f't_test_question_{str(question_number)}').removesuffix('.py').upper()
+                i = i.replace(f't_test_question_{str(question_number)}', '')
+                j = i.replace('.py', '')
+                j = j.upper()
                 j = roman.fromRoman(j)
                 keys = []
                 i = os.path.join("configs", i)
