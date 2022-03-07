@@ -122,10 +122,13 @@ def question_list_view(request):
     }
     return render(request, "question/question_list.html", context)
 
-
 def submit_view(request):
     p = re.compile(r'(python-marker\d*).exe')
-    z = p.search(yo)
+    z = p.search(sys.argv[0])
+
+    print('yops')
+    print(yo)
+    print(z)
 
     if z:
         filename = z.group(1)
