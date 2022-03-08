@@ -32,6 +32,17 @@ the pyinstaller command below if it does not already exist.
 
 
 ### Windows
+First you need to install pyinstaller bootloader. To do this activate the virtual environment and do the following
+within the venv (this is instead of doing ```pip install pyinstaller``` which will work however causes
+false positives with virus checkers such as virusTotal). This has been tested using Python 3.8.8:
+1. ```git clone https://github.com/pyinstaller/pyinstaller```
+2. ```cd pyinstaller```
+3. ```git checkout v4.7```
+4. ```cd \bootloader```
+5. ```python ./waf distclean all```
+6. ```cd ..```
+7. ```python setup.py install```
+
 To create a Windows executable you will need to run the following commands on a Windows machine.
 
 Run ```pyinstaller manage.py dist_win``` to create the executable # Note dist here is a custom command defined in  ```dist.py```
