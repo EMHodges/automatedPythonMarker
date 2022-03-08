@@ -138,3 +138,5 @@ static_lint/code_to_lint.py
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+
+.pyinstaller/*
