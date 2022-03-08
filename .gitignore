@@ -99,6 +99,8 @@ celerybeat-schedule.*
 # Environments
 .env
 .venv
+.my_venv
+my_venv
 env/
 venv/
 ENV/
@@ -139,4 +141,5 @@ static_lint/code_to_lint.py
 !.vscode/extensions.json
 .history
 
-.pyinstaller/*
+pyinstaller
+pyinstaller/*
