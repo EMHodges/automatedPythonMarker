@@ -5,8 +5,14 @@ from django.core import serializers
 from django.http import HttpResponse
 
 # Create your views here.
+from django.shortcuts import render
+
 from questions.models import QuestionComposite
 from results.models import Result
+
+def submit_page(request):
+    context = {}
+    return render(request, "submit_page/submit_page.html", context)
 
 
 def submit_view(request):

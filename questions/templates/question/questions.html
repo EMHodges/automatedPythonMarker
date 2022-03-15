@@ -14,6 +14,8 @@
 {% endfor %}
 {% include "question/navigate_questions.html" with next_question=next_question previous_question=previous_question %}
 
-<a href="{% url 'questions:question-list' %}">All Questions</a>
-
+Finished? <a href="{% url 'submit_page:submit-page' %}">Click here to submit answers</a>
+<div>
+    <a href="{% url 'questions:question-list' %}">All Questions</a>
+</div>
 {% endblock %}
