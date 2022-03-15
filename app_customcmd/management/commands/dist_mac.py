@@ -17,7 +17,8 @@ class Command(BaseCommand):
         PyInstaller.__main__.run([
             'automatedPythonMarker.spec',
             '-w',  # Creates a .app executable
-            '--onefile'
+            '--onefile',
+            '--clean'
         ])
 
     @staticmethod
