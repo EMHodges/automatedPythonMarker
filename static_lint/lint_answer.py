@@ -24,15 +24,11 @@ def lint_answer(answer, number):
     StaticLint.objects.update_or_create(question_number=number, defaults={'feedback': formatted_lint_errors})
 
 
-def linting_answer(number, question_part, submission):
+def linting_answer(number, submission):
     lint_errors = get_lint_errors()
     formatted_lint_errors = format_lint_errors(lint_errors)
-   # question = QuestionComposite.objects.get(number=number)
-   # sub_question = question.subquestioncomposite_set.get(part=question_part)
-   # submission = Submission.object.get_last_submission(sub_question)
     static_lint = StaticLint(question_number=number, submission=submission, feedback=formatted_lint_errors)
     static_lint.save()
-     #   update_or_create(question_number=number, defaults={'feedback': formatted_lint_errors})
 
 
 def write_answer_to_tmp_file(answer):

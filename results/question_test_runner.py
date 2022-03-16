@@ -18,6 +18,4 @@ class QuestionsTestRunner(unittest.TextTestRunner):
         question = QuestionComposite.objects.get(number=self.question_number)
         sub_question = SubQuestionComposite.object.get(question=question, part=self.question_part)
         submission = Submission.object.get_last_submission(sub_question)
-      #  submission = Submission.object.get(sub_question=sub_question, submission_number=submission_number)
-        print('making result')
         return QuestionsTextTestResult(self.question_number, self.question_part, submission, self.stream, self.descriptions, self.verbosity)
