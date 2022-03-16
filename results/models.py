@@ -1,6 +1,7 @@
 from django.db import models
 
 from GetOrNoneManager import GetOrNoneManager
+from submission.models import Submission
 
 from .results_enum import ResultsEnums
 
@@ -27,6 +28,7 @@ class ResultManager(GetOrNoneManager, models.Manager):
 class Result(models.Model):
     question_number = models.IntegerField()
     question_part = models.IntegerField()
+    submission = models.ForeignKey(Submission, on_delete=models.CASCADE, null=True)
     test_name = models.TextField()
     test_result = models.CharField(max_length=2, choices=ResultsEnums.choices, default=ResultsEnums.SUCCESS)
     test_feedback = models.TextField()

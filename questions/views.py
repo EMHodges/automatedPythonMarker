@@ -29,7 +29,7 @@ def question_update_views(request, number):
 
                 for sub_obj in sub_objs:
                     if first_letter == sub_obj.part:
-                        sub_question = SubQuestionComposite.objects.get(part=first_letter)
+                        sub_question = SubQuestionComposite.object.get(part=first_letter)
                         form = QuestionForm(request.POST or None, instance=sub_question, prefix=str(first_letter))
                         form_answer = request.POST.get(key)
 
