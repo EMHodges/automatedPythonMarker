@@ -5,9 +5,13 @@ import shutil
 from io import StringIO
 from automatedPythonMarker.settings import resource_path
 from pylint.reporters.json_reporter import JSONReporter
+
+from questions.models import SubQuestionComposite, QuestionComposite
 from static_lint.models import StaticLint
 from pylint import lint
 from astroid import MANAGER
+
+from submission.models import Submission
 
 TMP_FILE = resource_path(os.path.join('static_lint', 'code_to_lint.py'))
 LINT_RULES_FILE = os.path.join('static_lint', '.pylintrc')
@@ -20,10 +24,11 @@ def lint_answer(answer, number):
     StaticLint.objects.update_or_create(question_number=number, defaults={'feedback': formatted_lint_errors})
 
 
-def linting_answer(number):
+def linting_answer(number, submission):
     lint_errors = get_lint_errors()
     formatted_lint_errors = format_lint_errors(lint_errors)
-    StaticLint.objects.update_or_create(question_number=number, defaults={'feedback': formatted_lint_errors})
+    static_lint = StaticLint(question_number=number, submission=submission, feedback=formatted_lint_errors)
+    static_lint.save()
 
 
 def write_answer_to_tmp_file(answer):

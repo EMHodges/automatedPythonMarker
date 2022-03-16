@@ -18,8 +18,8 @@ def question_update_views(request, number):
 
     fords = {}
 
-    static_errors = StaticLint.objects.get_or_none(question_number=number)
     yo = {}
+    static_error = {}
 
     if request.method == "POST":
         request_dict = request.POST.dict()
@@ -40,7 +40,7 @@ def question_update_views(request, number):
                                 part=first_letter)
                             fords[x] = form
                             run_testing(form_answer, number, first_letter)
-                            static_errors = StaticLint.objects.get(question_number=number)
+                            # static_errors = StaticLint.objects.get(question_number=number)
                     else:
                         fords[sub_obj] = QuestionForm(None, instance=sub_obj, prefix=int(sub_obj.part))
     else:
@@ -49,13 +49,17 @@ def question_update_views(request, number):
 
     for objz in sub_objs:
         last_submission = Submission.object.get_last_submission(objz)
+        if (hasattr(last_submission, 'staticlint')):
+            static_error[objz] = last_submission.staticlint
+        else:
+            static_error[objz] = None
         yo[objz] = Result.objects.filter(question_number=number, question_part=objz.part, submission=last_submission)
-
+    print(static_error)
     context = {
         'form': fords,
         'next_question': None,
         'previous_question': None,
-        'static_errors': static_errors,
+        'static_errors': static_error,
         'test_results': yo,
         'question': obj,
         'mark': Result.objects.total_mark_for_question(question_number=number),

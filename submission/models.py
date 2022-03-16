@@ -13,7 +13,7 @@ class SubmissionManager(GetOrNoneManager, models.Manager):
         return max(current_submission_number) if current_submission_number else 0
        # return current_submission_number ? max(self.all().filter(sub_question=sub_question).values_list('submission_number', flat=True))
 
-    def get_last_submission(self, sub_question: SubQuestionComposite) -> SubQuestionComposite:
+    def get_last_submission(self, sub_question: SubQuestionComposite):
         submission_number = self.get_last_submission_number(sub_question)
         return self.get_or_none(sub_question=sub_question, submission_number=submission_number)
 
