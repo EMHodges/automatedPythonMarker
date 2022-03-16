@@ -1,0 +1,233 @@
+- model: questions.questioncomposite
+  pk: 14
+  fields:
+    number: 4
+    description: "The code for this question must be written in the provided file
+      question_2.py.\r\nIn information theory, the Hamming distance between two strings
+      of equal length is the number of positions at which the corresponding symbols
+      are different. In another words, it measures the minimum number of substitutions
+      required to change one string into the other, or the minimum number of errors
+      that could have transformed one string into the other. For example, the Hamming
+      distance between:\r\n• \"karolin\" and \"kathrin\" is 3. • \"karolin\" and \"kerstin\"
+      is 3. • 1011101 and 1001001 is 2.\r\nWrite a function hammingDistance(word1,
+      word2) which takes two string parameters and returns the Hamming distance between
+      the two strings word1 and word2. The function should raise a ValueError if the
+      strings are not of the same length. In addition, the result must be case sensitive."
+- model: questions.subquestioncomposite
+  pk: 5
+  fields:
+    question: 14
+    part: 1
+    description: description of code
+    method_name: yoyo
+    max_mark: 15
+    answer: "def yoyo(x,y,z):\r\n    return 0"
+- model: questions.subquestioncomposite
+  pk: 6
+  fields:
+    question: 14
+    part: 2
+    description: description of code part ii
+    method_name: yop
+    max_mark: 10
+    answer: "def yop(x,y,z):\r\n     return yoyo(x,x,x)"
+- model: submission.submission
+  pk: 88
+  fields:
+    sub_question: 6
+    submission_number: 1
+    submission_time: 2022-03-16 22:14:40.043512+00:00
+- model: submission.submission
+  pk: 89
+  fields:
+    sub_question: 6
+    submission_number: 2
+    submission_time: 2022-03-16 22:14:47.116617+00:00
+- model: submission.submission
+  pk: 90
+  fields:
+    sub_question: 5
+    submission_number: 1
+    submission_time: 2022-03-16 22:14:49.646721+00:00
+- model: static_lint.staticlint
+  pk: 88
+  fields:
+    question_number: 4
+    feedback: 'line 6, column 26: unterminated string literal (detected at line 6) '
+- model: static_lint.staticlint
+  pk: 89
+  fields:
+    question_number: 4
+    feedback: ''
+- model: static_lint.staticlint
+  pk: 90
+  fields:
+    question_number: 4
+    feedback: ''
+- model: results.result
+  pk: 195
+  fields:
+    question_number: 4
+    question_part: 2
+    submission: 88
+    test_name: testCaseSensitive
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0
+- model: results.result
+  pk: 196
+  fields:
+    question_number: 4
+    question_part: 2
+    submission: 88
+    test_name: testGeneralCase
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0
+- model: results.result
+  pk: 197
+  fields:
+    question_number: 4
+    question_part: 2
+    submission: 88
+    test_name: testInvalidSequencesLength
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0
+- model: results.result
+  pk: 198
+  fields:
+    question_number: 4
+    question_part: 2
+    submission: 88
+    test_name: testSameSequences
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0
+- model: results.result
+  pk: 199
+  fields:
+    question_number: 4
+    question_part: 2
+    submission: 89
+    test_name: testCaseSensitive
+    test_result: SU
+    test_feedback: Success
+    mark: 2
+- model: results.result
+  pk: 200
+  fields:
+    question_number: 4
+    question_part: 2
+    submission: 89
+    test_name: testGeneralCase
+    test_result: SU
+    test_feedback: Success
+    mark: 2
+- model: results.result
+  pk: 201
+  fields:
+    question_number: 4
+    question_part: 2
+    submission: 89
+    test_name: testInvalidSequencesLength
+    test_result: SU
+    test_feedback: Success
+    mark: 2
+- model: results.result
+  pk: 202
+  fields:
+    question_number: 4
+    question_part: 2
+    submission: 89
+    test_name: testSameSequences
+    test_result: SU
+    test_feedback: Success
+    mark: 2
+- model: results.result
+  pk: 203
+  fields:
+    question_number: 4
+    question_part: 1
+    submission: 90
+    test_name: testSpeedLower90
+    test_result: SU
+    test_feedback: Success
+    mark: 6
+- model: results.result
+  pk: 204
+  fields:
+    question_number: 4
+    question_part: 1
+    submission: 90
+    test_name: testSpeedOver90
+    test_result: SU
+    test_feedback: Success
+    mark: 6
+- model: results.result
+  pk: 205
+  fields:
+    question_number: 4
+    question_part: 1
+    submission: 90
+    test_name: testquestion4i
+    test_result: F
+    test_feedback: Failed
+    mark: 0
+- model: results.subtest
+  pk: 159
+  fields:
+    identifier: t_test_question_4ii.TestQuestion4ii.testCaseSensitive [lilian lilian]
+    part: 2
+    params_failing: lilian lilian
+    test_result: SU
+    test: 199
+- model: results.subtest
+  pk: 160
+  fields:
+    identifier: t_test_question_4ii.TestQuestion4ii.testGeneralCase [lilian lilian]
+    part: 2
+    params_failing: lilian lilian
+    test_result: SU
+    test: 200
+- model: results.subtest
+  pk: 161
+  fields:
+    identifier: t_test_question_4ii.TestQuestion4ii.testInvalidSequencesLength [lilian
+      lilian]
+    part: 2
+    params_failing: lilian lilian
+    test_result: SU
+    test: 201
+- model: results.subtest
+  pk: 162
+  fields:
+    identifier: t_test_question_4ii.TestQuestion4ii.testSameSequences [lilian lilian]
+    part: 2
+    params_failing: lilian lilian
+    test_result: SU
+    test: 202
+- model: results.subtest
+  pk: 163
+  fields:
+    identifier: t_test_question_4i.TestQuestion4i.testSpeedLower90 [71, 50]
+    part: 1
+    params_failing: 71, 50
+    test_result: SU
+    test: 203
+- model: results.subtest
+  pk: 164
+  fields:
+    identifier: t_test_question_4i.TestQuestion4i.testSpeedOver90 [71, 50]
+    part: 1
+    params_failing: 71, 50
+    test_result: SU
+    test: 204
+- model: results.subtest
+  pk: 165
+  fields:
+    identifier: t_test_question_4i.TestQuestion4i.testquestion4i [0, 0]
+    part: 1
+    params_failing: 0, 0
+    test_result: F
+    test: 205
