@@ -1,10 +1,11 @@
 from django.db import models
 
 # Create your models here.
+from GetOrNoneManager import GetOrNoneManager
 from questions.models import SubQuestionComposite
 
 
-class SubmissionManager(models.Manager):
+class SubmissionManager(GetOrNoneManager, models.Manager):
 
     def get_last_submission_number(self, sub_question: SubQuestionComposite):
         current_submission_number = self.all().filter(sub_question=sub_question).values_list('submission_number', flat=True)
@@ -14,7 +15,7 @@ class SubmissionManager(models.Manager):
 
     def get_last_submission(self, sub_question: SubQuestionComposite) -> SubQuestionComposite:
         submission_number = self.get_last_submission_number(sub_question)
-        return self.get(sub_question=sub_question, submission_number=submission_number)
+        return self.get_or_none(sub_question=sub_question, submission_number=submission_number)
 
     def get_next_submission_number(self, sub_question: SubQuestionComposite):
         return self.get_last_submission_number(sub_question) + 1

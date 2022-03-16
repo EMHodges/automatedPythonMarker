@@ -7,7 +7,7 @@ from submission.models import Submission
 from .forms import QuestionForm
 from .models import Question, QuestionComposite, SubQuestionComposite
 from results.main import run_testing
-from results.models import Result
+from results.models import Result, Subtest
 
 
 # Create your views here.
@@ -47,12 +47,10 @@ def question_update_views(request, number):
         for objz in sub_objs:
             fords[objz] = QuestionForm(None, instance=objz, prefix=int(objz.part))
 
-  #  current_submission = Submission.object.get_last_submission_number()
     for objz in sub_objs:
         last_submission = Submission.object.get_last_submission(objz)
         yo[objz] = Result.objects.filter(question_number=number, question_part=objz.part, submission=last_submission)
-    print(fords)
-    print(yo)
+
     context = {
         'form': fords,
         'next_question': None,

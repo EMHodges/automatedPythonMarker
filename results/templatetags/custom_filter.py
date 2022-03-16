@@ -33,7 +33,6 @@ def is_composite_question(dictionary):
 
 @register.filter
 def get_total_marks(dictionary):
-    print(list(dictionary.values()))
     total = 0
     for i in list(dictionary.values()):
         total += sum(i.values_list('mark', flat=True))
