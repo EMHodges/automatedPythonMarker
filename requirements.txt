@@ -7,10 +7,12 @@ lazy-object-proxy==1.7.1
 macholib==1.15.2
 mccabe==0.6.1
 platformdirs==2.4.1
-pyinstaller==4.7
 pyinstaller-hooks-contrib==2021.4
 pylint==2.12.2
 PyYAML==6.0
 sqlparse==0.4.2
 toml==0.10.2
 wrapt==1.13.3
+
+setuptools~=57.4.0
+roman~=3.3

@@ -20,6 +20,12 @@ def lint_answer(answer, number):
     StaticLint.objects.update_or_create(question_number=number, defaults={'feedback': formatted_lint_errors})
 
 
+def linting_answer(number):
+    lint_errors = get_lint_errors()
+    formatted_lint_errors = format_lint_errors(lint_errors)
+    StaticLint.objects.update_or_create(question_number=number, defaults={'feedback': formatted_lint_errors})
+
+
 def write_answer_to_tmp_file(answer):
     shutil.rmtree(TMP_FILE, ignore_errors=True)
     with open(TMP_FILE, 'w') as tmp_file:

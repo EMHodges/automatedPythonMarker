@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load custom_filter %}
+
+{% block content %}
+<h1>Submit</h1>
+<p>Thank you for getting so far - really nearly finished, to submit your answers please:</p>
+    <ol>
+    <li>
+        Generate download file -> <a href="{% url 'submit_page:submit-view' %}">Click here to download file</a>
+    </li>
+    <li>
+        Upload it to the website -> <a href="https://emhodges.github.io/markerWebsite/upload">Click here to upload file</a>
+    </li>
+    </ol>
+
+<h5>Home</h5>
+<div>
+    <a href="{% url 'questions:question-list' %}">Back to Homepage</a>
+</div>
+{% endblock %}

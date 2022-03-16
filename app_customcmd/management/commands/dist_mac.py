@@ -1,8 +1,8 @@
 from django.core.management.base import BaseCommand
 import PyInstaller.__main__
 
-from questions.models import Question
-from results.models import Result
+from questions.models import SubQuestionComposite
+from results.models import Result, Subtest
 from static_lint.models import StaticLint
 import shutil
 
@@ -17,14 +17,16 @@ class Command(BaseCommand):
         PyInstaller.__main__.run([
             'automatedPythonMarker.spec',
             '-w',  # Creates a .app executable
-            '--onefile'
+            '--onefile',
+            '--clean'
         ])
 
     @staticmethod
     def _clear_databases():
         StaticLint.objects.all().delete()
+        Subtest.objects.all().delete()
         Result.objects.all().delete()
-        Question.objects.all().update(answer=None, mark=0)
+        SubQuestionComposite.objects.all().update(answer=None)
 
     @staticmethod
     def _remove_generated_files():

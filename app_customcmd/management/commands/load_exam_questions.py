@@ -1,4 +1,5 @@
 import os
+import re
 from typing import Dict, List
 
 import yaml
@@ -43,17 +44,14 @@ class Command(BaseCommand):
             question_numbers[question.number].append(file)
 
         self._validate_question_numbers(question_numbers)
-        print(questions)
-        Result.objects.all().delete()
-        print('deleted results')
 
+        Result.objects.all().delete()
         Question.objects.all().delete()
-        print('deleted questions')
 
         for question in questions:
             Question.save(question)
 
-    def _load_question(self, file: str) -> Question | None:
+    def _load_question(self, file: str) -> Question:
         fixture_file = os.path.join("configs", file)
 
         with open(fixture_file) as stream:
@@ -70,7 +68,7 @@ class Command(BaseCommand):
 
     @staticmethod
     def _get_question_files(config_files):
-        return [file for file in config_files if file.startswith('question_')]
+        return [file for file in config_files if re.match(r'question_\d*.yaml', file)]
 
     @staticmethod
     def _set_defaults(question: Question) -> None:
