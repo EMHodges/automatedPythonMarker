@@ -29,3 +29,17 @@ def get_mark(results):
 @register.filter
 def is_composite_question(dictionary):
     return len(dictionary) > 1
+
+
+@register.filter
+def get_total_marks(dictionary):
+    print(list(dictionary.values()))
+    total = 0
+    for i in list(dictionary.values()):
+        total += sum(i.values_list('mark', flat=True))
+    return total
+
+
+@register.filter
+def get_total_available_marks(dictionary):
+    return sum([sub_question.max_mark for sub_question in list(dictionary.keys())])
