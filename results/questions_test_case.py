@@ -11,6 +11,7 @@ class QuestionsTestCase(unittest.TestCase):
 
     def __init__(self, methodName='runTest'):
         super(QuestionsTestCase, self).__init__(methodName)
+        print('making test case')
         self._mark = 0
         self.methodName = self._testMethodName
         self._questionNumber = self._get_question_number()

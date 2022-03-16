@@ -10,8 +10,10 @@
     {% endif %}
     {% include "question/question_update.html" with object=ob fo=for %}
     {% include "static_lint/static_lint_detail_view.html" with object=static_errors %}
-    {% include "results_for_question.html" with results=test_results|get_item:ob %}
+    {% include "results_for_question.html" with results=test_results|get_item:ob marks_available=ob.max_mark %}
 {% endfor %}
+    <h2>Total marks</h2>
+    {{ test_results|get_total_marks }} / {{ test_results|get_total_available_marks }}
 {% include "question/navigate_questions.html" with next_question=next_question previous_question=previous_question %}
 
 Finished? <a href="{% url 'submit_page:submit-page' %}">Click here to submit answers</a>

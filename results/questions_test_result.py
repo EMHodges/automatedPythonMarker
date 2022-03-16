@@ -1,8 +1,10 @@
 import unittest
 
+from questions.models import QuestionComposite, SubQuestionComposite
 from results.models import Result, Subtest
 from results.questions_test_case import QuestionsTestCase
 from results.results_enum import ResultsEnums
+from submission.models import Submission
 
 
 class QuestionsTestResult(unittest.TestResult):
@@ -23,8 +25,14 @@ class QuestionsTestResult(unittest.TestResult):
 
 
 def addSubTestResult(test: QuestionsTestCase, subtest, feedback, result: ResultsEnums):
+    question = QuestionComposite.objects.get(number=test.get_question_number())
+    sub_question = SubQuestionComposite.object.get(question=question, part=test._get_question_part())
+    submission_number = Submission.object.get_last_submission_number(sub_question)
+    submission = Submission.object.get(sub_question=sub_question, submission_number=submission_number)
+
     r = Result.objects.get(question_number=test.get_question_number(),
                            question_part=test._get_question_part(),
+                           submission=submission,
                            test_name=test.methodName)
     r.update_test_result(result, feedback)
     Subtest.objects.update_or_create(identifier=subtest.id(), defaults={

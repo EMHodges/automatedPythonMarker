@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # Create your models here.
 from django.urls import reverse
 
@@ -16,9 +15,14 @@ class Question(models.Model):
         return reverse("questions:question-update", kwargs={"number": self.number})
 
 
+class SubQuestionCompositeManager(models.Manager):
+    pass
+
+
 class QuestionComposite(models.Model):
     number = models.IntegerField()
     description = models.TextField(blank=False, null=False)
+    objects = SubQuestionCompositeManager()
 
 
 class SubQuestionComposite(models.Model):
@@ -28,3 +32,4 @@ class SubQuestionComposite(models.Model):
     method_name = models.TextField()
     max_mark = models.IntegerField()
     answer = models.TextField(blank=True, null=True)
+    object = SubQuestionCompositeManager()

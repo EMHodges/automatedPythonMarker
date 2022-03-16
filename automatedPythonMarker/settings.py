@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'questions',
     'static_lint',
     'submit_page',
+    'submission',
     'results',
     'results.templatetags',
     'configs'

@@ -3,10 +3,11 @@ import re
 from django.shortcuts import render, get_object_or_404
 
 from static_lint.models import StaticLint
+from submission.models import Submission
 from .forms import QuestionForm
 from .models import Question, QuestionComposite, SubQuestionComposite
 from results.main import run_testing
-from results.models import Result
+from results.models import Result, Subtest
 
 
 # Create your views here.
@@ -29,7 +30,7 @@ def question_update_views(request, number):
 
                 for sub_obj in sub_objs:
                     if first_letter == sub_obj.part:
-                        sub_question = SubQuestionComposite.objects.get(part=first_letter)
+                        sub_question = SubQuestionComposite.object.get(part=first_letter)
                         form = QuestionForm(request.POST or None, instance=sub_question, prefix=str(first_letter))
                         form_answer = request.POST.get(key)
 
@@ -47,7 +48,9 @@ def question_update_views(request, number):
             fords[objz] = QuestionForm(None, instance=objz, prefix=int(objz.part))
 
     for objz in sub_objs:
-        yo[objz] = Result.objects.filter(question_number=number, question_part=objz.part)
+        last_submission = Submission.object.get_last_submission(objz)
+        yo[objz] = Result.objects.filter(question_number=number, question_part=objz.part, submission=last_submission)
+
     context = {
         'form': fords,
         'next_question': None,
