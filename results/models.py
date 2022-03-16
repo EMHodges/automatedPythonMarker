@@ -21,6 +21,10 @@ class ResultManager(GetOrNoneManager, models.Manager):
         marks_for_question = self.filter(question_number=question_number).values_list('mark', flat=True)
         return sum(marks_for_question)
 
+    def total_mark_for_submi(self, question_number):
+        marks_for_question = self.filter(question_number=question_number).values_list('mark', flat=True)
+        return sum(marks_for_question)
+
     def reset_mark(self, question_number, question_part, submission, test_name):
         self.update_or_creates(question_number, question_part, submission, test_name, ResultsEnums.SUCCESS, 'Bp', 0)
 

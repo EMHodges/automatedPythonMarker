@@ -51,6 +51,7 @@ def question_update_views(request, number):
     for objz in sub_objs:
         last_submission = Submission.object.get_last_submission(objz)
         yo[objz] = Result.objects.filter(question_number=number, question_part=objz.part, submission=last_submission)
+    print(fords)
     context = {
         'form': fords,
         'next_question': None,
