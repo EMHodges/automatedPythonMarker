@@ -20,4 +20,5 @@ class QuestionsTestRunner(unittest.TextTestRunner):
         submission_number = Submission.object.get_next_submission_number(sub_question)
         submission = Submission.object.create(sub_question=sub_question, submission_number=submission_number)
         submission.save()
-        return QuestionsTextTestResult(self.question_number, self.question_part, self.stream, self.descriptions, self.verbosity)
+        print('making result')
+        return QuestionsTextTestResult(self.question_number, self.question_part, submission, self.stream, self.descriptions, self.verbosity)

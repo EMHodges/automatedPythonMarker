@@ -4,6 +4,7 @@ from results.questions_test_case import QuestionsTestCase
 from results.models import Result
 from results.questions_test_result import QuestionsTestResult
 from results.results_enum import ResultsEnums
+from submission.models import Submission
 
 
 class QuestionsTextTestResult(QuestionsTestResult):
@@ -11,7 +12,7 @@ class QuestionsTextTestResult(QuestionsTestResult):
     classdocs
     '''
 
-    def __init__(self, question_number, question_part, stream=None, descriptions=True, verbosity=1):
+    def __init__(self, question_number, question_part, submission: Submission, stream=None, descriptions=True, verbosity=1):
         """Construct a TextTestRunner.
 
         Subclasses should accept **kwargs to ensure
@@ -23,6 +24,7 @@ class QuestionsTextTestResult(QuestionsTestResult):
 
         self.question_number = question_number
         self.question_part = question_part
+        self.submission = submission
         super(QuestionsTextTestResult, self).__init__(stream, descriptions, verbosity)
 
     def addSuccess(self, test: QuestionsTestCase) -> None:
@@ -45,6 +47,7 @@ class QuestionsTextTestResult(QuestionsTestResult):
     def create_result(self, test: QuestionsTestCase, test_result, test_feedback: str) -> None:
         Result.objects.update_or_create(question_number=self.question_number,
                                         question_part=self.question_part,
+                                        submission=self.submission,
                                         test_name=test.methodName,
                                         defaults={
                                             'test_feedback': test_feedback,

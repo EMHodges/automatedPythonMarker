@@ -8,8 +8,9 @@ from .results_enum import ResultsEnums
 
 class ResultManager(GetOrNoneManager, models.Manager):
 
-    def update_or_creates(self, question_number, question_part, test_name, test_result, test_feedback, mark):
-        self.update_or_create(question_number=question_number, question_part=question_part, test_name=test_name,
+    def update_or_creates(self, question_number, question_part, submission, test_name, test_result, test_feedback, mark):
+        self.update_or_create(question_number=question_number, question_part=question_part, submission=submission,
+                              test_name=test_name,
                               defaults={
                                   'test_feedback': test_feedback,
                                   'test_result': test_result,
@@ -20,8 +21,8 @@ class ResultManager(GetOrNoneManager, models.Manager):
         marks_for_question = self.filter(question_number=question_number).values_list('mark', flat=True)
         return sum(marks_for_question)
 
-    def reset_mark(self, question_number, question_part, test_name):
-        self.update_or_creates(question_number, question_part, test_name, ResultsEnums.SUCCESS, 'Bp', 0)
+    def reset_mark(self, question_number, question_part, submission, test_name):
+        self.update_or_creates(question_number, question_part, submission, test_name, ResultsEnums.SUCCESS, 'Bp', 0)
 
 
 # Create your models here.
