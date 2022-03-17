@@ -19,9 +19,9 @@ def run_tests(answer, question_number):
     run_tests_for_question(question_number)
 
 
-def run_testing(answer, question_number, question_part):
+def run_testing(answer, question_number, question_part, submission):
     construct_test_file(answer, question_number, question_part)
-    submission = create_submission(question_number, question_part)
+   # submission = create_submission(question_number, question_part)
     linting_answer(question_number, submission)
     run_tests_for_question_part(question_number, question_part)
 

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Question, SubQuestionComposite
+from .models import Submission
 
 
 class QuestionForm(forms.ModelForm):
@@ -17,5 +17,5 @@ class QuestionForm(forms.ModelForm):
     )
 
     class Meta:
-        model = SubQuestionComposite
+        model = Submission
         fields = ['answer']
