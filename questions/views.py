@@ -4,9 +4,9 @@ from django.shortcuts import render, get_object_or_404
 
 from static_lint.models import StaticLint
 from submission.models import Submission
-from .forms import QuestionForm
+from submission.forms import QuestionForm
 from .models import Question, QuestionComposite, SubQuestionComposite
-from results.main import run_testing
+from results.main import run_testing, create_submission
 from results.models import Result, Subtest
 
 
@@ -30,8 +30,9 @@ def question_update_views(request, number):
 
                 for sub_obj in sub_objs:
                     if first_letter == sub_obj.part:
-                        sub_question = SubQuestionComposite.object.get(part=first_letter)
-                        form = QuestionForm(request.POST or None, instance=sub_question, prefix=str(first_letter))
+                        submission = create_submission(number, first_letter)
+                        # sub_question = SubQuestionComposite.object.get(part=first_letter)
+                        form = QuestionForm(request.POST or None, instance=submission, prefix=str(first_letter))
                         form_answer = request.POST.get(key)
 
                         if form.is_valid():
@@ -39,7 +40,7 @@ def question_update_views(request, number):
                             x = get_object_or_404(QuestionComposite, number=number).subquestioncomposite_set.get(
                                 part=first_letter)
                             fords[x] = form
-                            run_testing(form_answer, number, first_letter)
+                            run_testing(form_answer, number, first_letter, submission)
                             # static_errors = StaticLint.objects.get(question_number=number)
                     else:
                         fords[sub_obj] = QuestionForm(None, instance=sub_obj, prefix=int(sub_obj.part))
