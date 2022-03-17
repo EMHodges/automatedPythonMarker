@@ -43,10 +43,12 @@ def question_update_views(request, number):
                             run_testing(form_answer, number, first_letter, submission)
                             # static_errors = StaticLint.objects.get(question_number=number)
                     else:
-                        fords[sub_obj] = QuestionForm(None, instance=sub_obj, prefix=int(sub_obj.part))
+                        submission = Submission.object.get_last_submission(sub_obj)
+                        fords[sub_obj] = QuestionForm(None, instance=submission, prefix=int(sub_obj.part))
     else:
         for objz in sub_objs:
-            fords[objz] = QuestionForm(None, instance=objz, prefix=int(objz.part))
+            submission = Submission.object.get_last_submission(objz)
+            fords[objz] = QuestionForm(None, instance=submission, prefix=int(objz.part))
 
     for objz in sub_objs:
         last_submission = Submission.object.get_last_submission(objz)
