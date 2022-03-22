@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<h1>Questions</h1>
-
+<h1>Automated Python Marker</h1>
+<p>Hello thank you for participating</p>
+    <p>Please only spend <b>30 minutes</b> answering the question</p>
+<p>Click submit at the bottom of the page to download a file of your answers which you need to upload</p>
+<p>Remember you are not being assessed on how you score and all results will be anonymized so please submit any solution even if failing or incomplete</p>
 {% for instance in object_list %}
-    <p><a href='{{ instance.get_absolute_url }}'>Question {{ instance.number }}</a></p>
+    <p><a href='{{ instance.get_absolute_url }}'>Click here to get started!</a></p>
 {% endfor %}
 
-<h1>Results</h1>
-<a href="{% url 'results:results-page-view' %}">Results</a>
-<a href="{% url 'submit_page:submit-page' %}">Submit</a>
 {% endblock %}

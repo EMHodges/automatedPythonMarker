@@ -1,5 +1,7 @@
 import re
+import sys
 
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 from static_lint.models import StaticLint
@@ -8,12 +10,13 @@ from submission.forms import QuestionForm
 from .models import Question, QuestionComposite, SubQuestionComposite
 from results.main import run_testing, create_submission
 from results.models import Result, Subtest
+from django.core import serializers
 
 
 # Create your views here.
 def question_update_views(request, number):
     obj = get_object_or_404(QuestionComposite, number=number)
-
+    print("update views!")
     sub_objs = obj.subquestioncomposite_set.all()
 
     fords = {}
@@ -76,3 +79,46 @@ def question_list_view(request):
         "object_list": queryset
     }
     return render(request, "question/question_list.html", context)
+
+
+def submit_view(request):
+    if request.method == "POST":
+        request_dict = request.POST.dict()
+        print(request_dict)
+    p = re.compile(r'(python-marker\d*).exe')
+    z = p.search(sys.argv[0])
+
+    print('yops')
+    print(z)
+
+    if z:
+        filename = z.group(1)
+    else:
+        filename = 'pythonMarker'
+
+    response = HttpResponse(content_type='text/plain')
+    response['Content-Disposition'] = f'attachment; filename={filename}.txt'
+
+    lines = []
+
+    questions = QuestionComposite.objects.all()
+    sub_questions = SubQuestionComposite.object.all()
+    submissions = Submission.object.all()
+    static_lint = StaticLint.objects.all()
+    results = Result.objects.all()
+    sub_tests = Subtest.objects.all()
+
+    lines.append(serialize(questions))
+    lines.append(serialize(sub_questions))
+    lines.append(serialize(submissions))
+    lines.append(serialize(static_lint))
+    lines.append(serialize(results))
+    lines.append(serialize(sub_tests))
+
+    response.writelines(lines)
+
+    return response
+
+
+def serialize(object):
+    return serializers.serialize("yaml", object)
