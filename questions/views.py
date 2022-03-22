@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from static_lint.models import StaticLint
 from submission.models import Submission
 from submission.forms import QuestionForm
-from .models import Question, QuestionComposite, SubQuestionComposite
+from .models import Question, QuestionComposite, SubQuestionComposite, TimeStarted
 from results.main import run_testing, create_submission
 from results.models import Result, Subtest
 from django.core import serializers
@@ -18,6 +18,11 @@ def question_update_views(request, number):
     obj = get_object_or_404(QuestionComposite, number=number)
     print("update views!")
     sub_objs = obj.subquestioncomposite_set.all()
+
+    time_obj = TimeStarted.objects.get_or_none()
+    if not time_obj:
+        time = TimeStarted()
+        time.save()
 
     fords = {}
 
@@ -101,6 +106,7 @@ def submit_view(request):
 
     lines = []
 
+    time_started = TimeStarted.objects.all()
     questions = QuestionComposite.objects.all()
     sub_questions = SubQuestionComposite.object.all()
     submissions = Submission.object.all()
@@ -108,12 +114,13 @@ def submit_view(request):
     results = Result.objects.all()
     sub_tests = Subtest.objects.all()
 
-    lines.append(serialize(questions))
-    lines.append(serialize(sub_questions))
-    lines.append(serialize(submissions))
-    lines.append(serialize(static_lint))
-    lines.append(serialize(results))
-    lines.append(serialize(sub_tests))
+    lines.append(serialize(time_started))
+ #   lines.append(serialize(questions))
+ ##   lines.append(serialize(sub_questions))
+ #   lines.append(serialize(submissions))
+ #   lines.append(serialize(static_lint))
+ #   lines.append(serialize(results))
+ #   lines.append(serialize(sub_tests))
 
     response.writelines(lines)
 
