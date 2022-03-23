@@ -6,19 +6,13 @@
 <script type="text/javascript">
   $(function(){
     $("#hello_button").click(function(e){
-        console.log('{{ csrftoken }}')
-        console.log({{ csrftoken }})
-        console.log($('textarea[name="1-answer"]').val())
-        console.log($('textarea[name="2-answer"]').val());
-
-        console.log({{ csrftoken }});
         $.ajax({ // create an AJAX call...
                 data: {'1-answer': $('textarea[name="1-answer"]').val()},
                 headers:{"X-CSRFToken": '{{ csrf_token }}'},// get the form data
                 type: 'POST', // GET or POST
                 url: '/questions/4/', // the file to call
                 success: function (response) { // on success..
-                    console.log('yo') // update the DIV
+                    console.log('successfully saved') // update the DIV
                 },
             });
         sleep(2000)
@@ -28,7 +22,7 @@
                 type: 'POST', // GET or POST
                 url: '/questions/4/', // the file to call
                 success: function (response) { // on success..
-                    console.log('yo') // update the DIV
+                    console.log('successfully saved')
                 },
             });
         e.preventDefault()
@@ -51,7 +45,7 @@
     {
         alert('You have spent 30 minutes on this question. Please save your answers and submit them below');
     },
-    1000 * 10 * 30);
+    1000 * 60 * 30);
 });
 
 

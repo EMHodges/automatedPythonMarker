@@ -6,9 +6,7 @@
 <form method='POST' class="lll"> {% csrf_token %}
     <p>{{ object.description | linebreaks }}</p>
     {{ fo.as_p }}
-    <input type="submit"  data-myAttribute="yo" class="click_here" value="Save"/>
-    <input type="reset" data-myAttribute="poo" class="click_heres" value="Saves"/>
-    <button class="kk">Button</button>
+    <input type="submit" value="Save"/>
 </form>
 
 {% endblock %}
