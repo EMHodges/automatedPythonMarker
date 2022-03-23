@@ -31,6 +31,7 @@ def question_update_views(request, number):
 
     if request.method == "POST":
         request_dict = request.POST.dict()
+        print(request.POST.dict())
         for key, value in request_dict.items():
             answer_key = re.match(r'\d+-answer', key)
             if answer_key:
