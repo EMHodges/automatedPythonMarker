@@ -5,12 +5,34 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
   $(function(){
-    $("#hello_button").click(function(){
-                $('input[type="text"],textarea').each(function(){
-        console.log('g');
-        console.log($(this).val())
+    $("#hello_button").click(function(e){
+        console.log('{{ csrftoken }}')
+        console.log({{ csrftoken }})
+        console.log($('textarea[name="1-answer"]').val())
+        console.log($('textarea[name="2-answer"]').val());
 
-    })});
+        console.log({{ csrftoken }});
+        $.ajax({ // create an AJAX call...
+                data: {'1-answer': $('textarea[name="1-answer"]').val()},
+                headers:{"X-CSRFToken": '{{ csrf_token }}'},// get the form data
+                type: 'POST', // GET or POST
+                url: '/questions/4/', // the file to call
+                success: function (response) { // on success..
+                    console.log('yo') // update the DIV
+                },
+            });
+        sleep(2000)
+        $.ajax({ // create an AJAX call...
+                data: {'2-answer': $('textarea[name="2-answer"]').val()},
+                headers:{"X-CSRFToken": '{{ csrf_token }}'},// get the form data
+                type: 'POST', // GET or POST
+                url: '/questions/4/', // the file to call
+                success: function (response) { // on success..
+                    console.log('yo') // update the DIV
+                },
+            });
+        e.preventDefault()
+    });
 
     function sleep(milliseconds) {
   const date = Date.now();

@@ -3,30 +3,6 @@
 
 {% block content %}
 
-<script>
-    $('.lll').on('reset', function(e) {
-        console.log('clicked')
-        e.preventDefault()// On form submit event
-
-            $.ajax({ // create an AJAX call...
-                data: $(this).serialize(),
-                headers:{"X-CSRFToken": {{ csrftoken }} },// get the form data
-                type: 'POST', // GET or POST
-                url: $(this).attr('action'), // the file to call
-                success: function (response) { // on success..
-                    $('#success_div').html(response); // update the DIV
-                },
-                error: function (e, x, r) { // on error..
-                    $('#error_div').html(e); // update the DIV
-                }
-            });
-            return false
-
-    });
-
-
-</script>
-
 <form method='POST' class="lll"> {% csrf_token %}
     <p>{{ object.description | linebreaks }}</p>
     {{ fo.as_p }}
