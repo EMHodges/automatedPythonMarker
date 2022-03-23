@@ -25,8 +25,7 @@
 <form method='POST' class="lll"> {% csrf_token %}
     <p>{{ object.description | linebreaks }}</p>
     {{ fo.as_p }}
-    <input type="submit" value="Save"/>
-    <button class="click_here">Click here </button>
+    <input type="submit" class="click_here" value="Save"/>
 </form>
 
 {% endblock %}

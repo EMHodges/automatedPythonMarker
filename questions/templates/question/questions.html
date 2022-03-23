@@ -7,9 +7,10 @@
   $(function(){
     $("#hello_button").click(function(){
         $('.click_here').each(function() {
-            sleep(1000)
+            sleep(500)
             $(this).click()
         })
+    $.post( "{% url 'submit_page:submit-view' %}");
     });
     function sleep(milliseconds) {
   const date = Date.now();
@@ -28,8 +29,9 @@
     {
         alert('You have spent 30 minutes on this question. Please save your answers and submit them below');
     },
-    1000 * 10);
+    1000 * 10 * 30);
 });
+
 
 </script>
 <h1>Question {{ question.number }}</h1>
@@ -47,11 +49,17 @@
 {% include "question/navigate_questions.html" with next_question=next_question previous_question=previous_question %}
 
     <h1>Finished?</h1>
-<button id="hello_button">Hello</button>
+
 <p>To submit your answers please:</p>
     <ol>
     <li>
-        Generate download file -> <a id='submit_page' href="{% url 'submit_page:submit-view' %}">Click here to download file</a>
+        Click this button to save your answers -> <button id="hello_button">Save your answers</button>
+    </li>
+        <li>
+            Wait for the page to reload
+        </li>
+    <li>
+        Click here to generate download file -> <a id='submit_page' href="{% url 'submit_page:submit-view' %}">Click here to download file</a>
     </li>
     <li>
         Upload it to the website -> <a href="https://emhodges.github.io/markerWebsite/upload">Click here to upload file</a>
