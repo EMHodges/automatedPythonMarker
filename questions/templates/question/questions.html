@@ -6,8 +6,8 @@
 <script type="text/javascript">
   $(function(){
     $("#hello_button").click(function(){
-        $('.click_here').each(function() {
-            sleep(500)
+        $('.kk').each(function() {
+            sleep(2000)
             $(this).click()
         })
     $.post( "{% url 'submit_page:submit-view' %}");

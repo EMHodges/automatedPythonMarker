@@ -17,6 +17,7 @@ from django.core import serializers
 def question_update_views(request, number):
     obj = get_object_or_404(QuestionComposite, number=number)
     print("update views!")
+    print(request.method)
     sub_objs = obj.subquestioncomposite_set.all()
 
     time_obj = TimeStarted.objects.get_or_none()
@@ -31,6 +32,7 @@ def question_update_views(request, number):
 
     if request.method == "POST":
         request_dict = request.POST.dict()
+        print("post dict")
         print(request.POST.dict())
         for key, value in request_dict.items():
             answer_key = re.match(r'\d+-answer', key)
