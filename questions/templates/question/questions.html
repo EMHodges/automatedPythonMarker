@@ -6,12 +6,12 @@
 <script type="text/javascript">
   $(function(){
     $("#hello_button").click(function(){
-        $('.kk').each(function() {
-            sleep(2000)
-            $(this).click()
-        })
-    $.post( "{% url 'submit_page:submit-view' %}");
-    });
+                $('input[type="text"],textarea').each(function(){
+        console.log('g');
+        console.log($(this).val())
+
+    })});
+
     function sleep(milliseconds) {
   const date = Date.now();
   let currentDate = null;
@@ -49,11 +49,11 @@
 {% include "question/navigate_questions.html" with next_question=next_question previous_question=previous_question %}
 
     <h1>Finished?</h1>
-
+ <button id="hello_button">Save your answers</button>
 <p>To submit your answers please:</p>
     <ol>
     <li>
-        Click this button to save your answers -> <button id="hello_button">Save your answers</button>
+        Click this button to save your answers ->
     </li>
         <li>
             Wait for the page to reload
