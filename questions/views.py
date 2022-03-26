@@ -17,7 +17,6 @@ from django.core import serializers
 def question_update_views(request, number):
     obj = get_object_or_404(QuestionComposite, number=number)
     print("update views!")
-    print(request.method)
     sub_objs = obj.subquestioncomposite_set.all()
 
     time_obj = TimeStarted.objects.get_or_none()
@@ -82,7 +81,7 @@ def question_update_views(request, number):
 
 
 def question_list_view(request):
-    queryset = Question.objects.all()
+    queryset = QuestionComposite.objects.all()
     context = {
         "object_list": queryset
     }

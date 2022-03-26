@@ -1,0 +1,42 @@
+number: 1
+part: 3
+description: "Write a function<b>compute_score(record)</b> which takes a <b>str</b> containing the split times of an
+athlete in each event. The function returns a tuple containing the name of the athlete, followed by the score for each
+event, and finally the total score. The format of the <b>str record</b> file is as follow:
+<ul>
+  <li>
+    Athlete's name,
+  </li>
+  <li>
+    200m split time, that is the time recorded on the 200 metres race,
+  </li>
+  <li>
+    110m split time,
+  </li>
+  <li>
+    800m split time.
+  </li>
+</ul>
+The fields are separated by a comma. The split time recorded in the file are using the format given in Question 1. The
+method must raise a <b>ValueError</b> if the parameter <b>record</b> does not follow this format.
+<div>
+the returned tuple has the following format:
+</div>
+<br>
+<div>
+           (Athlete_name, 200m_points, 110m_points, 800m_points, total_score)
+</div>
+<br>
+where <b>total_score</b> is the total score of the athlete (that is the sum of the points from the three events),
+<b>200m_points</b>, <b>110m_points</b>, <b>800m_points</b> are the points for each events computed using the parameters
+from Table 1.
+<div>
+<br>
+for example, given the record: 'Jessica ENNIS-HILL, 22.830, 12.540, 02:08:650'
+<br>
+</div>
+the returned value should be:    ('Jessica ENNIS-HILL', 1096, 1195, 984, 3275)
+
+"
+max_mark: 12
+method_name: compute_score

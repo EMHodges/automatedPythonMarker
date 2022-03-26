@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from questions.models import SubQuestionComposite, QuestionComposite
+from questions.models import SubQuestionComposite, QuestionComposite, Question, TimeStarted
 from results.models import Result, Subtest
 from static_lint.models import StaticLint
 from submission.models import Submission
@@ -15,4 +15,6 @@ class Command(BaseCommand):
         Submission.object.all().delete()
         SubQuestionComposite.object.all().delete()
         QuestionComposite.objects.all().delete()
+        TimeStarted.objects.all().delete()
+
 

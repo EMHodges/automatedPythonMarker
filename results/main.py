@@ -37,7 +37,10 @@ def create_submission(question_number, question_part):
 
 def construct_test_file(answer, question_number, question_part):
     model_answers = MODEL_ANSWERS.get(question_number)
-
+    print(question_number)
+    print(question_part)
+    print(MODEL_ANSWERS)
+    print(model_answers)
     shutil.rmtree(TMP_FILE, ignore_errors=True)
     with open(TMP_FILE, 'w') as tmp_file:
         for key, value in model_answers.items():

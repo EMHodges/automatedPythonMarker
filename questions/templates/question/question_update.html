@@ -4,7 +4,7 @@
 {% block content %}
 
 <form method='POST' class="lll"> {% csrf_token %}
-    <p>{{ object.description | linebreaks }}</p>
+    <p>{{ object.description | safe }}</p>
     {{ fo.as_p }}
     <input type="submit" value="Save"/>
 </form>

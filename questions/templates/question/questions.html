@@ -10,17 +10,27 @@
                 data: {'1-answer': $('textarea[name="1-answer"]').val()},
                 headers:{"X-CSRFToken": '{{ csrf_token }}'},// get the form data
                 type: 'POST', // GET or POST
-                url: '/questions/4/', // the file to call
+                url: '/questions/1/', // the file to call
                 success: function (response) { // on success..
                     console.log('successfully saved') // update the DIV
                 },
             });
-        sleep(2000)
+
         $.ajax({ // create an AJAX call...
                 data: {'2-answer': $('textarea[name="2-answer"]').val()},
                 headers:{"X-CSRFToken": '{{ csrf_token }}'},// get the form data
                 type: 'POST', // GET or POST
-                url: '/questions/4/', // the file to call
+                url: '/questions/1/', // the file to call
+                success: function (response) { // on success..
+                    console.log('successfully saved')
+                },
+            });
+
+        $.ajax({ // create an AJAX call...
+                data: {'3-answer': $('textarea[name="3-answer"]').val()},
+                headers:{"X-CSRFToken": '{{ csrf_token }}'},// get the form data
+                type: 'POST', // GET or POST
+                url: '/questions/1/', // the file to call
                 success: function (response) { // on success..
                     console.log('successfully saved')
                 },

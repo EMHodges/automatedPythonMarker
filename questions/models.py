@@ -26,6 +26,11 @@ class QuestionComposite(models.Model):
     description = models.TextField(blank=False, null=False)
     objects = SubQuestionCompositeManager()
 
+    def get_absolute_url(self):
+        return reverse("questions:question-update", kwargs={"number": self.number})
+
+
+
 class TimeStarted(models.Model):
     time_started = models.DateTimeField(auto_now=True)
     objects = SubQuestionCompositeManager()
