@@ -41,5 +41,6 @@ class SubQuestionComposite(models.Model):
     description = models.TextField(blank=False, null=False)
     method_name = models.TextField()
     max_mark = models.IntegerField()
+    part_name = models.TextField(blank=False, null=False)
    # answer = models.TextField(blank=True, null=True)
     object = SubQuestionCompositeManager()

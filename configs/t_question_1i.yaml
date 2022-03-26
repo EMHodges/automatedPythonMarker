@@ -20,4 +20,5 @@ in second as a <b>float</b>. The function should accept the following <b>str</b>
   </li>
 </ul>"
 max_mark: 12
+part_name: Time Conversion
 method_name: time_to_seconds

@@ -39,4 +39,5 @@ the returned value should be:    ('Jessica ENNIS-HILL', 1096, 1195, 984, 3275)
 
 "
 max_mark: 12
+part_name: Athlete's score
 method_name: compute_score
