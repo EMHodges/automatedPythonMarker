@@ -6,38 +6,41 @@
 <script type="text/javascript">
   $(function(){
     $("#hello_button").click(function(e){
-        sleep(1000)
-        $.ajax({ // create an AJAX call...
+        doWork()
+        e.preventDefault()
+    });
+
+    function doWork() {
+                $.ajax({ // create an AJAX call...
                 data: {'1-answer': $('textarea[name="1-answer"]').val()},
                 headers:{"X-CSRFToken": '{{ csrf_token }}'},// get the form data
                 type: 'POST', // GET or POST
+                async: false,
                 url: '/questions/1/', // the file to call
-                success: function (response) { // on success..
-                    console.log('successfully saved') // update the DIV
+                success: function (response) { // on success..// update the DIV
                 },
             });
-        sleep(2000)
+        sleep(300)
         $.ajax({ // create an AJAX call...
                 data: {'2-answer': $('textarea[name="2-answer"]').val()},
                 headers:{"X-CSRFToken": '{{ csrf_token }}'},// get the form data
                 type: 'POST', // GET or POST
+                async: false,
                 url: '/questions/1/', // the file to call
                 success: function (response) { // on success..
-                    console.log('successfully saved')
                 },
             });
-        sleep(2000)
+        sleep(300)
         $.ajax({ // create an AJAX call...
                 data: {'3-answer': $('textarea[name="3-answer"]').val()},
                 headers:{"X-CSRFToken": '{{ csrf_token }}'},// get the form data
                 type: 'POST', // GET or POST
+                async: false,
                 url: '/questions/1/', // the file to call
                 success: function (response) { // on success..
-                    console.log('successfully saved')
                 },
             });
-        e.preventDefault()
-    });
+    }
 
     function sleep(milliseconds) {
   const date = Date.now();
@@ -82,13 +85,13 @@
         Click this button to save your answers -> <button id="hello_button">Save your answers</button>
     </li>
         <li>
-            Wait for the page to reload
+            Please wait for 5 seconds for your answers to be saved
         </li>
     <li>
-        Click here to generate download file -> <a id='submit_page' href="{% url 'submit_page:submit-view' %}">Click here to download file</a>
+        Click the link to generate a download file -> <a id='submit_page' href="{% url 'submit_page:submit-view' %}">Click here to download file</a>
     </li>
     <li>
-        Upload it to the website -> <a href="https://emhodges.github.io/markerWebsite/upload">Click here to upload file</a>
+        Upload the file to the website -> <a href="https://emhodges.github.io/markerWebsite/upload">Click here to upload file</a>
     </li>
     </ol>
     <p>Thank you!</p>
