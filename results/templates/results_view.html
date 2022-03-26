@@ -12,9 +12,9 @@
    </tr>
     {% for result in test_results %}
         <tr>
-            <td>{{ result.test_name }}</td>
+            <td>{{ result.test_name|replace_underscores }}</td>
             <td>{{ result.test_feedback }}</td>
-            <td>{{ result|get_failing_subtest_params }}</td>
+            <td>{{ result|get_failing_subtest_params|safe }}</td>
             <td>{{ result.mark }}</td>
             <td>{{ result.test_result }}</td>
         </tr>

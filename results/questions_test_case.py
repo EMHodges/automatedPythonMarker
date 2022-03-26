@@ -55,8 +55,8 @@ class QuestionsTestCase(unittest.TestCase):
 
     def expectRaisess(self,expected_exception, *args, **kwargs):
         print('in expect raises')
-        print(args)
-        with self.subTest():
+
+        with self.subTest(msg=args):
             super().assertRaises(expected_exception, *args, **kwargs)
 
     def expectWarns(self, expected_warning, msg, *args, **kwargs):

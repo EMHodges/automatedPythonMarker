@@ -31,8 +31,6 @@ def question_update_views(request, number):
 
     if request.method == "POST":
         request_dict = request.POST.dict()
-        print("post dict")
-        print(request.POST.dict())
         for key, value in request_dict.items():
             answer_key = re.match(r'\d+-answer', key)
             if answer_key:
@@ -67,7 +65,6 @@ def question_update_views(request, number):
         else:
             static_error[objz] = None
         yo[objz] = Result.objects.filter(question_number=number, question_part=objz.part, submission=last_submission)
-    print(static_error)
     context = {
         'form': fords,
         'next_question': None,
@@ -89,14 +86,8 @@ def question_list_view(request):
 
 
 def submit_view(request):
-    if request.method == "POST":
-        request_dict = request.POST.dict()
-        print(request_dict)
     p = re.compile(r'(python-marker\d*).exe')
     z = p.search(sys.argv[0])
-
-    print('yops')
-    print(z)
 
     if z:
         filename = z.group(1)
