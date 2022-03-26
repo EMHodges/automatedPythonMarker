@@ -13,7 +13,7 @@ in second as a <b>float</b>. The function should accept the following <b>str</b>
     For example <b>01.250</b> represents a second and 250 milliseconds. This format is used when the time is less than
     an minute. The returned value should be 1.25.
   </li>
-  <li>Any other format must raise a \verb|ValueError| exception.</li>
+  <li>Any other format must raise a <b>ValueError</b> exception.</li>
   <li>
     The seconds (ss) must be strictly less than 60, otherwise a <b>ValueError</b> exception should be raised. For
     example <b>'01:62.500'</b> should raise an exception.

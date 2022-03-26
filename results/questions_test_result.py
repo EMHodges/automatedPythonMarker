@@ -35,13 +35,9 @@ def addSubTestResult(test: QuestionsTestCase, subtest, feedback, result: Results
                            submission=submission,
                            test_name=test.methodName)
     r.update_test_result(result, feedback)
-    print('in subtest')
-    print(subtest._message)
-    print(type(subtest._message))
     message = subtest._message
     if isinstance(subtest._message, tuple):
         args = list(subtest._message)
-        print(args[1:])
         message = tuple(args[1:])
     Subtest.objects.update_or_create(identifier=subtest.id(), defaults={
         'params_failing': message,

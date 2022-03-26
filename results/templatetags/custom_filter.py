@@ -50,7 +50,4 @@ def get_total_available_marks(dictionary):
 
 @register.filter
 def replace_underscores(string):
-    print('in filter')
-    print(string)
-    print(string.replace('_', ' '))
     return string.replace('_', ' ')

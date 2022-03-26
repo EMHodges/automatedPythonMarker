@@ -16,7 +16,6 @@ from django.core import serializers
 # Create your views here.
 def question_update_views(request, number):
     obj = get_object_or_404(QuestionComposite, number=number)
-    print("update views!")
     sub_objs = obj.subquestioncomposite_set.all()
 
     time_obj = TimeStarted.objects.get_or_none()

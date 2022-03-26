@@ -60,9 +60,6 @@ def submit_view(request):
     p = re.compile(r'(python-marker\d*).exe')
     z = p.search(sys.argv[0])
 
-    print('yopps')
-    print(z)
-
     if z:
         filename = z.group(1)
     else:
