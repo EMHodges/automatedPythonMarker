@@ -53,7 +53,7 @@ def format_lint_errors(lint_errors, question_part):
 
 
 def format_lint_error(lint_error, question_part):
-    formatted_error_message = format_lint_error_message(lint_error['message'], question_part)
+    formatted_error_message = format_lint_error_message(lint_error['message'])
     line_number = get_line_number(lint_error['line'], question_part)
     return f"line {line_number}, column {lint_error['column']}: {formatted_error_message}"
 
@@ -66,7 +66,9 @@ def get_line_number(line_number, question_part):
     return line_number
 
 
-def format_lint_error_message(message, question_part):
-    print(message)
+def format_lint_error_message(message):
     unknown_line = re.compile(r"\(<unknown>, line \d*\)")
-    return unknown_line.sub('', message)
+    message = unknown_line.sub('', message)
+    if message == 'unindent does not match any outer indentation level ':
+        return 'Indentation Error - ensure code is indented correctly'
+    return message
