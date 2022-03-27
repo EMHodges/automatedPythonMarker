@@ -10,9 +10,6 @@ class ResultsConfig(AppConfig):
     def ready(self):
         importlib.import_module('configs.test_question_1', 'TestQuestion1')
         importlib.import_module('configs.test_question_2', 'TestQuestion2')
-        importlib.import_module('configs.t_test_question_4i', 'TestQuestion4i')
-        importlib.import_module('configs.t_test_question_4ii', 'TestQuestion4ii')
-        importlib.import_module('configs.t_model_answer_question_4', '')
         importlib.import_module('configs.t_test_question_1i', 'TestQuestion1i')
         importlib.import_module('configs.t_test_question_1ii', 'TestQuestion1ii')
         importlib.import_module('configs.t_test_question_1iii', 'TestQuestion1iii')
