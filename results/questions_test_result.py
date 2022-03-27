@@ -38,7 +38,13 @@ def addSubTestResult(test: QuestionsTestCase, subtest, feedback, result: Results
     message = subtest._message
     if isinstance(subtest._message, tuple):
         args = list(subtest._message)
-        message = tuple(args[1:])
+        message_args = args[1:]
+        if len(message_args) == 1:
+            message = "'" + str(message_args[0]) + "'"
+        else:
+            message = tuple(message_args)
+    elif isinstance(subtest._message, str):
+        message = "'" + subtest._message + "'"
     Subtest.objects.update_or_create(identifier=subtest.id(), defaults={
         'params_failing': message,
         'part': test._get_question_part(),
