@@ -2,12 +2,13 @@ number: 1
 part: 2
 description: "The scenario for this question is about computing the score of an athlete in a given track event. We need
 to convert a time in seconds into points. The official formula is:
-<div>points = a(b - time)^c</div>
+<div>points = a(b - time)^c <i>(Equation 1)</i></div>
 <br>
 where <i>time</i> is the time in seconds of the athlete for that event. <i>a</i>, <i>b</i> and <i>c</i> are parameters
-that vary depending on the event (see Table 1). The value of points must be rounded down to a whole number after
+that vary depending on the event (see Table 1 below). The value of points must be rounded down to a whole number after
 applying the respective formula (e.g. 499.999 points becomes 499).
 <br>
+<div>.</div>
 <table>
   <tr>
     <td>Women's events</td>
@@ -24,7 +25,7 @@ applying the respective formula (e.g. 499.999 points becomes 499).
   <tr>
     <td>800m</td>
     <td>0.11193</td>
-    <td>42.5</td>
+    <td>254.0</td>
     <td>1.88</td>
   </tr>
   <tr>
@@ -34,9 +35,10 @@ applying the respective formula (e.g. 499.999 points becomes 499).
     <td>1.835</td>
   </tr>
 </table>
+<div><i>Table 1: Constants </i>a<i>, </i>b<i> and </i>c<i> for each event</i></div>
 <br>
 Write a function <b>track_points(time, event_parameters)</b> which takes a <b>str</b> parameter <b>time</b>
-representing the athlete's time following the format given in Question 1, and a tuple containing the event's
+representing the athlete's time following the format given in part i, and a tuple containing the event's
 parameters. The method returns an <b>int</b> representing the points scored for that event using Equation 1.
 In addition, the method always returns a value greater or equal to 0, that is if the result of Equation 1
 is negative, the points must be rounded to 0.
@@ -60,7 +62,7 @@ is negative, the points must be rounded to 0.
   </li>
 </ul>
 
-The function must raise a <b>ValueError</b> if the time format does not follow the format given in Question 1. It
+The function must raise a <b>ValueError</b> if the time format does not follow the format given in part i. It
 should also raise a <b>ValueError</b> if the tuple does not contain exactly 3 float values.
 "
 max_mark: 16

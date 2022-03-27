@@ -1,7 +1,7 @@
 number: 1
 part: 1
 description: "Write a function <b>time_to_seconds(time)</b> which takes a <b>str</b> as a parameter and returns a time
-in second as a <b>float</b>. The function should accept the following <b>str</b> format for the parameter <b>time</b>:
+in seconds as a <b>float</b>. The function should accept the following <b>str</b> format for the parameter <b>time</b>:
 <ul>
   <li>
     <b>mm:ss.fff</b> where two digits are always used for minutes (m), seconds (s), and three digits for the fraction
@@ -11,7 +11,7 @@ in second as a <b>float</b>. The function should accept the following <b>str</b>
   <li>
     <b>ss.fff</b> where two digits are always used for seconds (s) and  three digits for the fraction of a second (f).
     For example <b>01.250</b> represents a second and 250 milliseconds. This format is used when the time is less than
-    an minute. The returned value should be 1.25.
+    a minute. The returned value should be 1.25.
   </li>
   <li>Any other format must raise a <b>ValueError</b> exception.</li>
   <li>
