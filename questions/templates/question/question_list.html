@@ -3,9 +3,19 @@
 {% block content %}
 <h1>Automated Python Marker</h1>
 <p>Hello thank you for participating</p>
-    <p>Please only spend <b>30 minutes</b> answering the question</p>
-<p>Click submit at the bottom of the page to download a file of your answers which you need to upload</p>
-<p>Remember you are not being assessed on how you score and all results will be anonymized so please submit any solution even if failing or incomplete</p>
+    <p>Please:</p>
+    <ul>
+        <li>
+            Spend at most <b>30 minutes</b> answering the question
+        </li>
+        <li>
+            Upload your answers to the website when you are finished (details are at the bottom of the next page)
+        </li>
+        <li>
+            Remember I am testing the tool, not you! So please submit your answers, they will be anonymous and gratefully received
+        </li>
+    </ul>
+
 {% for instance in object_list %}
     <p><a href='{{ instance.get_absolute_url }}'>Click here to get started!</a></p>
 {% endfor %}

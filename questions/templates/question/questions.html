@@ -52,20 +52,12 @@
 
 
  });
-
-  $(document).ready(function()
-{
-    setTimeout(function()
-    {
-        alert('You have spent 30 minutes on this question. Please save your answers and submit them below');
-    },
-    1000 * 60 * 30);
-});
-
-
 </script>
 <h1>Question {{ question.number }}</h1>
 {{ question.description }}
+    <div>.</div>
+    <div><b>Note:</b> click the 'Run Tests & Save' buttons to save your work and see how you are doing - do click this
+    to save your answer before working on another part</div>
 {% for ob, for in form.items %}
     {%  if form|is_composite_question %}
         <h2>{{ ob.part|get_roman_numeral }}) {{ ob.part_name }}</h2>
