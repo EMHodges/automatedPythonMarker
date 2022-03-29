@@ -58,12 +58,18 @@ def submit_views(request):
 
 def submit_view(request):
     p = re.compile(r'(python-marker\d{6}).exe')
+    mac = re.compile(r'(python-marker\d{6})')
 
     filename = 'python-marker'
     for arg in sys.argv:
         match = p.search(arg)
         if match:
             filename = match.group(1)
+    if filename == 'python-marker':
+        for arg in sys.argv:
+            match = mac.search(arg)
+            if match:
+                filename = match.group(1)
 
     response = HttpResponse(content_type='text/plain')
     response['Content-Disposition'] = f'attachment; filename={filename}.txt'
