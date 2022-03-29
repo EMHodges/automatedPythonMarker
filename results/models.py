@@ -37,7 +37,7 @@ class Result(models.Model):
     test_name = models.TextField()
     test_result = models.CharField(max_length=2, choices=ResultsEnums.choices, default=ResultsEnums.SUCCESS)
     test_feedback = models.TextField()
-    mark = models.IntegerField()
+    mark = models.FloatField()
     objects = ResultManager()
 
     def update_test_result(self, result: ResultsEnums, feedback):

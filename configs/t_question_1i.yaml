@@ -19,6 +19,6 @@ in seconds as a <b>float</b>. The function should accept the following <b>str</b
     example <b>'01:62.500'</b> should raise an exception.
   </li>
 </ul>"
-max_mark: 12
+max_mark: 15
 part_name: Time Conversion
 method_name: time_to_seconds

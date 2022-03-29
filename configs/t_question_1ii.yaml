@@ -65,6 +65,6 @@ is negative, the points must be rounded to 0.
 The function must raise a <b>ValueError</b> if the time format does not follow the format given in part i. It
 should also raise a <b>ValueError</b> if the tuple does not contain exactly 3 float values.
 "
-max_mark: 16
+max_mark: 15
 part_name: Event's Score
 method_name: track_points

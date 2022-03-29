@@ -38,6 +38,6 @@ for example, given the record: <i>'Jessica ENNIS-HILL, 22.830, 12.540, 02:08:650
 the returned value should be:   <i>('Jessica ENNIS-HILL', 1096, 1195, 984, 3275)</i>
 
 "
-max_mark: 12
+max_mark: 20
 part_name: Athlete's score
 method_name: compute_score
