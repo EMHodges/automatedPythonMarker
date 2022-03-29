@@ -60,7 +60,7 @@
     to save your answer before working on another part</div>
 {% for ob, for in form.items %}
     {%  if form|is_composite_question %}
-        <h2>{{ ob.part|get_roman_numeral }}) {{ ob.part_name }}</h2>
+        <h2>{{ ob.part|get_roman_numeral }}) {{ ob.part_name }} [{{ ob.max_mark }} Marks]</h2>
     {% endif %}
     {% include "question/question_update.html" with object=ob fo=for %}
     {% include "static_lint/static_lint_detail_view.html" with object=static_errors|get_item:ob %}
