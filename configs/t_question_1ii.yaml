@@ -61,9 +61,14 @@ is negative, the points must be rounded to 0.
   	a time of 255 seconds (i.e. 04:15.000) in the 800 metres corresponds to 0 points  (not a negative value).
   </li>
 </ul>
-
+<div>
 The function must raise a <b>ValueError</b> if the time format does not follow the format given in part i. It
 should also raise a <b>ValueError</b> if the tuple does not contain exactly 3 float values.
+</div>
+<br>
+<div>
+<i>Note - you may use the <b>time_to_seconds(time)</b> function even if your answer to part i was incorrect</i>
+</div>
 "
 max_mark: 15
 part_name: Event's Score

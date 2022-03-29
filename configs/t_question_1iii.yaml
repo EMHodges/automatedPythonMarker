@@ -35,8 +35,14 @@ from the Table i part ii.
 for example, given the record: <i>'Jessica ENNIS-HILL, 22.830, 12.540, 02:08:650'</i>
 <br>
 </div>
+<div>
 the returned value should be:   <i>('Jessica ENNIS-HILL', 1096, 1195, 984, 3275)</i>
-
+</div>
+<br>
+<div>
+<i>Note - you may use the <b>time_to_seconds(time)</b> & <b>track_points(time, event_parameters)</b> functions even if
+your answers to part i and/or part ii was incorrect</i>
+</div>
 "
 max_mark: 20
 part_name: Athlete's score
