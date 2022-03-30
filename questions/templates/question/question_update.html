@@ -3,22 +3,11 @@
 
 {% block content %}
 
-
-<form method='POST' id="your_form"> {% csrf_token %}
-    <script>
-       $('input').change(function(){$('form').submit()});
-        function validate_then_submit() {
-            var valid = false;
-            //validate form here
-            document.forms['your_form'].submit();
-        }
-    </script>
-
-    <p>{{ object.description | linebreaks }}</p>
+<form method='POST' class="lll"> {% csrf_token %}
+    <p>{{ object.description | safe }}</p>
     {{ fo.as_p }}
-    <input type='submit' value="Save" id="search_field"/>
+    <input type="submit" value="Run Tests & Save"/>
+
 </form>
-
-
 
 {% endblock %}

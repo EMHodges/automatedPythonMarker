@@ -14,12 +14,10 @@ def setup_test(max_mark):
         @functools.wraps(func)
         def decorated(*args, **kwargs):
             test_case: QuestionsTestCase = args[0]
-            print('in decorated')
             question = QuestionComposite.objects.get(number=test_case.get_question_number())
             sub_question = SubQuestionComposite.object.get(question=question, part=test_case._get_question_part())
             submission_number = Submission.object.get_last_submission_number(sub_question)
             submission = Submission.object.get(sub_question=sub_question, submission_number=submission_number)
-
             Result.objects.reset_mark(question_number=test_case.get_question_number(),
                                       question_part=test_case._get_question_part(),
                                       submission=submission,

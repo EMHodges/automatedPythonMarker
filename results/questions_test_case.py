@@ -11,7 +11,6 @@ class QuestionsTestCase(unittest.TestCase):
 
     def __init__(self, methodName='runTest'):
         super(QuestionsTestCase, self).__init__(methodName)
-        print('making test case')
         self._mark = 0
         self.methodName = self._testMethodName
         self._questionNumber = self._get_question_number()
@@ -49,6 +48,10 @@ class QuestionsTestCase(unittest.TestCase):
 
     def expectRaises(self,expected_exception, msg, *args, **kwargs):
         with self.subTest(msg=msg):
+            super().assertRaises(expected_exception, *args, **kwargs)
+
+    def expectRaisess(self,expected_exception, *args, **kwargs):
+        with self.subTest(msg=args):
             super().assertRaises(expected_exception, *args, **kwargs)
 
     def expectWarns(self, expected_warning, msg, *args, **kwargs):

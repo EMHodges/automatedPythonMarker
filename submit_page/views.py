@@ -9,7 +9,7 @@ from django.http import HttpResponse
 # Create your views here.
 from django.shortcuts import render
 
-from questions.models import QuestionComposite, SubQuestionComposite
+from questions.models import QuestionComposite, SubQuestionComposite, TimeStarted
 from results.models import Result, Subtest
 from static_lint.models import StaticLint
 from submission.models import Submission
@@ -59,18 +59,19 @@ def submit_views(request):
 
 
 def submit_view(request):
-    p = re.compile(r'(python-marker\d*).exe')
-    z = p.search(sys.argv[0])
-    print(request)
-    print(request.POST.dict())
+    p = re.compile(r'(python-marker\d{6}).exe')
+    mac = re.compile(r'(python-marker\d{6})')
 
-    print('yops')
-    print(z)
-
-    if z:
-        filename = z.group(1)
-    else:
-        filename = 'pythonMarker'
+    filename = 'python-marker'
+    for arg in sys.argv:
+        match = p.search(arg)
+        if match:
+            filename = match.group(1)
+    if filename == 'python-marker':
+        for arg in sys.argv:
+            match = mac.search(arg)
+            if match:
+                filename = match.group(1)
 
     response = HttpResponse(content_type='text/plain')
     response['Content-Disposition'] = f'attachment; filename={filename}.txt'
@@ -78,6 +79,7 @@ def submit_view(request):
     run_all_tests()
 
     lines = []
+    t = TimeStarted.objects.all()
 
     questions = QuestionComposite.objects.all()
     sub_questions = SubQuestionComposite.object.all()
@@ -86,6 +88,7 @@ def submit_view(request):
     results = Result.objects.all()
     sub_tests = Subtest.objects.all()
 
+    lines.append(serialize(t))
     lines.append(serialize(questions))
     lines.append(serialize(sub_questions))
     lines.append(serialize(submissions))

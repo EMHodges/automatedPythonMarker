@@ -22,7 +22,7 @@ def run_tests(answer, question_number):
 def run_testing(answer, question_number, question_part, submission):
     construct_test_file(answer, question_number, question_part)
    # submission = create_submission(question_number, question_part)
-    linting_answer(question_number, submission)
+    linting_answer(question_number, submission, question_part)
     run_tests_for_question_part(question_number, question_part)
 
 
@@ -37,7 +37,6 @@ def create_submission(question_number, question_part):
 
 def construct_test_file(answer, question_number, question_part):
     model_answers = MODEL_ANSWERS.get(question_number)
-
     shutil.rmtree(TMP_FILE, ignore_errors=True)
     with open(TMP_FILE, 'w') as tmp_file:
         for key, value in model_answers.items():

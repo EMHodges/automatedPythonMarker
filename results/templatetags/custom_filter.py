@@ -13,7 +13,11 @@ def get_item(dictionary, key):
 
 @register.filter
 def get_failing_subtest_params(result: Result):
-    return result.get_failing_subtest_params()
+    string = "<ul>"
+    for i in result.get_failing_subtest_params():
+        string += f"<li>{i}</li>"
+    string += "</ul>"
+    return string
 
 
 @register.filter
@@ -42,3 +46,8 @@ def get_total_marks(dictionary):
 @register.filter
 def get_total_available_marks(dictionary):
     return sum([sub_question.max_mark for sub_question in list(dictionary.keys())])
+
+
+@register.filter
+def replace_underscores(string):
+    return string.replace('_', ' ')

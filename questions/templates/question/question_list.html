@@ -1,14 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<h1>Questions</h1>
+<h1>Automated Python Marker</h1>
+<p>Hello thank you for participating</p>
+    <p>Please:</p>
+    <ul>
+        <li>
+            Spend at most <b>30 minutes</b> answering the question
+        </li>
+        <li>
+            Upload your answers to the website when you are finished (details are at the bottom of the next page)
+        </li>
+        <li>
+            Remember I am testing the tool, not you! So please submit your answers, they will be anonymous and gratefully received
+        </li>
+    </ul>
 
 {% for instance in object_list %}
-    <p><a href='{{ instance.get_absolute_url }}'>Question {{ instance.number }}</a></p>
+    <p><a href='{{ instance.get_absolute_url }}'>Click here to get started!</a></p>
 {% endfor %}
 
-<h1>Results</h1>
-<a href="{% url 'results:results-page-view' %}">Results</a>
-<a href="{% url 'submit_page:submit-page' %}">Submit</a>
 {% endblock %}
