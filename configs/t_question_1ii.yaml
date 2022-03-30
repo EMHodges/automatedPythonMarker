@@ -67,7 +67,7 @@ should also raise a <b>ValueError</b> if the tuple does not contain exactly 3 fl
 </div>
 <br>
 <div>
-<i>Note - you may use the <b>time_to_seconds(time)</b> function even if your answer to part i was incorrect</i>
+<i>Note - you may use the <b>time_to_seconds(time)</b> function even if your answer to part i are incorrect</i>
 </div>
 "
 max_mark: 15
