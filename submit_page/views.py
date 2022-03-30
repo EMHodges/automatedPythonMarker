@@ -1,7 +1,9 @@
 import re
 import sys
+from io import StringIO
 
 from django.core import serializers
+from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 
 # Create your views here.
@@ -74,6 +76,8 @@ def submit_view(request):
     response = HttpResponse(content_type='text/plain')
     response['Content-Disposition'] = f'attachment; filename={filename}.txt'
 
+    run_all_tests()
+
     lines = []
     t = TimeStarted.objects.all()
 
@@ -98,3 +102,22 @@ def submit_view(request):
 
 def serialize(object):
     return serializers.serialize("yaml", object)
+
+def run_all_tests():
+    pass
+
+def fake_post_request(method=None, fake_user=False):
+    '''Returns a fake `WSGIRequest` object that can be passed to viewss.
+    If `fake_user` is `True`, we attach a random staff member to the request.
+    Even if not set, you can still do this manually by setting the `user`
+    attribute on the returned object.
+    The `GET` and `POST` `QueryDict` objects are mutable::
+        req = fake_request(mutable=True)
+        req.GET['q'] = 'abc'
+        my_view(req)
+    '''
+    request = WSGIRequest({
+        'REQUEST_METHOD': method or 'GET',
+        'wsgi.input': StringIO(),
+    })
+    return request
