@@ -19,11 +19,6 @@ class QuestionComposite(models.Model):
         return reverse("questions:question-update", kwargs={"number": self.number})
 
 
-class TimeStarted(models.Model):
-    time_started = models.DateTimeField(auto_now=True)
-    objects = SubQuestionCompositeManager()
-
-
 class SubQuestionComposite(models.Model):
     question = models.ForeignKey(QuestionComposite, on_delete=models.CASCADE)
     part = models.IntegerField()

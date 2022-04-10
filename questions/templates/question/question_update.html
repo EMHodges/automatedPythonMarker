@@ -2,12 +2,9 @@
 {% load custom_filter %}
 
 {% block content %}
-
-<form method='POST' class="lll"> {% csrf_token %}
-    <p>{{ object.description | safe }}</p>
-    {{ form.as_p }}
-    <input type="submit" value="Run Tests & Save"/>
-
-</form>
-
+    <form method='POST' class="lll"> {% csrf_token %}
+        <p>{{ object.description | safe }}</p>
+        {{ form.as_p }}
+        <input type="submit" value="Run Tests & Save"/>
+    </form>
 {% endblock %}

@@ -22,19 +22,19 @@ class TestQuestion1(QuestionsTestCase):
     @setup_test(max_mark=1)
     def test_invalid_minutes_format(self):
         from static_lint.code_to_lint import time_to_seconds
-        self.expectRaisess(ValueError, time_to_seconds, '4:00.000')
+        self.expectRaises(ValueError, time_to_seconds, '4:00.000')
 
     @setup_test(max_mark=1)
     def test_invalid_seconds_format(self):
         from static_lint.code_to_lint import time_to_seconds
-        self.expectRaisess(ValueError, time_to_seconds, '04:1.000')
+        self.expectRaises(ValueError, time_to_seconds, '04:1.000')
 
     @setup_test(max_mark=1)
     def test_invalid_seconds2_format(self):
         from static_lint.code_to_lint import time_to_seconds
-        self.expectRaisess(ValueError, time_to_seconds, '01:61.000')
+        self.expectRaises(ValueError, time_to_seconds, '01:61.000')
 
     @setup_test(max_mark=1)
     def test_invalid_fractionseconds_format(self):
         from static_lint.code_to_lint import time_to_seconds
-        self.expectRaisess(ValueError, time_to_seconds, '04:01.5')
+        self.expectRaises(ValueError, time_to_seconds, '04:01.5')

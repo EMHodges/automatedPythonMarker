@@ -13,7 +13,7 @@ from submission.models import Submission
 TMP_FILE = resource_path(os.path.join('static_lint', 'code_to_lint.py'))
 
 
-def run_testing(answer, question_number, question_part, submission):
+def run_tests(answer, question_number, question_part, submission):
     construct_test_file(answer, question_number, question_part)
     lint_answer(question_number, submission, question_part)
     run_tests_for_question_part(question_number, question_part)
@@ -28,17 +28,17 @@ def create_submission(question_number, question_part):
     return Submission.object.get_last_submission(sub_question)
 
 
-def construct_test_file(answer, question_number, question_part):
+def construct_test_file(answer, question_number, question_part_submitted):
     model_answers = MODEL_ANSWERS.get(question_number)
     shutil.rmtree(TMP_FILE, ignore_errors=True)
     with open(TMP_FILE, 'w') as tmp_file:
-        for key, value in model_answers.items():
-            if key == question_part:
+        for question_part, model_answer_functions in model_answers.items():
+            if question_part == question_part_submitted:
                 tmp_file.write(answer + '\n \n')
                 break
             else:
-                for i in value:
-                    tmp_file.write(i + '\n \n')
+                for model_answer_function in model_answer_functions:
+                    tmp_file.write(model_answer_function + '\n \n')
 
 
 def run_tests_for_question_part(question_number, question_part):
