@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from static_lint.models import StaticLint
 from submission.models import Submission
 from submission.forms import QuestionForm
-from .models import Question, QuestionComposite, SubQuestionComposite, TimeStarted
+from .models import QuestionComposite, SubQuestionComposite, TimeStarted
 from results.main import run_testing, create_submission
 from results.models import Result, Subtest
 from django.core import serializers
@@ -15,8 +15,6 @@ from django.core import serializers
 
 # Create your views here.
 def question_update_views(request, number):
-    print(request)
-    print(type(request))
     obj = get_object_or_404(QuestionComposite, number=number)
     sub_objs = obj.subquestioncomposite_set.all()
 
@@ -32,12 +30,8 @@ def question_update_views(request, number):
 
     if request.method == "POST":
         request_dict = request.POST.dict()
-        print(request.POST.dict())
         for key, value in request_dict.items():
             answer_key = re.match(r'\d+-answer', key)
-            print('POSTED')
-            print(request.POST.get(key))
-            print('AFTER')
             if answer_key:
                 first_letter = int(key[0])
 
@@ -47,9 +41,6 @@ def question_update_views(request, number):
                         # sub_question = SubQuestionComposite.object.get(part=first_letter)
                         form = QuestionForm(request.POST or None, instance=submission, prefix=str(first_letter))
                         form_answer = request.POST.get(key)
-                        print('form answer')
-                        print(request.POST)
-                        print(form_answer)
                         if form.is_valid():
                             form.save()
                             x = get_object_or_404(QuestionComposite, number=number).subquestioncomposite_set.get(
