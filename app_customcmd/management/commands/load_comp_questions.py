@@ -5,7 +5,7 @@ from typing import Dict, List
 import yaml
 
 from django.core.management.base import BaseCommand
-from questions.models import Question, QuestionComposite, SubQuestionComposite
+from questions.models import QuestionComposite, SubQuestionComposite
 from collections import defaultdict
 
 from results.models import Result
@@ -56,7 +56,7 @@ class Command(BaseCommand):
             x = self._load_part_question(file)
             SubQuestionComposite.save(x)
 
-    def _load_question(self, file: str) -> Question:
+    def _load_question(self, file: str) -> QuestionComposite:
         fixture_file = os.path.join("configs", file)
         with open(fixture_file) as stream:
             try:
@@ -95,12 +95,6 @@ class Command(BaseCommand):
     @staticmethod
     def _get_comp_files(config_files):
         return [file for file in config_files if re.match(r'question_\d+\w+.yaml', file)]
-
-    @staticmethod
-    def _set_defaults(question: Question) -> None:
-        question.pk = question.number
-        question.mark = 0
-        question.answer = None
 
     @staticmethod
     def _validate_question_numbers(question_numbers: Dict[int, List[str]]) -> None or DuplicateQuestionNumberException:

@@ -57,13 +57,13 @@
     <div>.</div>
     <div><b>Note:</b> click the 'Run Tests & Save' buttons to save your work and see how you are doing - do click this
     to save your answer before working on another part</div>
-{% for ob, for in form.items %}
+{% for obj, form_instance in form.items %}
     {%  if form|is_composite_question %}
-        <h2>{{ ob.part|get_roman_numeral }}) {{ ob.part_name }} [{{ ob.max_mark }} Marks]</h2>
+        <h2>{{ obj.part|get_roman_numeral }}) {{ obj.part_name }} [{{ obj.max_mark }} Marks]</h2>
     {% endif %}
-    {% include "question/question_update.html" with object=ob fo=for %}
-    {% include "static_lint/static_lint_detail_view.html" with object=static_errors|get_item:ob %}
-    {% include "results_view.html" with results=test_results|get_item:ob marks_available=ob.max_mark %}
+    {% include "question/question_update.html" with object=obj form=form_instance %}
+    {% include "static_lint/static_lint_detail_view.html" with object=static_errors|get_item:obj %}
+    {% include "results_view.html" with results=test_results|get_item:obj marks_available=obj.max_mark %}
 {% endfor %}
     <h3>Total marks</h3>
     {{ test_results|get_total_marks }} / {{ test_results|get_total_available_marks }}
