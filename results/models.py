@@ -41,7 +41,7 @@ class Result(models.Model):
     objects = ResultManager()
 
     def update_test_result(self, result: ResultsEnums, feedback):
-        self.test_result = ResultsEnums.get_yo(self.test_result, result)
+        self.test_result = ResultsEnums.get_updated_enum(self.test_result, result)
         self.test_feedback = feedback
         self.save(update_fields=['test_result', 'test_feedback'])
 

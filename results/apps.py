@@ -38,11 +38,6 @@ class ResultsConfig(AppConfig):
                     exists[sub_question.part] = QuestionsTestRunner(question.number, sub_question.part)
                 else:
                     QUESTION_RUNNERS[question.number] = {sub_question.part: QuestionsTestRunner(question.number, sub_question.part)}
-
-    #     number_of_questions = Question.objects.values_list('number', flat=True)
-    #     for question_number in number_of_questions:
-    #        sub_questions = Question.objects.get()
-    #        QUESTION_RUNNERS[question_number] = QuestionsTestRunner(question_number)
             self._add_test_file_paths(question.number)
         self._extract_model_functions(1)
 

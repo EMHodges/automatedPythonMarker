@@ -1,6 +1,6 @@
-from results.new_file import RegisterCompositeTestClass
+from results.register_composite_test_decorator import RegisterCompositeTestClass
 from results.questions_test_case import QuestionsTestCase
-from results.utils import setup_test
+from results.setup_test_decorator import setup_test
 
 POINT_PARAMETERS = {"200m": (4.99087, 42.5, 1.81),
                     "800m": (0.11193, 254.0, 1.88),

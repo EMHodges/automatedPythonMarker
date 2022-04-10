@@ -15,7 +15,7 @@ class Command(BaseCommand):
         self._remove_generated_files()
 
         PyInstaller.__main__.run([
-            'automatedPythonMarker.spec',
+            'python-marker.spec',
             '-w',  # Creates a .app executable
             '--onefile',
             '--clean'

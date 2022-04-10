@@ -13,7 +13,6 @@ class Command(BaseCommand):
         path, dirs, submission_files = next(os.walk("data"))
         print(submission_files)
 
-
         for file in submission_files:
             fixture_file = os.path.join("data", file)
             print(fixture_file)

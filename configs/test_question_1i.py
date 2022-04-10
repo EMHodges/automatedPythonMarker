@@ -1,6 +1,6 @@
-from results.new_file import RegisterCompositeTestClass
+from results.register_composite_test_decorator import RegisterCompositeTestClass
 from results.questions_test_case import QuestionsTestCase
-from results.utils import setup_test
+from results.setup_test_decorator import setup_test
 
 
 @RegisterCompositeTestClass(question_number=1, question_part=1)

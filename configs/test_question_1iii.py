@@ -1,5 +1,5 @@
-from results.new_file import RegisterCompositeTestClass
-from results.utils import setup_test
+from results.register_composite_test_decorator import RegisterCompositeTestClass
+from results.setup_test_decorator import setup_test
 
 from results.questions_test_case import QuestionsTestCase
 
