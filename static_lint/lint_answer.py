@@ -1,7 +1,6 @@
 import json
 import os
 import re
-import shutil
 from io import StringIO
 from automatedPythonMarker.settings import resource_path
 from pylint.reporters.json_reporter import JSONReporter
@@ -14,24 +13,11 @@ TMP_FILE = resource_path(os.path.join('static_lint', 'code_to_lint.py'))
 LINT_RULES_FILE = os.path.join('static_lint', '.pylintrc')
 
 
-def lint_answer(answer, number):
-    write_answer_to_tmp_file(answer)
-    lint_errors = get_lint_errors()
-    formatted_lint_errors = format_lint_errors(lint_errors)
-    StaticLint.objects.update_or_create(question_number=number, defaults={'feedback': formatted_lint_errors})
-
-
-def linting_answer(number, submission, question_part):
+def lint_answer(number, submission, question_part):
     lint_errors = get_lint_errors()
     formatted_lint_errors = format_lint_errors(lint_errors, question_part)
     static_lint = StaticLint(question_number=number, submission=submission, feedback=formatted_lint_errors)
     static_lint.save()
-
-
-def write_answer_to_tmp_file(answer):
-    shutil.rmtree(TMP_FILE, ignore_errors=True)
-    with open(TMP_FILE, 'w') as tmp_file:
-        tmp_file.write(answer)
 
 
 def get_lint_errors():
