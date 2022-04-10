@@ -90,11 +90,11 @@ class Command(BaseCommand):
 
     @staticmethod
     def _get_question_files(config_files):
-        return [file for file in config_files if re.match(r't_question_\d+.yaml', file)]
+        return [file for file in config_files if re.match(r'question_\d+.yaml', file)]
 
     @staticmethod
     def _get_comp_files(config_files):
-        return [file for file in config_files if re.match(r't_question_\d+\w+.yaml', file)]
+        return [file for file in config_files if re.match(r'question_\d+\w+.yaml', file)]
 
     @staticmethod
     def _set_defaults(question: Question) -> None:

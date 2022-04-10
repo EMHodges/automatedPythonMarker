@@ -57,7 +57,7 @@ def write_answer_to_tmp_file(answer):
 def run_tests_for_question_part(question_number, question_part):
     loader = unittest.TestLoader()
     question_part_roman = roman.toRoman(question_part).lower()
-    suite = loader.discover('configs', pattern=f't_test_question_{question_number}{question_part_roman}.py')
+    suite = loader.discover('configs', pattern=f'test_question_{question_number}{question_part_roman}.py')
     question_runner = QUESTION_RUNNERS[question_number][question_part]
     question_runner.run(suite)
 

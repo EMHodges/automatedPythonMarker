@@ -52,8 +52,8 @@ class ResultsConfig(AppConfig):
         onlyfiles = [f for f in listdir(resource_path("configs")) if isfile(join(resource_path("configs"), f)) and f.startswith('t_test')]
 
         for i in onlyfiles:
-            if i.startswith(f't_test_question_{str(question_number)}'):
-                i = i.replace(f't_test_question_{str(question_number)}', '')
+            if i.startswith(f'test_question_{str(question_number)}'):
+                i = i.replace(f'test_question_{str(question_number)}', '')
                 j = i.replace('.py', '')
                 j = j.upper()
                 j = roman.fromRoman(j)
@@ -69,7 +69,7 @@ class ResultsConfig(AppConfig):
                     QUESTION_TEST_FILES[question_number] = {j: i}
 
     def _extract_model_functions(self, question_number):
-        source = open(resource_path(os.path.join('configs','t_model_answer_question_1.py'))).read()
+        source = open(resource_path(os.path.join('configs','model_answer_question_1.py'))).read()
         x = [node for node in ast.parse(source).body if isinstance(node, ast.FunctionDef)]
         for i in x:
             docstring = ast.get_docstring(i)
