@@ -38,42 +38,42 @@ class ResultsConfig(AppConfig):
                     exists[sub_question.part] = QuestionsTestRunner(question.number, sub_question.part)
                 else:
                     QUESTION_RUNNERS[question.number] = {sub_question.part: QuestionsTestRunner(question.number, sub_question.part)}
-
-    #     number_of_questions = Question.objects.values_list('number', flat=True)
-    #     for question_number in number_of_questions:
-    #        sub_questions = Question.objects.get()
-    #        QUESTION_RUNNERS[question_number] = QuestionsTestRunner(question_number)
             self._add_test_file_paths(question.number)
         self._extract_model_functions(1)
 
     def _add_test_file_paths(self, question_number):
         from automatedPythonMarker.settings import resource_path
 
-        onlyfiles = [f for f in listdir(resource_path("configs")) if isfile(join(resource_path("configs"), f)) and f.startswith('t_test')]
+        test_files = [test_file for test_file in listdir(resource_path("configs")) if
+                      isfile(join(resource_path("configs"), test_file)) and test_file.startswith('test_question_')]
 
-        for i in onlyfiles:
-            if i.startswith(f't_test_question_{str(question_number)}'):
-                i = i.replace(f't_test_question_{str(question_number)}', '')
-                j = i.replace('.py', '')
-                j = j.upper()
-                j = roman.fromRoman(j)
+        for test_file in test_files:
+            if test_file.startswith(f'test_question_{str(question_number)}'):
+                question_part = self._extract_question_part_from_file_name(test_file, question_number)
                 keys = []
-                i = os.path.join("configs", i)
+                test_file = os.path.join("configs", test_file)
                 for key, value in QUESTION_TEST_FILES.items():
                     keys.append(key)
 
                 if question_number in keys:
                     exists = QUESTION_TEST_FILES[question_number]
-                    exists[j] = i
+                    exists[question_part] = test_file
                 else:
-                    QUESTION_TEST_FILES[question_number] = {j: i}
+                    QUESTION_TEST_FILES[question_number] = {question_part: test_file}
 
-    def _extract_model_functions(self, question_number):
-        source = open(resource_path(os.path.join('configs','t_model_answer_question_1.py'))).read()
-        x = [node for node in ast.parse(source).body if isinstance(node, ast.FunctionDef)]
-        for i in x:
-            docstring = ast.get_docstring(i)
-            c = int(re.findall(r'\d+', docstring)[0])
+    @staticmethod
+    def _extract_question_part_from_file_name(test_file_name, question_number) -> int:
+        question_part = test_file_name.replace(f'test_question_{str(question_number)}', '')\
+                                      .replace('.py', '')
+        return roman.fromRoman(question_part.upper())
+
+    @staticmethod
+    def _extract_model_functions(question_number):
+        source = open(resource_path(os.path.join('configs', f'model_answer_question_{question_number}.py'))).read()
+        functions = [node for node in ast.parse(source).body if isinstance(node, ast.FunctionDef)]
+        for function in functions:
+            docstring = ast.get_docstring(function)
+            question_part = int(re.findall(r'\d+', docstring)[0])
             keys = []
             for key, value in MODEL_ANSWERS.items():
                 keys.append(key)
@@ -82,12 +82,12 @@ class ResultsConfig(AppConfig):
                 keyss = []
                 for key, value in exists.items():
                     keyss.append(key)
-                if c in keyss:
-                    exists[c].append(ast.get_source_segment(source, i))
+                if question_part in keyss:
+                    exists[question_part].append(ast.get_source_segment(source, function))
                 else:
-                    exists[c] = [ast.get_source_segment(source, i)]
+                    exists[question_part] = [ast.get_source_segment(source, function)]
             else:
-                x = {c: [ast.get_source_segment(source, i)]}
-                MODEL_ANSWERS[question_number] = x
+                functions = {question_part: [ast.get_source_segment(source, function)]}
+                MODEL_ANSWERS[question_number] = functions
 
 

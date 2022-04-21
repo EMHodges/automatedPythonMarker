@@ -1,5 +1,5 @@
-from results.new_file import RegisterCompositeTestClass
-from results.utils import setup_test
+from results.register_composite_test_decorator import RegisterCompositeTestClass
+from results.setup_test_decorator import setup_test
 
 from results.questions_test_case import QuestionsTestCase
 
@@ -35,9 +35,9 @@ class TestQuestion3(QuestionsTestCase):
     @setup_test(max_mark=1)
     def test_too_few_entries(self):
         from static_lint.code_to_lint import compute_score
-        self.expectRaisess(ValueError, compute_score, 'Liliane Blotty, 42.501, 27.480')
+        self.expectRaises(ValueError, compute_score, 'Liliane Blotty, 42.501, 27.480')
 
     @setup_test(max_mark=1)
     def test_too_many_entries(self):
         from static_lint.code_to_lint import compute_score
-        self.expectRaisess(ValueError, compute_score, 'Liliane Blotty, 42.501, 27.480, 04:14.001, 01:00.500')
+        self.expectRaises(ValueError, compute_score, 'Liliane Blotty, 42.501, 27.480, 04:14.001, 01:00.500')

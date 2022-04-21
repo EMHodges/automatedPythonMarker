@@ -2,7 +2,7 @@ from django import forms
 from .models import Submission
 
 
-class QuestionForm(forms.ModelForm):
+class SubmissionForm(forms.ModelForm):
     answer = forms.CharField(
         label='',
         required=True,

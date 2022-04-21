@@ -2,16 +2,16 @@
 {% load custom_filter %}
 
 {% block content %}
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript">
-  $(function(){
-    $("#hello_button").click(function(e){
-        doWork()
-        e.preventDefault()
-    });
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        $("#hello_button").click(function(e){
+            doWork()
+            e.preventDefault()
+        });
 
-    function doWork() {
-                $.ajax({ // create an AJAX call...
+        function doWork() {
+            $.ajax({ // create an AJAX call...
                 data: {'1-answer': $('textarea[name="1-answer"]').val()},
                 headers:{"X-CSRFToken": '{{ csrf_token }}'},// get the form data
                 type: 'POST', // GET or POST
@@ -20,8 +20,8 @@
                 success: function (response) { // on success..// update the DIV
                 },
             });
-        sleep(300)
-        $.ajax({ // create an AJAX call...
+            sleep(300)
+            $.ajax({ // create an AJAX call...
                 data: {'2-answer': $('textarea[name="2-answer"]').val()},
                 headers:{"X-CSRFToken": '{{ csrf_token }}'},// get the form data
                 type: 'POST', // GET or POST
@@ -30,8 +30,8 @@
                 success: function (response) { // on success..
                 },
             });
-        sleep(300)
-        $.ajax({ // create an AJAX call...
+            sleep(300)
+            $.ajax({ // create an AJAX call...
                 data: {'3-answer': $('textarea[name="3-answer"]').val()},
                 headers:{"X-CSRFToken": '{{ csrf_token }}'},// get the form data
                 type: 'POST', // GET or POST
@@ -40,51 +40,53 @@
                 success: function (response) { // on success..
                 },
             });
-    }
+        }
 
-    function sleep(milliseconds) {
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
-}
+      function sleep(milliseconds) {
+          const date = Date.now();
+          let currentDate = null;
+          do {
+            currentDate = Date.now();
+          } while (currentDate - date < milliseconds);
+      }
+     });
+    </script>
 
-
- });
-</script>
-<h1>Question {{ question.number }}</h1>
-{{ question.description }}
+    <h1>Question {{ question.number }}</h1>
+    {{ question.description }}
     <div>.</div>
-    <div><b>Note:</b> click the 'Run Tests & Save' buttons to save your work and see how you are doing - do click this
-    to save your answer before working on another part</div>
-{% for ob, for in form.items %}
-    {%  if form|is_composite_question %}
-        <h2>{{ ob.part|get_roman_numeral }}) {{ ob.part_name }} [{{ ob.max_mark }} Marks]</h2>
-    {% endif %}
-    {% include "question/question_update.html" with object=ob fo=for %}
-    {% include "static_lint/static_lint_detail_view.html" with object=static_errors|get_item:ob %}
-    {% include "results_for_question.html" with results=test_results|get_item:ob marks_available=ob.max_mark %}
-{% endfor %}
+    <div>
+        <b>Note:</b> click the 'Run Tests & Save' buttons to save your work and see how you are doing - do click this
+        to save your answer before working on another part
+    </div>
+    {% for obj, form_instance in form.items %}
+        {%  if form|is_composite_question %}
+            <h2>{{ obj.part|get_roman_numeral }}) {{ obj.part_name }} [{{ obj.max_mark }} Marks]</h2>
+        {% endif %}
+        {% include "question/question_update.html" with object=obj form=form_instance %}
+        {% include "static_lint/static_lint_detail_view.html" with object=static_errors|get_item:obj %}
+        {% include "results_view.html" with results=test_results|get_item:obj marks_available=obj.max_mark %}
+    {% endfor %}
+
     <h3>Total marks</h3>
     {{ test_results|get_total_marks }} / {{ test_results|get_total_available_marks }}
-{% include "question/navigate_questions.html" with next_question=next_question previous_question=previous_question %}
 
     <h1>Finished?</h1>
-<p>To submit your answers please:</p>
+    <p>To submit your answers please:</p>
     <ol>
-    <li>
-        Click this button to save your answers -> <button id="hello_button">Save your answers</button>
-    </li>
+        <li>
+            Click this button to save your answers -> <button id="hello_button">Save your answers</button>
+        </li>
         <li>
             Please wait for 5 seconds for your answers to be saved
         </li>
-    <li>
-        Click the link to generate a download file -> <a id='submit_page' href="{% url 'submit_page:submit-view' %}">Click here to download file</a>
-    </li>
-    <li>
-        Upload the file to the website -> <a href="https://emhodges.github.io/markerWebsite/upload">Click here to upload file</a>
-    </li>
+        <li>
+            Click the link to generate a download file -> <a id='submit_page' href="{% url 'questions:question-submit' %}">Click here to download file</a>
+        </li>
+        <li>
+            Upload the file to the website -> <a href="https://emhodges.github.io/markerWebsite/upload">
+            Click here to upload file</a>
+        </li>
     </ol>
     <p>Thank you!</p>
 {% endblock %}

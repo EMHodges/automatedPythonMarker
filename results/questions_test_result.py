@@ -27,8 +27,8 @@ class QuestionsTestResult(unittest.TestResult):
 def addSubTestResult(test: QuestionsTestCase, subtest, feedback, result: ResultsEnums):
     question = QuestionComposite.objects.get(number=test.get_question_number())
     sub_question = SubQuestionComposite.object.get(question=question, part=test._get_question_part())
-    submission_number = Submission.object.get_last_submission_number(sub_question)
-    submission = Submission.object.get(sub_question=sub_question, submission_number=submission_number)
+    submission_number = Submission.objects.get_last_submission_number(sub_question)
+    submission = Submission.objects.get(sub_question=sub_question, submission_number=submission_number)
 
     r = Result.objects.get(question_number=test.get_question_number(),
                            question_part=test._get_question_part(),

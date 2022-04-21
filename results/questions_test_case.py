@@ -1,7 +1,7 @@
 import importlib
 import unittest
 
-from results.new_file import RegisterCompositeTestClass
+from results.register_composite_test_decorator import RegisterCompositeTestClass
 
 
 class QuestionsTestCase(unittest.TestCase):
@@ -46,11 +46,7 @@ class QuestionsTestCase(unittest.TestCase):
         with self.subTest(msg=msg):
             super().assertFalse(expr, msg=msg)
 
-    def expectRaises(self,expected_exception, msg, *args, **kwargs):
-        with self.subTest(msg=msg):
-            super().assertRaises(expected_exception, *args, **kwargs)
-
-    def expectRaisess(self,expected_exception, *args, **kwargs):
+    def expectRaises(self, expected_exception, *args, **kwargs):
         with self.subTest(msg=args):
             super().assertRaises(expected_exception, *args, **kwargs)
 
@@ -58,8 +54,6 @@ class QuestionsTestCase(unittest.TestCase):
         with self.subTest(msg=msg):
             super().assertWarns(expected_warning, *args, **kwargs)
 
-    # ToDo override all of these methods add message which includes the input of the
-    # function so that this can be outputted, maybe add mark here?
     def expectEqual(self, first, second, msg):
         with self.subTest(msg=msg):
             super().assertEqual(first, second, msg)

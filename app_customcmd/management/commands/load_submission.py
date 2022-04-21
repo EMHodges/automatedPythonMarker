@@ -5,7 +5,7 @@ from typing import Dict, List
 import yaml
 
 from django.core.management.base import BaseCommand
-from questions.models import Question, QuestionComposite, SubQuestionComposite
+from questions.models import QuestionComposite, SubQuestionComposite
 from collections import defaultdict
 
 from results.models import Result

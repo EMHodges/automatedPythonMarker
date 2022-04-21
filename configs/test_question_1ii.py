@@ -1,6 +1,6 @@
-from results.new_file import RegisterCompositeTestClass
+from results.register_composite_test_decorator import RegisterCompositeTestClass
 from results.questions_test_case import QuestionsTestCase
-from results.utils import setup_test
+from results.setup_test_decorator import setup_test
 
 POINT_PARAMETERS = {"200m": (4.99087, 42.5, 1.81),
                     "800m": (0.11193, 254.0, 1.88),
@@ -30,29 +30,29 @@ class TestQuestion2(QuestionsTestCase):
     @setup_test(max_mark=1)
     def test_invalid_format_too_few_parameters(self):
         from static_lint.code_to_lint import track_points
-        self.expectRaisess(ValueError, track_points, '4:00.000', (0.11193, 254.0))
+        self.expectRaises(ValueError, track_points, '4:00.000', (0.11193, 254.0))
 
     @setup_test(max_mark=1)
     def test_invalid_format_too_many_parameters(self):
         from static_lint.code_to_lint import track_points
-        self.expectRaisess(ValueError, track_points, '4:00.000', (0.11193, 254.0, 1.267, 1.835))
+        self.expectRaises(ValueError, track_points, '4:00.000', (0.11193, 254.0, 1.267, 1.835))
 
     @setup_test(max_mark=0.5)
     def test_invalid_format_minutes(self):
         from static_lint.code_to_lint import track_points
-        self.expectRaisess(ValueError, track_points, '4:00.000', POINT_PARAMETERS["800m"])
+        self.expectRaises(ValueError, track_points, '4:00.000', POINT_PARAMETERS["800m"])
 
     @setup_test(max_mark=0.5)
     def test_invalid_format_seconds(self):
         from static_lint.code_to_lint import track_points
-        self.expectRaisess(ValueError, track_points, '04:1.000', POINT_PARAMETERS["800m"])
+        self.expectRaises(ValueError, track_points, '04:1.000', POINT_PARAMETERS["800m"])
 
     @setup_test(max_mark=0.5)
     def test_invalid_format_seconds2(self):
         from static_lint.code_to_lint import track_points
-        self.expectRaisess(ValueError, track_points, '01:61.000', POINT_PARAMETERS["800m"])
+        self.expectRaises(ValueError, track_points, '01:61.000', POINT_PARAMETERS["800m"])
 
     @setup_test(max_mark=0.5)
     def test_invalid_format_fractionseconds(self):
         from static_lint.code_to_lint import track_points
-        self.expectRaisess(ValueError, track_points, '04:01.5', POINT_PARAMETERS["800m"])
+        self.expectRaises(ValueError, track_points, '04:01.5', POINT_PARAMETERS["800m"])

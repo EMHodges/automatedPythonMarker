@@ -20,7 +20,5 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('questions/', include('questions.urls')),
-    path('results/', include('results.urls')),
-    path('submit/', include('submit_page.urls')),
     path('', RedirectView.as_view(url='/questions/', permanent=True)),
 ]

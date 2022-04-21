@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'app_customcmd',
     'questions',
     'static_lint',
-    'submit_page',
     'submission',
     'results',
     'results.templatetags',
