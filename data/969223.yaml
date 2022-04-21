@@ -1,0 +1,956 @@
+- model: questions.timestarted
+  pk: 3
+  fields:
+    time_started: 2022-04-01 14:05:14.000461+00:00
+- model: questions.questioncomposite
+  pk: 8
+  fields:
+    number: 1
+    description: The scenario for this question is about computing scores in a heptathlon
+      event. For simplicity we are focusing only on the track events, the 200 metres,
+      the 800 metres, and the 110 metres hurdles.
+- model: questions.subquestioncomposite
+  pk: 20
+  fields:
+    question: 8
+    part: 1
+    description: 'Write a function <b>time_to_seconds(time)</b> which takes a <b>str</b>
+      as a parameter and returns a time in seconds as a <b>float</b>. The function
+      should accept the following <b>str</b> format for the parameter <b>time</b>:
+      <ul> <li> <b>mm:ss.fff</b> where two digits are always used for minutes (m),
+      seconds (s), and three digits for the fraction of a second (f). For example
+      <b>02:05.512</b> represents 2 minutes and 5 seconds and 512 milliseconds. The
+      returned value should be 125.512. </li> <li> <b>ss.fff</b> where two digits
+      are always used for seconds (s) and  three digits for the fraction of a second
+      (f). For example <b>01.250</b> represents a second and 250 milliseconds. This
+      format is used when the time is less than a minute. The returned value should
+      be 1.25. </li> <li>Any other format must raise a <b>ValueError</b> exception.</li>
+      <li> The seconds (ss) must be strictly less than 60, otherwise a <b>ValueError</b>
+      exception should be raised. For example <b>''01:62.500''</b> should raise an
+      exception. </li> </ul>'
+    method_name: time_to_seconds
+    max_mark: 15
+    part_name: Time Conversion
+- model: questions.subquestioncomposite
+  pk: 21
+  fields:
+    question: 8
+    part: 2
+    description: 'The scenario for this question is about computing the score of an
+      athlete in a given track event. We need to convert a time in seconds into points.
+      The official formula is: <div>points = a(b - time)^c <i>(Equation 1)</i></div>
+      <br> where <i>time</i> is the time in seconds of the athlete for that event.
+      <i>a</i>, <i>b</i> and <i>c</i> are parameters that vary depending on the event
+      (see Table 1 below). The value of points must be rounded down to a whole number
+      after applying the respective formula (e.g. 499.999 points becomes 499). <br>
+      <div>.</div> <table> <tr> <td>Women''s events</td> <td>a</td> <td>b</td> <td>c</td>
+      </tr> <tr> <td>200m</td> <td>4.99087</td> <td>42.5</td> <td>1.81</td> </tr>
+      <tr> <td>800m</td> <td>0.11193</td> <td>254.0</td> <td>1.88</td> </tr> <tr>
+      <td>110m</td> <td>9.23076</td> <td>26.7</td> <td>1.835</td> </tr> </table> <div><i>Table
+      1: Constants </i>a<i>, </i>b<i> and </i>c<i> for each event</i></div> <br> Write
+      a function <b>track_points(time, event_parameters)</b> which takes a <b>str</b>
+      parameter <b>time</b> representing the athlete''s time following the format
+      given in part i, and a tuple containing the event''s parameters. The method
+      returns an <b>int</b> representing the points scored for that event using Equation
+      1. In addition, the method always returns a value greater or equal to 0, that
+      is if the result of Equation 1 is negative, the points must be rounded to 0.
+      <br> <div>For example:</div> <ul> <li> a time of 22.830 seconds in the 200 metres
+      corresponds to 1,096 points, </li> <li> a time of 45.000 seconds in the 200
+      metres corresponds to 0 points (not a negative value), </li> <li> a time of
+      12.540 seconds in the 110 metres hurdles corresponds to 1,195 points, </li>
+      <li> a time of 128.650 seconds (i.e. 02:08.650) in the 800 metres corresponds
+      to 984 points, </li> <li> a time of 255 seconds (i.e. 04:15.000) in the 800
+      metres corresponds to 0 points  (not a negative value). </li> </ul> <div> The
+      function must raise a <b>ValueError</b> if the time format does not follow the
+      format given in part i. It should also raise a <b>ValueError</b> if the tuple
+      does not contain exactly 3 float values. </div> <br> <div> <i>Note - you may
+      use the <b>time_to_seconds(time)</b> function even if your answer to part i
+      are incorrect</i> </div> '
+    method_name: track_points
+    max_mark: 15
+    part_name: Event's Score
+- model: questions.subquestioncomposite
+  pk: 22
+  fields:
+    question: 8
+    part: 3
+    description: 'Write a function <b>compute_score(record)</b> which takes a <b>str</b>
+      containing the split times of an athlete in each event. The function returns
+      a tuple containing the name of the athlete, followed by the score for each event,
+      and finally the total score. The format of the <b>str record</b> file is as
+      follow: <ul> <li> Athlete''s name, </li> <li> 200m split time, that is the time
+      recorded on the 200 metres race, </li> <li> 110m split time, </li> <li> 800m
+      split time. </li> </ul> The fields are separated by a comma. The split time
+      recorded in the file is in the format given in part i. The method must raise
+      a <b>ValueError</b> if the parameter <b>record</b> does not follow this format.
+      <div> the returned tuple has the following format: </div> <br> <div> <i>(Athlete_name,
+      200m_points, 110m_points, 800m_points, total_score)</i> </div> <br> where <b>total_score</b>
+      is the total score of the athlete (that is the sum of the points from the three
+      events), <b>200m_points</b>, <b>110m_points</b>, <b>800m_points</b> are the
+      points for each event computed using the parameters from the Table i part ii.
+      <div> <br> for example, given the record: <i>''Jessica ENNIS-HILL, 22.830, 12.540,
+      02:08:650''</i> <br> </div> <div> the returned value should be:   <i>(''Jessica
+      ENNIS-HILL'', 1096, 1195, 984, 3275)</i> </div> <br> <div> <i>Note - you may
+      use the <b>time_to_seconds(time)</b> & <b>track_points(time, event_parameters)</b>
+      functions even if your answers to part i and/or part ii are incorrect</i> </div> '
+    method_name: compute_score
+    max_mark: 20
+    part_name: Athlete's score
+- model: submission.submission
+  pk: 58
+  fields:
+    sub_question: 20
+    submission_number: 1
+    submission_time: 2022-04-01 14:15:02.932241+00:00
+    answer: "def time_to_seconds(time):\r\n    time1 = time.split(\".\")\r\n    if
+      len(time1) != 1:\r\n        raise ValueError()\r\n    fraction = time1[1]\r\n
+      \   time2 = time.split(\":\")\r\n    if len(time2) == 1:\r\n        seconds
+      = int(time1[0])\r\n    elif len(time2) == 2:\r\n        minutes = int(time2[0])\r\n
+      \       seconds = int(time2[1].split(\".\")[0])\r\n    else:\r\n        raise
+      ValueError()\r\n    \r\n    if seconds > 60:\r\n        raise ValueError\r\n\r\n
+      \   time = minutes * 60  +  seconds  +  int(\"0.\" + fraction)\r\n    return
+      time"
+- model: submission.submission
+  pk: 59
+  fields:
+    sub_question: 20
+    submission_number: 2
+    submission_time: 2022-04-01 14:16:45.685297+00:00
+    answer: "def time_to_seconds(time):\r\n    time1 = time.split(\".\")\r\n    if
+      len(time1) != 2:\r\n        raise ValueError()\r\n    fraction = time1[1]\r\n
+      \   time2 = time.split(\":\")\r\n    if len(time2) == 1:\r\n        seconds
+      = int(time1[0])\r\n    elif len(time2) == 2:\r\n        minutes = int(time2[0])\r\n
+      \       seconds = int(time2[1].split(\".\")[0])\r\n    else:\r\n        raise
+      ValueError()\r\n    \r\n    if seconds > 60:\r\n        raise ValueError\r\n\r\n
+      \   time = minutes * 60  +  seconds  +  int(\"0.\" + fraction)\r\n    return
+      time"
+- model: submission.submission
+  pk: 60
+  fields:
+    sub_question: 20
+    submission_number: 3
+    submission_time: 2022-04-01 14:18:27.115482+00:00
+    answer: "def time_to_seconds(time):\r\n    time1 = time.split(\".\")\r\n    if
+      len(time1) != 2:\r\n        raise ValueError()\r\n    fraction = time1[1]\r\n
+      \   time2 = time.split(\":\")\r\n    if len(time2) == 1:\r\n        seconds
+      = int(time1[0])\r\n    elif len(time2) == 2:\r\n        minutes = int(time2[0])\r\n
+      \       seconds = int(time2[1].split(\".\")[0])\r\n    else:\r\n        raise
+      ValueError()\r\n    \r\n    if seconds > 60:\r\n        raise ValueError()\r\n\r\n
+      \   time = minutes * 60  +  seconds  +  int(\"0.\" + fraction)\r\n    return
+      time"
+- model: submission.submission
+  pk: 61
+  fields:
+    sub_question: 20
+    submission_number: 4
+    submission_time: 2022-04-01 14:21:48.246421+00:00
+    answer: "def time_to_seconds(time):\r\n    time1 = time.split(\".\")\r\n    print(time1)\r\n
+      \   if len(time1) != 2:\r\n        raise ValueError(\"1\")\r\n    fraction =
+      time1[1]\r\n    print(fraction)\r\n    time2 = time.split(\":\")\r\n    print(time2)\r\n
+      \   if len(time2) == 1:\r\n        seconds = float(time1[0])\r\n    elif len(time2)
+      == 2:\r\n        minutes = float(time2[0])\r\n        seconds = float(time2[1].split(\".\")[0])\r\n
+      \   else:\r\n        raise ValueError(\"2\")\r\n    print(minutes, seconds)\r\n
+      \   \r\n    if seconds > 60:\r\n        raise ValueError(\"3\")\r\n\r\n    time
+      = minutes * 60  +  seconds  +  float(\"0.\" + fraction)\r\n    return time"
+- model: submission.submission
+  pk: 62
+  fields:
+    sub_question: 20
+    submission_number: 5
+    submission_time: 2022-04-01 14:22:31.354042+00:00
+    answer: "def time_to_seconds(time):\r\n    time1 = time.split(\".\")\r\n    if
+      len(time1) != 2:\r\n        raise ValueError()\r\n    fraction = time1[1]\r\n
+      \   time2 = time.split(\":\")\r\n    if len(time2) == 1:\r\n        seconds
+      = float(time1[0])\r\n    elif len(time2) == 2:\r\n        minutes = float(time2[0])\r\n
+      \       seconds = float(time2[1].split(\".\")[0])\r\n    else:\r\n        raise
+      ValueError()\r\n    \r\n    if seconds > 60:\r\n        raise ValueError()\r\n\r\n
+      \   time = minutes * 60  +  seconds  +  float(\"0.\" + fraction)\r\n    return
+      time"
+- model: submission.submission
+  pk: 63
+  fields:
+    sub_question: 20
+    submission_number: 6
+    submission_time: 2022-04-01 14:24:10.824260+00:00
+    answer: "def time_to_seconds(time):\r\n    time1 = time.split(\".\")\r\n    if
+      len(time1) != 2:\r\n        raise ValueError()\r\n    fraction = time1[1]\r\n
+      \   time2 = time.split(\":\")\r\n    if len(time2) == 1:\r\n        minutes
+      = 0\r\n        seconds = float(time1[0])\r\n    elif len(time2) == 2:\r\n        minutes
+      = float(time2[0])\r\n        seconds = float(time2[1].split(\".\")[0])\r\n    else:\r\n
+      \       raise ValueError()\r\n    \r\n    if seconds > 60:\r\n        raise
+      ValueError()\r\n\r\n    time = minutes * 60  +  seconds  +  float(\"0.\" + fraction)\r\n
+      \   return time"
+- model: submission.submission
+  pk: 64
+  fields:
+    sub_question: 20
+    submission_number: 7
+    submission_time: 2022-04-01 14:59:12.558540+00:00
+    answer: "def time_to_seconds(time):\n    time1 = time.split(\".\")\n    if len(time1)
+      != 2:\n        raise ValueError()\n    fraction = time1[1]\n    time2 = time.split(\":\")\n
+      \   if len(time2) == 1:\n        minutes = 0\n        seconds = float(time1[0])\n
+      \   elif len(time2) == 2:\n        minutes = float(time2[0])\n        seconds
+      = float(time2[1].split(\".\")[0])\n    else:\n        raise ValueError()\n    \n
+      \   if seconds > 60:\n        raise ValueError()\n\n    time = minutes * 60
+      \ +  seconds  +  float(\"0.\" + fraction)\n    return time"
+- model: submission.submission
+  pk: 65
+  fields:
+    sub_question: 21
+    submission_number: 1
+    submission_time: 2022-04-01 14:59:13.443146+00:00
+    answer: ''
+- model: submission.submission
+  pk: 66
+  fields:
+    sub_question: 22
+    submission_number: 1
+    submission_time: 2022-04-01 14:59:13.811821+00:00
+    answer: ''
+- model: static_lint.staticlint
+  pk: 58
+  fields:
+    question_number: 1
+    feedback: ''
+- model: static_lint.staticlint
+  pk: 59
+  fields:
+    question_number: 1
+    feedback: ''
+- model: static_lint.staticlint
+  pk: 60
+  fields:
+    question_number: 1
+    feedback: ''
+- model: static_lint.staticlint
+  pk: 61
+  fields:
+    question_number: 1
+    feedback: ''
+- model: static_lint.staticlint
+  pk: 62
+  fields:
+    question_number: 1
+    feedback: ''
+- model: static_lint.staticlint
+  pk: 63
+  fields:
+    question_number: 1
+    feedback: ''
+- model: static_lint.staticlint
+  pk: 64
+  fields:
+    question_number: 1
+    feedback: ''
+- model: results.result
+  pk: 1
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 58
+    test_name: test_invalid_fractionseconds_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 2
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 58
+    test_name: test_invalid_minutes_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 3
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 58
+    test_name: test_invalid_seconds2_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 4
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 58
+    test_name: test_invalid_seconds_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 5
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 58
+    test_name: test_minutes_seconds
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
+- model: results.result
+  pk: 6
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 58
+    test_name: test_seconds_only
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
+- model: results.result
+  pk: 7
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 59
+    test_name: test_invalid_fractionseconds_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 8
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 59
+    test_name: test_invalid_minutes_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 9
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 59
+    test_name: test_invalid_seconds2_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 10
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 59
+    test_name: test_invalid_seconds_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 11
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 59
+    test_name: test_minutes_seconds
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
+- model: results.result
+  pk: 12
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 59
+    test_name: test_seconds_only
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
+- model: results.result
+  pk: 13
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 60
+    test_name: test_invalid_fractionseconds_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 14
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 60
+    test_name: test_invalid_minutes_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 15
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 60
+    test_name: test_invalid_seconds2_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 16
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 60
+    test_name: test_invalid_seconds_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 17
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 60
+    test_name: test_minutes_seconds
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
+- model: results.result
+  pk: 18
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 60
+    test_name: test_seconds_only
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
+- model: results.result
+  pk: 19
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 61
+    test_name: test_invalid_fractionseconds_format
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
+- model: results.result
+  pk: 20
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 61
+    test_name: test_invalid_minutes_format
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
+- model: results.result
+  pk: 21
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 61
+    test_name: test_invalid_seconds2_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 22
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 61
+    test_name: test_invalid_seconds_format
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
+- model: results.result
+  pk: 23
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 61
+    test_name: test_minutes_seconds
+    test_result: SU
+    test_feedback: Success
+    mark: 7.0
+- model: results.result
+  pk: 24
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 61
+    test_name: test_seconds_only
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
+- model: results.result
+  pk: 25
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 62
+    test_name: test_invalid_fractionseconds_format
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
+- model: results.result
+  pk: 26
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 62
+    test_name: test_invalid_minutes_format
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
+- model: results.result
+  pk: 27
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 62
+    test_name: test_invalid_seconds2_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 28
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 62
+    test_name: test_invalid_seconds_format
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
+- model: results.result
+  pk: 29
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 62
+    test_name: test_minutes_seconds
+    test_result: SU
+    test_feedback: Success
+    mark: 7.0
+- model: results.result
+  pk: 30
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 62
+    test_name: test_seconds_only
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
+- model: results.result
+  pk: 31
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 63
+    test_name: test_invalid_fractionseconds_format
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
+- model: results.result
+  pk: 32
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 63
+    test_name: test_invalid_minutes_format
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
+- model: results.result
+  pk: 33
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 63
+    test_name: test_invalid_seconds2_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 34
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 63
+    test_name: test_invalid_seconds_format
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
+- model: results.result
+  pk: 35
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 63
+    test_name: test_minutes_seconds
+    test_result: SU
+    test_feedback: Success
+    mark: 7.0
+- model: results.result
+  pk: 36
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 63
+    test_name: test_seconds_only
+    test_result: SU
+    test_feedback: Success
+    mark: 4.0
+- model: results.result
+  pk: 37
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 64
+    test_name: test_invalid_fractionseconds_format
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
+- model: results.result
+  pk: 38
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 64
+    test_name: test_invalid_minutes_format
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
+- model: results.result
+  pk: 39
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 64
+    test_name: test_invalid_seconds2_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 40
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 64
+    test_name: test_invalid_seconds_format
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
+- model: results.result
+  pk: 41
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 64
+    test_name: test_minutes_seconds
+    test_result: SU
+    test_feedback: Success
+    mark: 7.0
+- model: results.result
+  pk: 42
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 64
+    test_name: test_seconds_only
+    test_result: SU
+    test_feedback: Success
+    mark: 4.0
+- model: results.subtest
+  pk: 11
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
+      [(<function time_to_seconds at 0x0000027BF24DF790>, '04:01.5')]
+    part: 1
+    params_failing: '''04:01.5'''
+    test_result: SU
+    test: 1
+- model: results.subtest
+  pk: 12
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
+      [(<function time_to_seconds at 0x0000027BF24DF820>, '4:00.000')]
+    part: 1
+    params_failing: '''4:00.000'''
+    test_result: SU
+    test: 2
+- model: results.subtest
+  pk: 13
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
+      [(<function time_to_seconds at 0x0000027BF24DF790>, '01:61.000')]
+    part: 1
+    params_failing: '''01:61.000'''
+    test_result: SU
+    test: 3
+- model: results.subtest
+  pk: 14
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
+      [(<function time_to_seconds at 0x0000027BF24DF4C0>, '04:1.000')]
+    part: 1
+    params_failing: '''04:1.000'''
+    test_result: SU
+    test: 4
+- model: results.subtest
+  pk: 15
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
+      [(<function time_to_seconds at 0x0000027BF3FC63A0>, '04:01.5')]
+    part: 1
+    params_failing: '''04:01.5'''
+    test_result: SU
+    test: 7
+- model: results.subtest
+  pk: 16
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
+      [(<function time_to_seconds at 0x0000027BF3FC64C0>, '4:00.000')]
+    part: 1
+    params_failing: '''4:00.000'''
+    test_result: SU
+    test: 8
+- model: results.subtest
+  pk: 17
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
+      [(<function time_to_seconds at 0x0000027BF3FC63A0>, '01:61.000')]
+    part: 1
+    params_failing: '''01:61.000'''
+    test_result: SU
+    test: 9
+- model: results.subtest
+  pk: 18
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
+      [(<function time_to_seconds at 0x0000027BF3FC64C0>, '04:1.000')]
+    part: 1
+    params_failing: '''04:1.000'''
+    test_result: SU
+    test: 10
+- model: results.subtest
+  pk: 19
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
+      [(<function time_to_seconds at 0x0000027BF491F820>, '04:01.5')]
+    part: 1
+    params_failing: '''04:01.5'''
+    test_result: SU
+    test: 13
+- model: results.subtest
+  pk: 20
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
+      [(<function time_to_seconds at 0x0000027BF491F940>, '4:00.000')]
+    part: 1
+    params_failing: '''4:00.000'''
+    test_result: SU
+    test: 14
+- model: results.subtest
+  pk: 21
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
+      [(<function time_to_seconds at 0x0000027BF491F820>, '01:61.000')]
+    part: 1
+    params_failing: '''01:61.000'''
+    test_result: SU
+    test: 15
+- model: results.subtest
+  pk: 22
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
+      [(<function time_to_seconds at 0x0000027BF491F670>, '04:1.000')]
+    part: 1
+    params_failing: '''04:1.000'''
+    test_result: SU
+    test: 16
+- model: results.subtest
+  pk: 23
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
+      [(<function time_to_seconds at 0x0000027BF5127D30>, '04:01.5')]
+    part: 1
+    params_failing: '''04:01.5'''
+    test_result: F
+    test: 19
+- model: results.subtest
+  pk: 24
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
+      [(<function time_to_seconds at 0x0000027BF5127DC0>, '4:00.000')]
+    part: 1
+    params_failing: '''4:00.000'''
+    test_result: F
+    test: 20
+- model: results.subtest
+  pk: 25
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
+      [(<function time_to_seconds at 0x0000027BF5127B80>, '01:61.000')]
+    part: 1
+    params_failing: '''01:61.000'''
+    test_result: SU
+    test: 21
+- model: results.subtest
+  pk: 26
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
+      [(<function time_to_seconds at 0x0000027BF5127C10>, '04:1.000')]
+    part: 1
+    params_failing: '''04:1.000'''
+    test_result: F
+    test: 22
+- model: results.subtest
+  pk: 27
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_minutes_seconds [04:00.000]
+    part: 1
+    params_failing: '''04:00.000'''
+    test_result: SU
+    test: 41
+- model: results.subtest
+  pk: 28
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_minutes_seconds [02:15.000]
+    part: 1
+    params_failing: '''02:15.000'''
+    test_result: SU
+    test: 41
+- model: results.subtest
+  pk: 29
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_minutes_seconds [02:05.520]
+    part: 1
+    params_failing: '''02:05.520'''
+    test_result: SU
+    test: 41
+- model: results.subtest
+  pk: 30
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_minutes_seconds [01:59.999]
+    part: 1
+    params_failing: '''01:59.999'''
+    test_result: SU
+    test: 41
+- model: results.subtest
+  pk: 31
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
+      [(<function time_to_seconds at 0x0000027BF54691F0>, '04:01.5')]
+    part: 1
+    params_failing: '''04:01.5'''
+    test_result: F
+    test: 25
+- model: results.subtest
+  pk: 32
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
+      [(<function time_to_seconds at 0x0000027BF5469280>, '4:00.000')]
+    part: 1
+    params_failing: '''4:00.000'''
+    test_result: F
+    test: 26
+- model: results.subtest
+  pk: 33
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
+      [(<function time_to_seconds at 0x0000027BF54691F0>, '01:61.000')]
+    part: 1
+    params_failing: '''01:61.000'''
+    test_result: SU
+    test: 27
+- model: results.subtest
+  pk: 34
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
+      [(<function time_to_seconds at 0x0000027BF5469310>, '04:1.000')]
+    part: 1
+    params_failing: '''04:1.000'''
+    test_result: F
+    test: 28
+- model: results.subtest
+  pk: 35
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
+      [(<function time_to_seconds at 0x0000027BF5127EE0>, '04:01.5')]
+    part: 1
+    params_failing: '''04:01.5'''
+    test_result: F
+    test: 31
+- model: results.subtest
+  pk: 36
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
+      [(<function time_to_seconds at 0x0000027BF5127E50>, '4:00.000')]
+    part: 1
+    params_failing: '''4:00.000'''
+    test_result: F
+    test: 32
+- model: results.subtest
+  pk: 37
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
+      [(<function time_to_seconds at 0x0000027BF5127EE0>, '01:61.000')]
+    part: 1
+    params_failing: '''01:61.000'''
+    test_result: SU
+    test: 33
+- model: results.subtest
+  pk: 38
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
+      [(<function time_to_seconds at 0x0000027BF5127AF0>, '04:1.000')]
+    part: 1
+    params_failing: '''04:1.000'''
+    test_result: F
+    test: 34
+- model: results.subtest
+  pk: 39
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_seconds_only [10.530]
+    part: 1
+    params_failing: '''10.530'''
+    test_result: SU
+    test: 42
+- model: results.subtest
+  pk: 40
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
+      [(<function time_to_seconds at 0x0000027BF7E09DC0>, '04:01.5')]
+    part: 1
+    params_failing: '''04:01.5'''
+    test_result: F
+    test: 37
+- model: results.subtest
+  pk: 41
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
+      [(<function time_to_seconds at 0x0000027BF7E09EE0>, '4:00.000')]
+    part: 1
+    params_failing: '''4:00.000'''
+    test_result: F
+    test: 38
+- model: results.subtest
+  pk: 42
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
+      [(<function time_to_seconds at 0x0000027BF7E09DC0>, '01:61.000')]
+    part: 1
+    params_failing: '''01:61.000'''
+    test_result: SU
+    test: 39
+- model: results.subtest
+  pk: 43
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
+      [(<function time_to_seconds at 0x0000027BF7E09F70>, '04:1.000')]
+    part: 1
+    params_failing: '''04:1.000'''
+    test_result: F
+    test: 40
