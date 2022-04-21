@@ -22,10 +22,10 @@ def run_tests(answer, question_number, question_part, submission):
 def create_submission(question_number, question_part):
     question = QuestionComposite.objects.get(number=question_number)
     sub_question = SubQuestionComposite.object.get(question=question, part=question_part)
-    submission_number = Submission.object.get_next_submission_number(sub_question)
-    submission = Submission.object.create(sub_question=sub_question, submission_number=submission_number)
+    submission_number = Submission.objects.get_next_submission_number(sub_question)
+    submission = Submission.objects.create(sub_question=sub_question, submission_number=submission_number)
     submission.save()
-    return Submission.object.get_last_submission(sub_question)
+    return Submission.objects.get_last_submission(sub_question)
 
 
 def construct_test_file(answer, question_number, question_part_submitted):

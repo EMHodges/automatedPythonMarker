@@ -44,15 +44,15 @@ def question_update_view(request, number):
                             fords[x] = form
                             run_tests(form_answer, number, first_letter, submission)
                     else:
-                        submission = Submission.object.get_last_submission(sub_obj)
+                        submission = Submission.objects.get_last_submission(sub_obj)
                         fords[sub_obj] = SubmissionForm(None, instance=submission, prefix=int(sub_obj.part))
     else:
         for objz in sub_objs:
-            submission = Submission.object.get_last_submission(objz)
+            submission = Submission.objects.get_last_submission(objz)
             fords[objz] = SubmissionForm(None, instance=submission, prefix=int(objz.part))
 
     for objz in sub_objs:
-        last_submission = Submission.object.get_last_submission(objz)
+        last_submission = Submission.objects.get_last_submission(objz)
         if (hasattr(last_submission, 'staticlint')):
             static_error[objz] = last_submission.staticlint
         else:
@@ -95,7 +95,7 @@ def question_generate_submission_file_view(request):
         TimeStarted.objects.all(),
         QuestionComposite.objects.all(),
         SubQuestionComposite.object.all(),
-        Submission.object.all(),
+        Submission.objects.all(),
         StaticLint.objects.all(),
         Result.objects.all(),
         Subtest.objects.all()

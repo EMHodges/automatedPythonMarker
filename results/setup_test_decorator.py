@@ -1,6 +1,11 @@
+import _thread
 import ast
 import functools
 import os
+import threading
+from contextlib import contextmanager
+
+import timeout_decorator
 
 from automatedPythonMarker.settings import resource_path
 from questions.models import QuestionComposite, SubQuestionComposite
@@ -16,8 +21,8 @@ def setup_test(max_mark):
             test_case: QuestionsTestCase = args[0]
             question = QuestionComposite.objects.get(number=test_case.get_question_number())
             sub_question = SubQuestionComposite.object.get(question=question, part=test_case._get_question_part())
-            submission_number = Submission.object.get_last_submission_number(sub_question)
-            submission = Submission.object.get(sub_question=sub_question, submission_number=submission_number)
+            submission_number = Submission.objects.get_last_submission_number(sub_question)
+            submission = Submission.objects.get(sub_question=sub_question, submission_number=submission_number)
             Result.objects.reset_mark(question_number=test_case.get_question_number(),
                                       question_part=test_case._get_question_part(),
                                       submission=submission,

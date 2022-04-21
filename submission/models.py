@@ -25,7 +25,7 @@ class Submission(models.Model, models.Manager):
     submission_number = models.IntegerField()
     submission_time = models.DateTimeField(auto_now=True)
     answer = models.TextField()
-    object = SubmissionManager()
+    objects = SubmissionManager()
 
 
 class TimeStarted(models.Model):
