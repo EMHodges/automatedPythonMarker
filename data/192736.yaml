@@ -1,4 +1,4 @@
-- model: questions.timestarted
+- model: submission.timestarted
   pk: 3
   fields:
     time_started: 2022-04-01 09:13:56.903173+00:00
@@ -821,4 +821,3 @@
     test_result: E
     test_feedback: ERROR! Syntax Error
     mark: 0.0
-[]

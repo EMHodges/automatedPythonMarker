@@ -1,4 +1,4 @@
-- model: questions.timestarted
+- model: submission.timestarted
   pk: 3
   fields:
     time_started: 2022-04-08 13:49:00.694175+00:00

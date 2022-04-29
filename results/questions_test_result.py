@@ -13,7 +13,11 @@ class QuestionsTestResult(unittest.TestResult):
         super(QuestionsTestResult, self).__init__(stream, descriptions, verbosity)
 
     def addSubTest(self, test: QuestionsTestCase, subtest, err):
+        print(test)
+        print(err)
+        print(err is None)
         if err is None:
+
             addSubTestResult(test, subtest, 'Success', ResultsEnums.SUCCESS)
         else:
             if getattr(self, 'failfast', False):

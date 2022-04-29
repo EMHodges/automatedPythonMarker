@@ -1,7 +1,7 @@
 - model: submission.timestarted
   pk: 3
   fields:
-    time_started: 2022-04-17 11:05:03.459666+00:00
+    time_started: 2022-04-22 08:26:41.622930+00:00
 - model: questions.questioncomposite
   pk: 8
   fields:
@@ -101,246 +101,283 @@
   fields:
     sub_question: 20
     submission_number: 1
-    submission_time: 2022-04-17 11:12:32.938090+00:00
-    answer: "def time_to_seconds(time: str) -> float:\r\n    mm, rest = time.split(\":\")\r\n
-      \   ss, fff = rest.split(\".\")\r\n\r\n    if not (len(mm) == 2 and len(ss)
-      == 2 and len(fff) == 3):\r\n        raise ValueError(\"Incorrect time format
-      entered. Must be mm:ss.fff\")\r\n\r\n    if int(ss) >= 60:\r\n        raise
-      ValueError(\"Cannot have more than 60 seconds in a minute.\")\r\n\r\n    return
-      60*int(mm) + int(ss) + int(fff)/1000"
+    submission_time: 2022-04-22 08:36:43.910229+00:00
+    answer: "def checkIfInt(int):\r\n    try:\r\n        return int(value)\r\n    except:\r\n
+      \       raise ValueError(\"Non-integer value entered\")\r\n\r\n\r\ndef time_to_seconds(time):\r\n
+      \   fractionIndex = time.index(\".\")\r\n    if (fractionIndex == -1):\r\n        raise
+      ValueError(\"No fraction of a second\")\r\n    secsIndex = time.index(\":\")\r\n
+      \   if (secsIndex == -1):\r\n        secs = checkIfInt(time[:fractionIndex])\r\n
+      \       fraction = checkIfInt(time[fractionIndex + 1:])\r\n        if (secs
+      >= 60):\r\n            raise ValueError(\"Value above 60 entered)\r\n        return
+      secs + (fraction / 1000)\r\n    else:\r\n        mins = checkIfInt(time[:secsIndex])\r\n
+      \       secs = checkIfInt(time[secsIndex+1:fractionIndex])\r\n        fraction
+      = checkIfInt(time[fractionIndex + 1:])\r\n        if (mins >= 60 or secs >=
+      60):\r\n            raise ValueError(\"Value above 60 entered)\r\n        return
+      mins * 60 + secs + (fraction / 1000)"
 - model: submission.submission
   pk: 59
   fields:
     sub_question: 20
     submission_number: 2
-    submission_time: 2022-04-17 11:15:25.845956+00:00
-    answer: "def time_to_seconds(time: str) -> float:\r\n    mm, rest = time.split(\":\")\r\n
-      \   ss, fff = rest.split(\".\")\r\n\r\n    if not (len(mm) == 2 and len(ss)
-      == 2 and len(fff) == 3):\r\n        raise ValueError(\"Incorrect time format
-      entered. Must be mm:ss.fff\")\r\n\r\n    if int(ss) >= 60:\r\n        raise
-      ValueError(\"Cannot have more than 60 seconds in a minute.\")\r\n\r\n    output
-      = 60*int(mm) + int(ss) + int(fff)/1000\r\n\r\n    return f\"{output:.3f}\""
+    submission_time: 2022-04-22 08:37:44.832501+00:00
+    answer: "def checkIfInt(int):\r\n    try:\r\n        return int(value)\r\n    except:\r\n
+      \       raise ValueError(\"Non-integer value entered\")\r\n\r\n\r\ndef time_to_seconds(time):\r\n
+      \   fractionIndex = time.index(\".\")\r\n    if (fractionIndex == -1):\r\n        raise
+      ValueError(\"No fraction of a second\")\r\n    secsIndex = time.index(\":\")\r\n
+      \   if (secsIndex == -1):\r\n        secs = checkIfInt(time[:fractionIndex])\r\n
+      \       fraction = checkIfInt(time[fractionIndex + 1:])\r\n        if (secs
+      >= 60):\r\n            raise ValueError(\"Value above 60 entered\")\r\n        return
+      secs + (fraction / 1000)\r\n    else:\r\n        mins = checkIfInt(time[:secsIndex])\r\n
+      \       secs = checkIfInt(time[secsIndex+1:fractionIndex])\r\n        fraction
+      = checkIfInt(time[fractionIndex + 1:])\r\n        if (mins >= 60 or secs >=
+      60):\r\n            raise ValueError(\"Value above 60 entered\")\r\n        return
+      mins * 60 + secs + (fraction / 1000)"
 - model: submission.submission
   pk: 60
   fields:
     sub_question: 20
     submission_number: 3
-    submission_time: 2022-04-17 11:16:16.206750+00:00
-    answer: "def time_to_seconds(time: str) -> float:\r\n    mm, rest = time.split(\":\")\r\n
-      \   ss, fff = rest.split(\".\")\r\n\r\n    if not (len(mm) == 2 and len(ss)
-      == 2 and len(fff) == 3):\r\n        raise ValueError(\"Incorrect time format
-      entered. Must be mm:ss.fff\")\r\n\r\n    if int(ss) >= 60:\r\n        raise
-      ValueError(\"Cannot have more than 60 seconds in a minute.\")\r\n\r\n    output
-      = 60*int(mm) + int(ss) + int(fff)/1000\r\n\r\n    return float(f\"{output:.3f}\")"
+    submission_time: 2022-04-22 08:39:41.165885+00:00
+    answer: "def checkIfInt(int):\r\n    try:\r\n        return int(value)\r\n    except:\r\n
+      \       raise ValueError(\"Non-integer value entered\")\r\n\r\n\r\ndef time_to_seconds(time):\r\n
+      \   fractionIndex = time.find(\".\")\r\n    if (fractionIndex == -1):\r\n        raise
+      ValueError(\"No fraction of a second\")\r\n    secsIndex = time.find(\":\")\r\n
+      \   if (secsIndex == -1):\r\n        secs = checkIfInt(time[:fractionIndex])\r\n
+      \       fraction = checkIfInt(time[fractionIndex + 1:])\r\n        if (secs
+      >= 60):\r\n            raise ValueError(\"Value above 60 entered\")\r\n        return
+      secs + (fraction / 1000)\r\n    else:\r\n        mins = checkIfInt(time[:secsIndex])\r\n
+      \       secs = checkIfInt(time[secsIndex+1:fractionIndex])\r\n        fraction
+      = checkIfInt(time[fractionIndex + 1:])\r\n        if (mins >= 60 or secs >=
+      60):\r\n            raise ValueError(\"Value above 60 entered\")\r\n        return
+      mins * 60 + secs + (fraction / 1000)"
 - model: submission.submission
   pk: 61
   fields:
     sub_question: 20
     submission_number: 4
-    submission_time: 2022-04-17 11:17:50.872588+00:00
-    answer: "def time_to_seconds(time: str) -> float:\r\n    mm, rest = time.split(\":\")\r\n
-      \   ss, fff = rest.split(\".\")\r\n\r\n    if not (len(mm) == 2 and len(ss)
-      == 2 and len(fff) == 3):\r\n        raise ValueError(\"Incorrect time format
-      entered. Must be mm:ss.fff\")\r\n\r\n    if int(ss) >= 60:\r\n        raise
-      ValueError(\"Cannot have more than 60 seconds in a minute.\")\r\n\r\n    return
-      60*int(mm) + int(ss) + int(fff)/1000"
+    submission_time: 2022-04-22 08:39:58.864384+00:00
+    answer: "def checkIfInt(intVal):\r\n    try:\r\n        return int(intVal)\r\n
+      \   except:\r\n        raise ValueError(\"Non-integer value entered\")\r\n\r\n\r\ndef
+      time_to_seconds(time):\r\n    fractionIndex = time.find(\".\")\r\n    if (fractionIndex
+      == -1):\r\n        raise ValueError(\"No fraction of a second\")\r\n    secsIndex
+      = time.find(\":\")\r\n    if (secsIndex == -1):\r\n        secs = checkIfInt(time[:fractionIndex])\r\n
+      \       fraction = checkIfInt(time[fractionIndex + 1:])\r\n        if (secs
+      >= 60):\r\n            raise ValueError(\"Value above 60 entered\")\r\n        return
+      secs + (fraction / 1000)\r\n    else:\r\n        mins = checkIfInt(time[:secsIndex])\r\n
+      \       secs = checkIfInt(time[secsIndex+1:fractionIndex])\r\n        fraction
+      = checkIfInt(time[fractionIndex + 1:])\r\n        if (mins >= 60 or secs >=
+      60):\r\n            raise ValueError(\"Value above 60 entered\")\r\n        return
+      mins * 60 + secs + (fraction / 1000)"
 - model: submission.submission
   pk: 62
   fields:
     sub_question: 20
     submission_number: 5
-    submission_time: 2022-04-17 11:19:38.823169+00:00
-    answer: "def time_to_seconds(time: str) -> float:\r\n    mm, rest = time.split(\":\")\r\n
-      \   ss, fff = rest.split(\".\")\r\n\r\n    if not (len(mm) == 2 and len(ss)
-      == 2 and len(fff) == 3):\r\n        raise ValueError(\"Incorrect time format
-      entered. Must be mm:ss.fff\")\r\n\r\n    if int(ss) >= 60:\r\n        raise
-      ValueError(\"Cannot have more than 60 seconds in a minute.\")\r\n\r\n    output
-      = 60*int(mm) + int(ss) \r\n    \r\n    if int(fff) > 0:\r\n        output +=
-      int(fff)/1000\r\n\r\n    return output"
+    submission_time: 2022-04-22 08:42:11.341273+00:00
+    answer: "def checkIfInt(intVal):\r\n    try:\r\n        return int(intVal)\r\n
+      \   except:\r\n        raise ValueError(\"Non-integer value entered\")\r\n\r\n\r\ndef
+      time_to_seconds(time):\r\n    fractionIndex = time.find(\".\")\r\n    if (fractionIndex
+      == -1):\r\n        raise ValueError(\"No fraction of a second\")\r\n    secsIndex
+      = time.find(\":\")\r\n    if (secsIndex == -1):\r\n        if (not len(time[:fractionIndex])
+      == 2 or not len(time[fractionIndex + 1:]) == 3):\r\n            raise ValueError(\"Incorrect
+      Format\")\r\n        secs = checkIfInt(time[:fractionIndex])\r\n        fraction
+      = checkIfInt(time[fractionIndex + 1:])\r\n        if (secs >= 60):\r\n            raise
+      ValueError(\"Value above 60 entered\")\r\n        return secs + (fraction /
+      1000)\r\n    else:\r\n        if (not len(time[:secsIndex]) == 2 or not len(time[secsIndex+1:fractionIndex])
+      == 2 not len(time[fractionIndex + 1:]) == 3):\r\n            raise ValueError(\"Incorrect
+      Format\")\r\n        mins = checkIfInt(time[:secsIndex])\r\n        secs = checkIfInt(time[secsIndex+1:fractionIndex])\r\n
+      \       fraction = checkIfInt(time[fractionIndex + 1:])\r\n        if (mins
+      >= 60 or secs >= 60):\r\n            raise ValueError(\"Value above 60 entered\")\r\n
+      \       return mins * 60 + secs + (fraction / 1000)"
 - model: submission.submission
   pk: 63
   fields:
     sub_question: 20
     submission_number: 6
-    submission_time: 2022-04-17 11:20:07.234182+00:00
-    answer: "def time_to_seconds(time: str) -> float:\r\n    mm, rest = time.split(\":\")\r\n
-      \   ss, fff = rest.split(\".\")\r\n\r\n    if not (len(mm) == 2 and len(ss)
-      == 2 and len(fff) == 3):\r\n        raise ValueError(\"Incorrect time format
-      entered. Must be mm:ss.fff\")\r\n\r\n    if int(ss) >= 60:\r\n        raise
-      ValueError(\"Cannot have more than 60 seconds in a minute.\")\r\n\r\n    return
-      60*int(mm) + int(ss) + int(fff)/1000"
+    submission_time: 2022-04-22 08:42:30.700926+00:00
+    answer: "def checkIfInt(intVal):\r\n    try:\r\n        return int(intVal)\r\n
+      \   except:\r\n        raise ValueError(\"Non-integer value entered\")\r\n\r\n\r\ndef
+      time_to_seconds(time):\r\n    fractionIndex = time.find(\".\")\r\n    if (fractionIndex
+      == -1):\r\n        raise ValueError(\"No fraction of a second\")\r\n    secsIndex
+      = time.find(\":\")\r\n    if (secsIndex == -1):\r\n        if (not len(time[:fractionIndex])
+      == 2 or not len(time[fractionIndex + 1:]) == 3):\r\n            raise ValueError(\"Incorrect
+      Format\")\r\n        secs = checkIfInt(time[:fractionIndex])\r\n        fraction
+      = checkIfInt(time[fractionIndex + 1:])\r\n        if (secs >= 60):\r\n            raise
+      ValueError(\"Value above 60 entered\")\r\n        return secs + (fraction /
+      1000)\r\n    else:\r\n        if (not len(time[:secsIndex]) == 2 or not len(time[secsIndex+1:fractionIndex])
+      == 2 or not len(time[fractionIndex + 1:]) == 3):\r\n            raise ValueError(\"Incorrect
+      Format\")\r\n        mins = checkIfInt(time[:secsIndex])\r\n        secs = checkIfInt(time[secsIndex+1:fractionIndex])\r\n
+      \       fraction = checkIfInt(time[fractionIndex + 1:])\r\n        if (mins
+      >= 60 or secs >= 60):\r\n            raise ValueError(\"Value above 60 entered\")\r\n
+      \       return mins * 60 + secs + (fraction / 1000)"
 - model: submission.submission
   pk: 64
   fields:
     sub_question: 21
     submission_number: 1
-    submission_time: 2022-04-17 11:33:15.787062+00:00
-    answer: "import math\r\n\r\ndef track_points(time: str, event_parameters: tuple[float,
-      float, float]) -> int:\r\n    a, b, c = event_parameters\r\n\r\n    calc_time
-      = time_to_seconds(time)\r\n\r\n    if b - calc_time < 0:\r\n        return 0\r\n\r\n
-      \   points = math.floor(a*(b-time_to_seconds(time))**c)\r\n\r\n    return max(0,
-      points)"
+    submission_time: 2022-04-22 08:44:39.220502+00:00
+    answer: "def track_points(time, event_parameters):\r\n   timeSeconds = time_to_seconds(time)\r\n
+      \  points = (event_parameters[0] * (event_parameters[1] - time))**event_parameters[2]\r\n
+      \  if points < 0:\r\n       points = 0\r\n   return points"
 - model: submission.submission
   pk: 65
   fields:
     sub_question: 21
     submission_number: 2
-    submission_time: 2022-04-17 11:33:28.112629+00:00
-    answer: "import math\r\n\r\ndef time_to_seconds(time: str) -> float:\r\n    mm,
-      rest = time.split(\":\")\r\n    ss, fff = rest.split(\".\")\r\n\r\n    if not
-      (len(mm) == 2 and len(ss) == 2 and len(fff) == 3):\r\n        raise ValueError(\"Incorrect
-      time format entered. Must be mm:ss.fff\")\r\n\r\n    if int(ss) >= 60:\r\n        raise
-      ValueError(\"Cannot have more than 60 seconds in a minute.\")\r\n\r\n    return
-      60*int(mm) + int(ss) + int(fff)/1000\r\n\r\ndef track_points(time: str, event_parameters:
-      tuple[float, float, float]) -> int:\r\n    a, b, c = event_parameters\r\n\r\n
-      \   calc_time = time_to_seconds(time)\r\n\r\n    if b - calc_time < 0:\r\n        return
-      0\r\n\r\n    points = math.floor(a*(b-time_to_seconds(time))**c)\r\n\r\n    return
-      max(0, points)"
+    submission_time: 2022-04-22 08:46:56.709205+00:00
+    answer: "def track_points(time, event_parameters):\r\n   timeSeconds = time_to_seconds(time)\r\n
+      \  points = (event_parameters[0] * (event_parameters[1] - timeSeconds))**event_parameters[2]\r\n
+      \  if points < 0:\r\n       points = 0\r\n   return points"
 - model: submission.submission
   pk: 66
   fields:
     sub_question: 21
     submission_number: 3
-    submission_time: 2022-04-17 11:33:51.677225+00:00
-    answer: "import math\r\n\r\ndef time_to_seconds(time):\r\n    mm, rest = time.split(\":\")\r\n
-      \   ss, fff = rest.split(\".\")\r\n\r\n    if not (len(mm) == 2 and len(ss)
-      == 2 and len(fff) == 3):\r\n        raise ValueError(\"Incorrect time format
-      entered. Must be mm:ss.fff\")\r\n\r\n    if int(ss) >= 60:\r\n        raise
-      ValueError(\"Cannot have more than 60 seconds in a minute.\")\r\n\r\n    return
-      60*int(mm) + int(ss) + int(fff)/1000\r\n\r\ndef track_points(time, event_parameters):\r\n
-      \   a, b, c = event_parameters\r\n\r\n    calc_time = time_to_seconds(time)\r\n\r\n
-      \   if b - calc_time < 0:\r\n        return 0\r\n\r\n    points = math.floor(a*(b-time_to_seconds(time))**c)\r\n\r\n
-      \   return max(0, points)"
+    submission_time: 2022-04-22 08:48:37.801616+00:00
+    answer: "def track_points(time, event_parameters):\r\n   timeSeconds = time_to_seconds(time)\r\n
+      \  points = event_parameters[0] * ((event_parameters[1] - timeSeconds))**event_parameters[2]\r\n
+      \  if points < 0:\r\n       points = 0\r\n   return points"
 - model: submission.submission
   pk: 67
   fields:
     sub_question: 21
     submission_number: 4
-    submission_time: 2022-04-17 11:34:18.706905+00:00
-    answer: "import math\r\n\r\ndef time_to_seconds(time):\r\n    mm, rest = time.split(\":\")\r\n
-      \   ss, fff = rest.split(\".\")\r\n\r\n    if not (len(mm) == 2 and len(ss)
-      == 2 and len(fff) == 3):\r\n        raise ValueError(\"Incorrect time format
-      entered. Must be mm:ss.fff\")\r\n\r\n    if int(ss) >= 60:\r\n        raise
-      ValueError(\"Cannot have more than 60 seconds in a minute.\")\r\n\r\n    return
-      60*int(mm) + int(ss) + int(fff)/1000\r\n\r\ndef track_points(time, event_parameters):\r\n
-      \   a, b, c = event_parameters\r\n\r\n    calc_time = time_to_seconds(time)\r\n\r\n
-      \   if b - calc_time < 0:\r\n        return 0\r\n\r\n    points = math.floor(a*(b-calc_time)**c)\r\n\r\n
-      \   return max(0, points)"
+    submission_time: 2022-04-22 08:49:08.904745+00:00
+    answer: "def track_points(time, event_parameters):\r\n   timeSeconds = time_to_seconds(time)\r\n
+      \  points = round(event_parameters[0] * ((event_parameters[1] - timeSeconds))**event_parameters[2])\r\n
+      \  if points < 0:\r\n       points = 0\r\n   return points"
 - model: submission.submission
   pk: 68
   fields:
-    sub_question: 21
-    submission_number: 5
-    submission_time: 2022-04-17 11:36:44.799845+00:00
-    answer: "import math\r\n\r\ndef time_to_seconds(time):\r\n    mm, rest = time.split(\":\")\r\n
-      \   ss, fff = rest.split(\".\")\r\n\r\n    if not (len(mm) == 2 and len(ss)
-      == 2 and len(fff) == 3):\r\n        raise ValueError(\"Incorrect time format
-      entered. Must be mm:ss.fff\")\r\n\r\n    if int(ss) >= 60:\r\n        raise
-      ValueError(\"Cannot have more than 60 seconds in a minute.\")\r\n\r\n    return
-      60*int(mm) + int(ss) + int(fff)/1000\r\n\r\ndef track_points(time, event_parameters):\r\n
-      \   a, b, c = event_parameters\r\n\r\n    calc_time = time_to_seconds(time)\r\n\r\n
-      \   if b - calc_time < 0:\r\n        return 0\r\n\r\n    points = math.floor(a*(b-calc_time)**c)\r\n\r\n
-      \   return max(0, points)"
+    sub_question: 22
+    submission_number: 1
+    submission_time: 2022-04-22 08:53:51.634290+00:00
+    answer: "event_params = [(4.99087, 42.5, 1.81), (9.23076, 26.7, 1.835), (0.11193,
+      254.0, 1.88)]\r\n\r\ndef (compute_score(record)):\r\n    record.split(\",\")\r\n
+      \   name = record[0]\r\n    scores = []\r\n    for i in range(3):\r\n        scores.append(track_points(record[i
+      + 1], event_params[i])\r\n    return(name, scores[0], scores[1], scores[2])"
 - model: submission.submission
   pk: 69
   fields:
-    sub_question: 21
-    submission_number: 6
-    submission_time: 2022-04-17 11:36:52.550117+00:00
-    answer: "import math\r\n\r\ndef track_points(time, event_parameters):\r\n    a,
-      b, c = event_parameters\r\n\r\n    calc_time = time_to_seconds(time)\r\n\r\n
-      \   if b - calc_time < 0:\r\n        return 0\r\n\r\n    points = math.floor(a*(b-calc_time)**c)\r\n\r\n
-      \   return max(0, points)"
+    sub_question: 22
+    submission_number: 2
+    submission_time: 2022-04-22 08:54:17.177363+00:00
+    answer: "event_params = [(4.99087, 42.5, 1.81), (9.23076, 26.7, 1.835), (0.11193,
+      254.0, 1.88)]\r\n\r\ndef compute_score(record):\r\n    record.split(\",\")\r\n
+      \   name = record[0]\r\n    scores = []\r\n    for i in range(3):\r\n        scores.append(track_points(record[i
+      + 1], event_params[i])\r\n    return(name, scores[0], scores[1], scores[2])"
 - model: submission.submission
   pk: 70
   fields:
-    sub_question: 20
-    submission_number: 7
-    submission_time: 2022-04-17 11:53:43.784374+00:00
-    answer: "import re\r\n\r\ndef time_to_seconds(time):\r\n\r\n    nums = re.findall(r\"\\d+\",
-      time)\r\n\r\n    if len(nums) == 2:\r\n        ss, fff = nums\r\n\r\n        if
-      not (len(ss) == 2 and len(fff) == 3):\r\n            raise ValueError(\"Incorrect
-      time format entered. Must be ss.fff\")\r\n        \r\n        if int(ss) >=
-      60:\r\n            raise ValueError(\"Cannot have more than 60 seconds in a
-      minute.\")\r\n\r\n        return int(ss) + int(fff)/1000\r\n    else: \r\n        mm,
-      ss, fff = nums\r\n\r\n        if not (len(mm) == 2 and len(ss) == 2 and len(fff)
-      == 3):\r\n            raise ValueError(\"Incorrect time format entered. Must
-      be mm:ss.fff\")\r\n\r\n        if int(ss) >= 60:\r\n            raise ValueError(\"Cannot
-      have more than 60 seconds in a minute.\")\r\n        \r\n        return 60*int(mm)
-      + int(ss) + int(fff)/1000"
+    sub_question: 22
+    submission_number: 3
+    submission_time: 2022-04-22 08:54:36.760362+00:00
+    answer: "event_params = [(4.99087, 42.5, 1.81), (9.23076, 26.7, 1.835), (0.11193,
+      254.0, 1.88)]\r\n\r\ndef compute_score(record):\r\n    record.split(\",\")\r\n
+      \   name = record[0]\r\n    scores = []\r\n    for i in range(3):\r\n        scores.append(track_points(record[i
+      + 1], event_params[i]))\r\n    return(name, scores[0], scores[1], scores[2])"
 - model: submission.submission
   pk: 71
   fields:
     sub_question: 21
-    submission_number: 7
-    submission_time: 2022-04-17 11:53:51.845044+00:00
-    answer: "import math\r\n\r\ndef track_points(time, event_parameters):\r\n    a,
-      b, c = event_parameters\r\n\r\n    calc_time = time_to_seconds(time)\r\n\r\n
-      \   if b - calc_time < 0:\r\n        return 0\r\n\r\n    points = math.floor(a*(b-calc_time)**c)\r\n\r\n
-      \   return max(0, points)"
+    submission_number: 5
+    submission_time: 2022-04-22 09:14:20.011157+00:00
+    answer: "def track_points(time, event_parameters):\r\n   timeSeconds = time_to_seconds(time)\r\n
+      \  points = math.floor(event_parameters[0] * ((event_parameters[1] - timeSeconds))**event_parameters[2])\r\n
+      \  if points < 0:\r\n       points = 0\r\n   return points"
 - model: submission.submission
   pk: 72
   fields:
-    sub_question: 22
-    submission_number: 1
-    submission_time: 2022-04-17 11:57:48.896711+00:00
-    answer: "def compute_score(splits):\r\n    name, _200, _110, _800 = splits.split(\",
-      \")\r\n\r\n    params = [(4.99087, 42.5, 1.81), (9.23076, 26.7, 1.835), (0.11193,
-      254.0, 1.88)]\r\n\r\n    scores = [track_points(time, param) for time, param
-      in zip([_200, _110, _800], params)]\r\n\r\n    print(scores)\r\n\r\n    return
-      (name, *scores, sum(scores))"
+    sub_question: 21
+    submission_number: 6
+    submission_time: 2022-04-22 09:14:33.145291+00:00
+    answer: "import math\r\n\r\ndef track_points(time, event_parameters):\r\n   timeSeconds
+      = time_to_seconds(time)\r\n   points = math.floor(event_parameters[0] * ((event_parameters[1]
+      - timeSeconds))**event_parameters[2])\r\n   if points < 0:\r\n       points
+      = 0\r\n   return points"
 - model: submission.submission
   pk: 73
   fields:
-    sub_question: 20
-    submission_number: 8
-    submission_time: 2022-04-17 12:06:30.497587+00:00
-    answer: "import re\n\ndef time_to_seconds(time):\n\n    nums = re.findall(r\"\\d+\",
-      time)\n\n    if len(nums) == 2:\n        ss, fff = nums\n\n        if not (len(ss)
-      == 2 and len(fff) == 3):\n            raise ValueError(\"Incorrect time format
-      entered. Must be ss.fff\")\n        \n        if int(ss) >= 60:\n            raise
-      ValueError(\"Cannot have more than 60 seconds in a minute.\")\n\n        return
-      int(ss) + int(fff)/1000\n    else: \n        mm, ss, fff = nums\n\n        if
-      not (len(mm) == 2 and len(ss) == 2 and len(fff) == 3):\n            raise ValueError(\"Incorrect
-      time format entered. Must be mm:ss.fff\")\n\n        if int(ss) >= 60:\n            raise
-      ValueError(\"Cannot have more than 60 seconds in a minute.\")\n        \n        return
-      60*int(mm) + int(ss) + int(fff)/1000"
+    sub_question: 22
+    submission_number: 4
+    submission_time: 2022-04-22 09:19:59.259126+00:00
+    answer: "event_params = [(4.99087, 42.5, 1.81), (9.23076, 26.7, 1.835), (0.11193,
+      254.0, 1.88)]\r\n\r\ndef compute_score(record):\r\n    record = record.split(\",\")\r\n
+      \   for i in range(4):\r\n        record[i] = record[i].strip()\r\n    name
+      = record[0]\r\n    scores = []\r\n    for i in range(3):\r\n        scores.append(track_points(record[i
+      + 1], event_params[i]))\r\n    return(name, scores[0], scores[1], scores[2],
+      sum(scores))"
 - model: submission.submission
   pk: 74
   fields:
-    sub_question: 21
-    submission_number: 8
-    submission_time: 2022-04-17 12:06:32.050754+00:00
-    answer: "import math\n\ndef track_points(time, event_parameters):\n    a, b, c
-      = event_parameters\n\n    calc_time = time_to_seconds(time)\n\n    if b - calc_time
-      < 0:\n        return 0\n\n    points = math.floor(a*(b-calc_time)**c)\n\n    return
-      max(0, points)"
+    sub_question: 22
+    submission_number: 5
+    submission_time: 2022-04-22 09:20:46.422366+00:00
+    answer: "event_params = [(4.99087, 42.5, 1.81), (9.23076, 26.7, 1.835), (0.11193,
+      254.0, 1.88)]\r\n\r\ndef compute_score(record):\r\n    record = record.split(\",\")\r\n
+      \   if not (len(record) == 4):\r\n       raise ValueError(\"Incorrect number
+      of entries\")\r\n    for i in range(4):\r\n        record[i] = record[i].strip()\r\n
+      \   name = record[0]\r\n    scores = []\r\n    for i in range(3):\r\n        scores.append(track_points(record[i
+      + 1], event_params[i]))\r\n    return(name, scores[0], scores[1], scores[2],
+      sum(scores))"
 - model: submission.submission
   pk: 75
   fields:
+    sub_question: 20
+    submission_number: 7
+    submission_time: 2022-04-22 09:21:01.278009+00:00
+    answer: "def checkIfInt(intVal):\n    try:\n        return int(intVal)\n    except:\n
+      \       raise ValueError(\"Non-integer value entered\")\n\n\ndef time_to_seconds(time):\n
+      \   fractionIndex = time.find(\".\")\n    if (fractionIndex == -1):\n        raise
+      ValueError(\"No fraction of a second\")\n    secsIndex = time.find(\":\")\n
+      \   if (secsIndex == -1):\n        if (not len(time[:fractionIndex]) == 2 or
+      not len(time[fractionIndex + 1:]) == 3):\n            raise ValueError(\"Incorrect
+      Format\")\n        secs = checkIfInt(time[:fractionIndex])\n        fraction
+      = checkIfInt(time[fractionIndex + 1:])\n        if (secs >= 60):\n            raise
+      ValueError(\"Value above 60 entered\")\n        return secs + (fraction / 1000)\n
+      \   else:\n        if (not len(time[:secsIndex]) == 2 or not len(time[secsIndex+1:fractionIndex])
+      == 2 or not len(time[fractionIndex + 1:]) == 3):\n            raise ValueError(\"Incorrect
+      Format\")\n        mins = checkIfInt(time[:secsIndex])\n        secs = checkIfInt(time[secsIndex+1:fractionIndex])\n
+      \       fraction = checkIfInt(time[fractionIndex + 1:])\n        if (mins >=
+      60 or secs >= 60):\n            raise ValueError(\"Value above 60 entered\")\n
+      \       return mins * 60 + secs + (fraction / 1000)"
+- model: submission.submission
+  pk: 76
+  fields:
+    sub_question: 21
+    submission_number: 7
+    submission_time: 2022-04-22 09:21:02.286334+00:00
+    answer: "import math\n\ndef track_points(time, event_parameters):\n   timeSeconds
+      = time_to_seconds(time)\n   points = math.floor(event_parameters[0] * ((event_parameters[1]
+      - timeSeconds))**event_parameters[2])\n   if points < 0:\n       points = 0\n
+      \  return points"
+- model: submission.submission
+  pk: 77
+  fields:
     sub_question: 22
-    submission_number: 2
-    submission_time: 2022-04-17 12:06:33.613699+00:00
-    answer: "def compute_score(splits):\n    name, _200, _110, _800 = splits.split(\",
-      \")\n\n    params = [(4.99087, 42.5, 1.81), (9.23076, 26.7, 1.835), (0.11193,
-      254.0, 1.88)]\n\n    scores = [track_points(time, param) for time, param in
-      zip([_200, _110, _800], params)]\n\n    print(scores)\n\n    return (name, *scores,
-      sum(scores))"
+    submission_number: 6
+    submission_time: 2022-04-22 09:21:03.358646+00:00
+    answer: "event_params = [(4.99087, 42.5, 1.81), (9.23076, 26.7, 1.835), (0.11193,
+      254.0, 1.88)]\n\ndef compute_score(record):\n    record = record.split(\",\")\n
+      \   if not (len(record) == 4):\n       raise ValueError(\"Incorrect number of
+      entries\")\n    for i in range(4):\n        record[i] = record[i].strip()\n
+      \   name = record[0]\n    scores = []\n    for i in range(3):\n        scores.append(track_points(record[i
+      + 1], event_params[i]))\n    return(name, scores[0], scores[1], scores[2], sum(scores))"
 - model: static_lint.staticlint
   pk: 58
   fields:
     question_number: 1
-    feedback: ''
+    feedback: 'line 33, column 54: EOL while scanning string literal '
 - model: static_lint.staticlint
   pk: 59
   fields:
     question_number: 1
-    feedback: ''
+    feedback: 'line 5, column 19: Undefined variable ''value'''
 - model: static_lint.staticlint
   pk: 60
   fields:
     question_number: 1
-    feedback: ''
+    feedback: 'line 5, column 19: Undefined variable ''value'''
 - model: static_lint.staticlint
   pk: 61
   fields:
@@ -350,7 +387,7 @@
   pk: 62
   fields:
     question_number: 1
-    feedback: ''
+    feedback: 'line 43, column 97: invalid syntax '
 - model: static_lint.staticlint
   pk: 63
   fields:
@@ -360,43 +397,42 @@
   pk: 64
   fields:
     question_number: 1
-    feedback: 'line 5, column 46: Value ''tuple'' is unsubscriptable'
+    feedback: ''
 - model: static_lint.staticlint
   pk: 65
   fields:
     question_number: 1
-    feedback: 'line 5, column 0: function already defined line 1line 29, column 46:
-      Value ''tuple'' is unsubscriptable'
+    feedback: ''
 - model: static_lint.staticlint
   pk: 66
   fields:
     question_number: 1
-    feedback: 'line 5, column 0: function already defined line 1'
+    feedback: ''
 - model: static_lint.staticlint
   pk: 67
   fields:
     question_number: 1
-    feedback: 'line 5, column 0: function already defined line 1'
+    feedback: ''
 - model: static_lint.staticlint
   pk: 68
   fields:
     question_number: 1
-    feedback: 'line 5, column 0: function already defined line 1'
+    feedback: 'line 5, column 5: invalid syntax '
 - model: static_lint.staticlint
   pk: 69
   fields:
     question_number: 1
-    feedback: ''
+    feedback: 'line 17, column 5: invalid syntax '
 - model: static_lint.staticlint
   pk: 70
   fields:
     question_number: 1
-    feedback: 'line 1, column 0: Unable to import ''re'''
+    feedback: ''
 - model: static_lint.staticlint
   pk: 71
   fields:
     question_number: 1
-    feedback: ''
+    feedback: 'line 5, column 12: Undefined variable ''math'''
 - model: static_lint.staticlint
   pk: 72
   fields:
@@ -406,7 +442,7 @@
   pk: 73
   fields:
     question_number: 1
-    feedback: 'line 1, column 0: Unable to import ''re'''
+    feedback: ''
 - model: static_lint.staticlint
   pk: 74
   fields:
@@ -414,6 +450,16 @@
     feedback: ''
 - model: static_lint.staticlint
   pk: 75
+  fields:
+    question_number: 1
+    feedback: ''
+- model: static_lint.staticlint
+  pk: 76
+  fields:
+    question_number: 1
+    feedback: ''
+- model: static_lint.staticlint
+  pk: 77
   fields:
     question_number: 1
     feedback: ''
@@ -424,9 +470,9 @@
     question_part: 1
     submission: 58
     test_name: test_invalid_fractionseconds_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 2
   fields:
@@ -434,9 +480,9 @@
     question_part: 1
     submission: 58
     test_name: test_invalid_minutes_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 3
   fields:
@@ -444,9 +490,9 @@
     question_part: 1
     submission: 58
     test_name: test_invalid_seconds2_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 4
   fields:
@@ -454,9 +500,9 @@
     question_part: 1
     submission: 58
     test_name: test_invalid_seconds_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 5
   fields:
@@ -464,9 +510,9 @@
     question_part: 1
     submission: 58
     test_name: test_minutes_seconds
-    test_result: SU
-    test_feedback: Success
-    mark: 7.0
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 6
   fields:
@@ -475,7 +521,7 @@
     submission: 58
     test_name: test_seconds_only
     test_result: E
-    test_feedback: 'ERROR! '
+    test_feedback: ERROR! Syntax Error
     mark: 0.0
 - model: results.result
   pk: 7
@@ -525,7 +571,7 @@
     submission: 59
     test_name: test_minutes_seconds
     test_result: E
-    test_feedback: Error
+    test_feedback: 'ERROR! '
     mark: 0.0
 - model: results.result
   pk: 12
@@ -584,9 +630,9 @@
     question_part: 1
     submission: 60
     test_name: test_minutes_seconds
-    test_result: SU
-    test_feedback: Success
-    mark: 7.0
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
 - model: results.result
   pk: 18
   fields:
@@ -604,9 +650,9 @@
     question_part: 1
     submission: 61
     test_name: test_invalid_fractionseconds_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
 - model: results.result
   pk: 20
   fields:
@@ -614,9 +660,9 @@
     question_part: 1
     submission: 61
     test_name: test_invalid_minutes_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
 - model: results.result
   pk: 21
   fields:
@@ -634,9 +680,9 @@
     question_part: 1
     submission: 61
     test_name: test_invalid_seconds_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
 - model: results.result
   pk: 23
   fields:
@@ -654,9 +700,9 @@
     question_part: 1
     submission: 61
     test_name: test_seconds_only
-    test_result: E
-    test_feedback: 'ERROR! '
-    mark: 0.0
+    test_result: SU
+    test_feedback: Success
+    mark: 4.0
 - model: results.result
   pk: 25
   fields:
@@ -664,9 +710,9 @@
     question_part: 1
     submission: 62
     test_name: test_invalid_fractionseconds_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 26
   fields:
@@ -674,9 +720,9 @@
     question_part: 1
     submission: 62
     test_name: test_invalid_minutes_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 27
   fields:
@@ -684,9 +730,9 @@
     question_part: 1
     submission: 62
     test_name: test_invalid_seconds2_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 28
   fields:
@@ -694,9 +740,9 @@
     question_part: 1
     submission: 62
     test_name: test_invalid_seconds_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 29
   fields:
@@ -704,9 +750,9 @@
     question_part: 1
     submission: 62
     test_name: test_minutes_seconds
-    test_result: SU
-    test_feedback: Success
-    mark: 7.0
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 30
   fields:
@@ -715,7 +761,7 @@
     submission: 62
     test_name: test_seconds_only
     test_result: E
-    test_feedback: 'ERROR! '
+    test_feedback: ERROR! Syntax Error
     mark: 0.0
 - model: results.result
   pk: 31
@@ -774,9 +820,9 @@
     question_part: 1
     submission: 63
     test_name: test_seconds_only
-    test_result: E
-    test_feedback: 'ERROR! '
-    mark: 0.0
+    test_result: SU
+    test_feedback: Success
+    mark: 4.0
 - model: results.result
   pk: 37
   fields:
@@ -784,9 +830,9 @@
     question_part: 2
     submission: 64
     test_name: test_invalid_format_fractionseconds
-    test_result: E
-    test_feedback: 'ERROR! '
-    mark: 0.0
+    test_result: SU
+    test_feedback: Success
+    mark: 0.5
 - model: results.result
   pk: 38
   fields:
@@ -794,9 +840,9 @@
     question_part: 2
     submission: 64
     test_name: test_invalid_format_minutes
-    test_result: E
-    test_feedback: 'ERROR! '
-    mark: 0.0
+    test_result: SU
+    test_feedback: Success
+    mark: 0.5
 - model: results.result
   pk: 39
   fields:
@@ -804,9 +850,9 @@
     question_part: 2
     submission: 64
     test_name: test_invalid_format_seconds
-    test_result: E
-    test_feedback: 'ERROR! '
-    mark: 0.0
+    test_result: SU
+    test_feedback: Success
+    mark: 0.5
 - model: results.result
   pk: 40
   fields:
@@ -814,9 +860,9 @@
     question_part: 2
     submission: 64
     test_name: test_invalid_format_seconds2
-    test_result: E
-    test_feedback: 'ERROR! '
-    mark: 0.0
+    test_result: SU
+    test_feedback: Success
+    mark: 0.5
 - model: results.result
   pk: 41
   fields:
@@ -824,9 +870,9 @@
     question_part: 2
     submission: 64
     test_name: test_invalid_format_too_few_parameters
-    test_result: E
-    test_feedback: 'ERROR! '
-    mark: 0.0
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
 - model: results.result
   pk: 42
   fields:
@@ -834,9 +880,9 @@
     question_part: 2
     submission: 64
     test_name: test_invalid_format_too_many_parameters
-    test_result: E
-    test_feedback: 'ERROR! '
-    mark: 0.0
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
 - model: results.result
   pk: 43
   fields:
@@ -864,9 +910,9 @@
     question_part: 2
     submission: 65
     test_name: test_invalid_format_fractionseconds
-    test_result: E
-    test_feedback: 'ERROR! '
-    mark: 0.0
+    test_result: SU
+    test_feedback: Success
+    mark: 0.5
 - model: results.result
   pk: 46
   fields:
@@ -874,9 +920,9 @@
     question_part: 2
     submission: 65
     test_name: test_invalid_format_minutes
-    test_result: E
-    test_feedback: 'ERROR! '
-    mark: 0.0
+    test_result: SU
+    test_feedback: Success
+    mark: 0.5
 - model: results.result
   pk: 47
   fields:
@@ -884,9 +930,9 @@
     question_part: 2
     submission: 65
     test_name: test_invalid_format_seconds
-    test_result: E
-    test_feedback: 'ERROR! '
-    mark: 0.0
+    test_result: SU
+    test_feedback: Success
+    mark: 0.5
 - model: results.result
   pk: 48
   fields:
@@ -894,9 +940,9 @@
     question_part: 2
     submission: 65
     test_name: test_invalid_format_seconds2
-    test_result: E
-    test_feedback: 'ERROR! '
-    mark: 0.0
+    test_result: SU
+    test_feedback: Success
+    mark: 0.5
 - model: results.result
   pk: 49
   fields:
@@ -904,9 +950,9 @@
     question_part: 2
     submission: 65
     test_name: test_invalid_format_too_few_parameters
-    test_result: E
-    test_feedback: 'ERROR! '
-    mark: 0.0
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
 - model: results.result
   pk: 50
   fields:
@@ -914,9 +960,9 @@
     question_part: 2
     submission: 65
     test_name: test_invalid_format_too_many_parameters
-    test_result: E
-    test_feedback: 'ERROR! '
-    mark: 0.0
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
 - model: results.result
   pk: 51
   fields:
@@ -924,8 +970,8 @@
     question_part: 2
     submission: 65
     test_name: test_points
-    test_result: E
-    test_feedback: 'ERROR! '
+    test_result: F
+    test_feedback: Failed
     mark: 0.0
 - model: results.result
   pk: 52
@@ -1004,8 +1050,8 @@
     question_part: 2
     submission: 66
     test_name: test_points
-    test_result: E
-    test_feedback: 'ERROR! '
+    test_result: F
+    test_feedback: Failed
     mark: 0.0
 - model: results.result
   pk: 60
@@ -1084,8 +1130,8 @@
     question_part: 2
     submission: 67
     test_name: test_points
-    test_result: E
-    test_feedback: 'ERROR! '
+    test_result: F
+    test_feedback: Success
     mark: 0.0
 - model: results.result
   pk: 68
@@ -1101,169 +1147,169 @@
   pk: 69
   fields:
     question_number: 1
-    question_part: 2
+    question_part: 3
     submission: 68
-    test_name: test_invalid_format_fractionseconds
-    test_result: SU
-    test_feedback: Success
-    mark: 0.5
+    test_name: test_point_1
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 70
   fields:
     question_number: 1
-    question_part: 2
+    question_part: 3
     submission: 68
-    test_name: test_invalid_format_minutes
-    test_result: SU
-    test_feedback: Success
-    mark: 0.5
+    test_name: test_point_2
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 71
   fields:
     question_number: 1
-    question_part: 2
+    question_part: 3
     submission: 68
-    test_name: test_invalid_format_seconds
-    test_result: SU
-    test_feedback: Success
-    mark: 0.5
+    test_name: test_point_3
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 72
   fields:
     question_number: 1
-    question_part: 2
+    question_part: 3
     submission: 68
-    test_name: test_invalid_format_seconds2
-    test_result: SU
-    test_feedback: Success
-    mark: 0.5
+    test_name: test_too_few_entries
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 73
   fields:
     question_number: 1
-    question_part: 2
+    question_part: 3
     submission: 68
-    test_name: test_invalid_format_too_few_parameters
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    test_name: test_too_many_entries
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 74
   fields:
     question_number: 1
-    question_part: 2
+    question_part: 3
     submission: 68
-    test_name: test_invalid_format_too_many_parameters
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    test_name: test_zero_point
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 75
   fields:
     question_number: 1
-    question_part: 2
-    submission: 68
-    test_name: test_points
+    question_part: 3
+    submission: 69
+    test_name: test_point_1
     test_result: E
-    test_feedback: 'ERROR! '
+    test_feedback: ERROR! Syntax Error
     mark: 0.0
 - model: results.result
   pk: 76
   fields:
     question_number: 1
-    question_part: 2
-    submission: 68
-    test_name: test_zero_points
+    question_part: 3
+    submission: 69
+    test_name: test_point_2
     test_result: E
-    test_feedback: 'ERROR! '
+    test_feedback: ERROR! Syntax Error
     mark: 0.0
 - model: results.result
   pk: 77
   fields:
     question_number: 1
-    question_part: 2
+    question_part: 3
     submission: 69
-    test_name: test_invalid_format_fractionseconds
-    test_result: SU
-    test_feedback: Success
-    mark: 0.5
+    test_name: test_point_3
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 78
   fields:
     question_number: 1
-    question_part: 2
+    question_part: 3
     submission: 69
-    test_name: test_invalid_format_minutes
-    test_result: SU
-    test_feedback: Success
-    mark: 0.5
+    test_name: test_too_few_entries
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 79
   fields:
     question_number: 1
-    question_part: 2
+    question_part: 3
     submission: 69
-    test_name: test_invalid_format_seconds
-    test_result: SU
-    test_feedback: Success
-    mark: 0.5
+    test_name: test_too_many_entries
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 80
   fields:
     question_number: 1
-    question_part: 2
+    question_part: 3
     submission: 69
-    test_name: test_invalid_format_seconds2
-    test_result: SU
-    test_feedback: Success
-    mark: 0.5
+    test_name: test_zero_point
+    test_result: E
+    test_feedback: ERROR! Syntax Error
+    mark: 0.0
 - model: results.result
   pk: 81
   fields:
     question_number: 1
-    question_part: 2
-    submission: 69
-    test_name: test_invalid_format_too_few_parameters
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    question_part: 3
+    submission: 70
+    test_name: test_point_1
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
 - model: results.result
   pk: 82
   fields:
     question_number: 1
-    question_part: 2
-    submission: 69
-    test_name: test_invalid_format_too_many_parameters
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    question_part: 3
+    submission: 70
+    test_name: test_point_2
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
 - model: results.result
   pk: 83
   fields:
     question_number: 1
-    question_part: 2
-    submission: 69
-    test_name: test_points
-    test_result: SU
-    test_feedback: Success
-    mark: 8.0
+    question_part: 3
+    submission: 70
+    test_name: test_point_3
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
 - model: results.result
   pk: 84
   fields:
     question_number: 1
-    question_part: 2
-    submission: 69
-    test_name: test_zero_points
+    question_part: 3
+    submission: 70
+    test_name: test_too_few_entries
     test_result: SU
     test_feedback: Success
-    mark: 3.0
+    mark: 1.0
 - model: results.result
   pk: 85
   fields:
     question_number: 1
-    question_part: 1
+    question_part: 3
     submission: 70
-    test_name: test_invalid_fractionseconds_format
+    test_name: test_too_many_entries
     test_result: SU
     test_feedback: Success
     mark: 1.0
@@ -1271,54 +1317,14 @@
   pk: 86
   fields:
     question_number: 1
-    question_part: 1
+    question_part: 3
     submission: 70
-    test_name: test_invalid_minutes_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
+    test_name: test_zero_point
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
 - model: results.result
   pk: 87
-  fields:
-    question_number: 1
-    question_part: 1
-    submission: 70
-    test_name: test_invalid_seconds2_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
-- model: results.result
-  pk: 88
-  fields:
-    question_number: 1
-    question_part: 1
-    submission: 70
-    test_name: test_invalid_seconds_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
-- model: results.result
-  pk: 89
-  fields:
-    question_number: 1
-    question_part: 1
-    submission: 70
-    test_name: test_minutes_seconds
-    test_result: SU
-    test_feedback: Success
-    mark: 7.0
-- model: results.result
-  pk: 90
-  fields:
-    question_number: 1
-    question_part: 1
-    submission: 70
-    test_name: test_seconds_only
-    test_result: SU
-    test_feedback: Success
-    mark: 4.0
-- model: results.result
-  pk: 91
   fields:
     question_number: 1
     question_part: 2
@@ -1328,7 +1334,7 @@
     test_feedback: Success
     mark: 0.5
 - model: results.result
-  pk: 92
+  pk: 88
   fields:
     question_number: 1
     question_part: 2
@@ -1338,7 +1344,7 @@
     test_feedback: Success
     mark: 0.5
 - model: results.result
-  pk: 93
+  pk: 89
   fields:
     question_number: 1
     question_part: 2
@@ -1348,7 +1354,7 @@
     test_feedback: Success
     mark: 0.5
 - model: results.result
-  pk: 94
+  pk: 90
   fields:
     question_number: 1
     question_part: 2
@@ -1358,7 +1364,7 @@
     test_feedback: Success
     mark: 0.5
 - model: results.result
-  pk: 95
+  pk: 91
   fields:
     question_number: 1
     question_part: 2
@@ -1368,7 +1374,7 @@
     test_feedback: Success
     mark: 1.0
 - model: results.result
-  pk: 96
+  pk: 92
   fields:
     question_number: 1
     question_part: 2
@@ -1378,192 +1384,232 @@
     test_feedback: Success
     mark: 1.0
 - model: results.result
-  pk: 97
+  pk: 93
   fields:
     question_number: 1
     question_part: 2
     submission: 71
     test_name: test_points
-    test_result: SU
-    test_feedback: Success
-    mark: 8.0
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
 - model: results.result
-  pk: 98
+  pk: 94
   fields:
     question_number: 1
     question_part: 2
     submission: 71
     test_name: test_zero_points
-    test_result: SU
-    test_feedback: Success
-    mark: 3.0
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
 - model: results.result
-  pk: 99
-  fields:
-    question_number: 1
-    question_part: 3
-    submission: 72
-    test_name: test_point_1
-    test_result: SU
-    test_feedback: Success
-    mark: 5.0
-- model: results.result
-  pk: 100
-  fields:
-    question_number: 1
-    question_part: 3
-    submission: 72
-    test_name: test_point_2
-    test_result: SU
-    test_feedback: Success
-    mark: 5.0
-- model: results.result
-  pk: 101
-  fields:
-    question_number: 1
-    question_part: 3
-    submission: 72
-    test_name: test_point_3
-    test_result: SU
-    test_feedback: Success
-    mark: 5.0
-- model: results.result
-  pk: 102
-  fields:
-    question_number: 1
-    question_part: 3
-    submission: 72
-    test_name: test_too_few_entries
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
-- model: results.result
-  pk: 103
-  fields:
-    question_number: 1
-    question_part: 3
-    submission: 72
-    test_name: test_too_many_entries
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
-- model: results.result
-  pk: 104
-  fields:
-    question_number: 1
-    question_part: 3
-    submission: 72
-    test_name: test_zero_point
-    test_result: SU
-    test_feedback: Success
-    mark: 3.0
-- model: results.result
-  pk: 105
-  fields:
-    question_number: 1
-    question_part: 1
-    submission: 73
-    test_name: test_invalid_fractionseconds_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
-- model: results.result
-  pk: 106
-  fields:
-    question_number: 1
-    question_part: 1
-    submission: 73
-    test_name: test_invalid_minutes_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
-- model: results.result
-  pk: 107
-  fields:
-    question_number: 1
-    question_part: 1
-    submission: 73
-    test_name: test_invalid_seconds2_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
-- model: results.result
-  pk: 108
-  fields:
-    question_number: 1
-    question_part: 1
-    submission: 73
-    test_name: test_invalid_seconds_format
-    test_result: SU
-    test_feedback: Success
-    mark: 1.0
-- model: results.result
-  pk: 109
-  fields:
-    question_number: 1
-    question_part: 1
-    submission: 73
-    test_name: test_minutes_seconds
-    test_result: SU
-    test_feedback: Success
-    mark: 7.0
-- model: results.result
-  pk: 110
-  fields:
-    question_number: 1
-    question_part: 1
-    submission: 73
-    test_name: test_seconds_only
-    test_result: SU
-    test_feedback: Success
-    mark: 4.0
-- model: results.result
-  pk: 111
+  pk: 95
   fields:
     question_number: 1
     question_part: 2
-    submission: 74
+    submission: 72
     test_name: test_invalid_format_fractionseconds
     test_result: SU
     test_feedback: Success
     mark: 0.5
 - model: results.result
-  pk: 112
+  pk: 96
   fields:
     question_number: 1
     question_part: 2
-    submission: 74
+    submission: 72
     test_name: test_invalid_format_minutes
     test_result: SU
     test_feedback: Success
     mark: 0.5
 - model: results.result
-  pk: 113
+  pk: 97
   fields:
     question_number: 1
     question_part: 2
-    submission: 74
+    submission: 72
     test_name: test_invalid_format_seconds
     test_result: SU
     test_feedback: Success
     mark: 0.5
 - model: results.result
-  pk: 114
+  pk: 98
   fields:
     question_number: 1
     question_part: 2
-    submission: 74
+    submission: 72
     test_name: test_invalid_format_seconds2
     test_result: SU
     test_feedback: Success
     mark: 0.5
 - model: results.result
-  pk: 115
+  pk: 99
   fields:
     question_number: 1
     question_part: 2
-    submission: 74
+    submission: 72
     test_name: test_invalid_format_too_few_parameters
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 100
+  fields:
+    question_number: 1
+    question_part: 2
+    submission: 72
+    test_name: test_invalid_format_too_many_parameters
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 101
+  fields:
+    question_number: 1
+    question_part: 2
+    submission: 72
+    test_name: test_points
+    test_result: SU
+    test_feedback: Success
+    mark: 8.0
+- model: results.result
+  pk: 102
+  fields:
+    question_number: 1
+    question_part: 2
+    submission: 72
+    test_name: test_zero_points
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
+- model: results.result
+  pk: 103
+  fields:
+    question_number: 1
+    question_part: 3
+    submission: 73
+    test_name: test_point_1
+    test_result: SU
+    test_feedback: Success
+    mark: 5.0
+- model: results.result
+  pk: 104
+  fields:
+    question_number: 1
+    question_part: 3
+    submission: 73
+    test_name: test_point_2
+    test_result: SU
+    test_feedback: Success
+    mark: 5.0
+- model: results.result
+  pk: 105
+  fields:
+    question_number: 1
+    question_part: 3
+    submission: 73
+    test_name: test_point_3
+    test_result: SU
+    test_feedback: Success
+    mark: 5.0
+- model: results.result
+  pk: 106
+  fields:
+    question_number: 1
+    question_part: 3
+    submission: 73
+    test_name: test_too_few_entries
+    test_result: E
+    test_feedback: Error
+    mark: 0.0
+- model: results.result
+  pk: 107
+  fields:
+    question_number: 1
+    question_part: 3
+    submission: 73
+    test_name: test_too_many_entries
+    test_result: F
+    test_feedback: Failed
+    mark: 0.0
+- model: results.result
+  pk: 108
+  fields:
+    question_number: 1
+    question_part: 3
+    submission: 73
+    test_name: test_zero_point
+    test_result: SU
+    test_feedback: Success
+    mark: 3.0
+- model: results.result
+  pk: 109
+  fields:
+    question_number: 1
+    question_part: 3
+    submission: 74
+    test_name: test_point_1
+    test_result: SU
+    test_feedback: Success
+    mark: 5.0
+- model: results.result
+  pk: 110
+  fields:
+    question_number: 1
+    question_part: 3
+    submission: 74
+    test_name: test_point_2
+    test_result: SU
+    test_feedback: Success
+    mark: 5.0
+- model: results.result
+  pk: 111
+  fields:
+    question_number: 1
+    question_part: 3
+    submission: 74
+    test_name: test_point_3
+    test_result: SU
+    test_feedback: Success
+    mark: 5.0
+- model: results.result
+  pk: 112
+  fields:
+    question_number: 1
+    question_part: 3
+    submission: 74
+    test_name: test_too_few_entries
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 113
+  fields:
+    question_number: 1
+    question_part: 3
+    submission: 74
+    test_name: test_too_many_entries
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 114
+  fields:
+    question_number: 1
+    question_part: 3
+    submission: 74
+    test_name: test_zero_point
+    test_result: SU
+    test_feedback: Success
+    mark: 3.0
+- model: results.result
+  pk: 115
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 75
+    test_name: test_invalid_fractionseconds_format
     test_result: SU
     test_feedback: Success
     mark: 1.0
@@ -1571,9 +1617,9 @@
   pk: 116
   fields:
     question_number: 1
-    question_part: 2
-    submission: 74
-    test_name: test_invalid_format_too_many_parameters
+    question_part: 1
+    submission: 75
+    test_name: test_invalid_minutes_format
     test_result: SU
     test_feedback: Success
     mark: 1.0
@@ -1581,78 +1627,178 @@
   pk: 117
   fields:
     question_number: 1
+    question_part: 1
+    submission: 75
+    test_name: test_invalid_seconds2_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 118
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 75
+    test_name: test_invalid_seconds_format
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 119
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 75
+    test_name: test_minutes_seconds
+    test_result: SU
+    test_feedback: Success
+    mark: 7.0
+- model: results.result
+  pk: 120
+  fields:
+    question_number: 1
+    question_part: 1
+    submission: 75
+    test_name: test_seconds_only
+    test_result: SU
+    test_feedback: Success
+    mark: 4.0
+- model: results.result
+  pk: 121
+  fields:
+    question_number: 1
     question_part: 2
-    submission: 74
+    submission: 76
+    test_name: test_invalid_format_fractionseconds
+    test_result: SU
+    test_feedback: Success
+    mark: 0.5
+- model: results.result
+  pk: 122
+  fields:
+    question_number: 1
+    question_part: 2
+    submission: 76
+    test_name: test_invalid_format_minutes
+    test_result: SU
+    test_feedback: Success
+    mark: 0.5
+- model: results.result
+  pk: 123
+  fields:
+    question_number: 1
+    question_part: 2
+    submission: 76
+    test_name: test_invalid_format_seconds
+    test_result: SU
+    test_feedback: Success
+    mark: 0.5
+- model: results.result
+  pk: 124
+  fields:
+    question_number: 1
+    question_part: 2
+    submission: 76
+    test_name: test_invalid_format_seconds2
+    test_result: SU
+    test_feedback: Success
+    mark: 0.5
+- model: results.result
+  pk: 125
+  fields:
+    question_number: 1
+    question_part: 2
+    submission: 76
+    test_name: test_invalid_format_too_few_parameters
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 126
+  fields:
+    question_number: 1
+    question_part: 2
+    submission: 76
+    test_name: test_invalid_format_too_many_parameters
+    test_result: SU
+    test_feedback: Success
+    mark: 1.0
+- model: results.result
+  pk: 127
+  fields:
+    question_number: 1
+    question_part: 2
+    submission: 76
     test_name: test_points
     test_result: SU
     test_feedback: Success
     mark: 8.0
 - model: results.result
-  pk: 118
+  pk: 128
   fields:
     question_number: 1
     question_part: 2
-    submission: 74
+    submission: 76
     test_name: test_zero_points
-    test_result: SU
-    test_feedback: Success
-    mark: 3.0
+    test_result: E
+    test_feedback: 'ERROR! '
+    mark: 0.0
 - model: results.result
-  pk: 119
+  pk: 129
   fields:
     question_number: 1
     question_part: 3
-    submission: 75
+    submission: 77
     test_name: test_point_1
     test_result: SU
     test_feedback: Success
     mark: 5.0
 - model: results.result
-  pk: 120
+  pk: 130
   fields:
     question_number: 1
     question_part: 3
-    submission: 75
+    submission: 77
     test_name: test_point_2
     test_result: SU
     test_feedback: Success
     mark: 5.0
 - model: results.result
-  pk: 121
+  pk: 131
   fields:
     question_number: 1
     question_part: 3
-    submission: 75
+    submission: 77
     test_name: test_point_3
     test_result: SU
     test_feedback: Success
     mark: 5.0
 - model: results.result
-  pk: 122
+  pk: 132
   fields:
     question_number: 1
     question_part: 3
-    submission: 75
+    submission: 77
     test_name: test_too_few_entries
     test_result: SU
     test_feedback: Success
     mark: 1.0
 - model: results.result
-  pk: 123
+  pk: 133
   fields:
     question_number: 1
     question_part: 3
-    submission: 75
+    submission: 77
     test_name: test_too_many_entries
     test_result: SU
     test_feedback: Success
     mark: 1.0
 - model: results.result
-  pk: 124
+  pk: 134
   fields:
     question_number: 1
     question_part: 3
-    submission: 75
+    submission: 77
     test_name: test_zero_point
     test_result: SU
     test_feedback: Success
@@ -1661,817 +1807,714 @@
   pk: 11
   fields:
     identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
-      [(<function time_to_seconds at 0x000001E231A54CA0>, '04:01.5')]
+      [(<function time_to_seconds at 0x0000021CB96F3DC0>, '04:01.5')]
     part: 1
     params_failing: '''04:01.5'''
-    test_result: SU
-    test: 1
+    test_result: F
+    test: 19
 - model: results.subtest
   pk: 12
   fields:
     identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
-      [(<function time_to_seconds at 0x000001E231A54E50>, '4:00.000')]
-    part: 1
-    params_failing: '''4:00.000'''
-    test_result: SU
-    test: 2
-- model: results.subtest
-  pk: 13
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
-      [(<function time_to_seconds at 0x000001E231A54AF0>, '01:61.000')]
-    part: 1
-    params_failing: '''01:61.000'''
-    test_result: SU
-    test: 3
-- model: results.subtest
-  pk: 14
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
-      [(<function time_to_seconds at 0x000001E231A54C10>, '04:1.000')]
-    part: 1
-    params_failing: '''04:1.000'''
-    test_result: SU
-    test: 4
-- model: results.subtest
-  pk: 15
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_minutes_seconds [04:00.000]
-    part: 1
-    params_failing: '''04:00.000'''
-    test_result: SU
-    test: 109
-- model: results.subtest
-  pk: 16
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_minutes_seconds [02:15.000]
-    part: 1
-    params_failing: '''02:15.000'''
-    test_result: SU
-    test: 109
-- model: results.subtest
-  pk: 17
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_minutes_seconds [02:05.520]
-    part: 1
-    params_failing: '''02:05.520'''
-    test_result: SU
-    test: 109
-- model: results.subtest
-  pk: 18
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_minutes_seconds [01:59.999]
-    part: 1
-    params_failing: '''01:59.999'''
-    test_result: SU
-    test: 109
-- model: results.subtest
-  pk: 19
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
-      [(<function time_to_seconds at 0x000001E231A54C10>, '04:01.5')]
-    part: 1
-    params_failing: '''04:01.5'''
-    test_result: SU
-    test: 7
-- model: results.subtest
-  pk: 20
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
-      [(<function time_to_seconds at 0x000001E2335C0B80>, '4:00.000')]
+      [(<function time_to_seconds at 0x0000021CB96F3F70>, '4:00.000')]
     part: 1
     params_failing: '''4:00.000'''
     test_result: SU
     test: 8
 - model: results.subtest
-  pk: 21
+  pk: 13
   fields:
     identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
-      [(<function time_to_seconds at 0x000001E2335C0C10>, '01:61.000')]
+      [(<function time_to_seconds at 0x0000021CBAAAD040>, '01:61.000')]
     part: 1
     params_failing: '''01:61.000'''
     test_result: SU
     test: 9
 - model: results.subtest
-  pk: 22
+  pk: 14
   fields:
     identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
-      [(<function time_to_seconds at 0x000001E2335C0AF0>, '04:1.000')]
+      [(<function time_to_seconds at 0x0000021CB96F3DC0>, '04:1.000')]
     part: 1
     params_failing: '''04:1.000'''
-    test_result: SU
-    test: 10
+    test_result: F
+    test: 22
 - model: results.subtest
-  pk: 23
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
-      [(<function time_to_seconds at 0x000001E231A54D30>, '04:01.5')]
-    part: 1
-    params_failing: '''04:01.5'''
-    test_result: SU
-    test: 13
-- model: results.subtest
-  pk: 24
+  pk: 15
   fields:
     identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
-      [(<function time_to_seconds at 0x000001E2341830D0>, '4:00.000')]
+      [(<function time_to_seconds at 0x0000021CBB37A3A0>, '4:00.000')]
     part: 1
     params_failing: '''4:00.000'''
     test_result: SU
     test: 14
 - model: results.subtest
-  pk: 25
+  pk: 16
   fields:
     identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
-      [(<function time_to_seconds at 0x000001E233E2BE50>, '01:61.000')]
+      [(<function time_to_seconds at 0x0000021CBB37A4C0>, '01:61.000')]
     part: 1
     params_failing: '''01:61.000'''
     test_result: SU
     test: 15
 - model: results.subtest
-  pk: 26
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
-      [(<function time_to_seconds at 0x000001E233822AF0>, '04:1.000')]
-    part: 1
-    params_failing: '''04:1.000'''
-    test_result: SU
-    test: 16
-- model: results.subtest
-  pk: 27
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
-      [(<function time_to_seconds at 0x000001E233E2BF70>, '04:01.5')]
-    part: 1
-    params_failing: '''04:01.5'''
-    test_result: SU
-    test: 19
-- model: results.subtest
-  pk: 28
+  pk: 17
   fields:
     identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
-      [(<function time_to_seconds at 0x000001E2349CC670>, '4:00.000')]
+      [(<function time_to_seconds at 0x0000021CBBCDB820>, '4:00.000')]
     part: 1
     params_failing: '''4:00.000'''
-    test_result: SU
+    test_result: F
     test: 20
 - model: results.subtest
-  pk: 29
+  pk: 18
   fields:
     identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
-      [(<function time_to_seconds at 0x000001E2349CC700>, '01:61.000')]
+      [(<function time_to_seconds at 0x0000021CBBCDB8B0>, '01:61.000')]
     part: 1
     params_failing: '''01:61.000'''
     test_result: SU
     test: 21
 - model: results.subtest
-  pk: 30
+  pk: 19
   fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
-      [(<function time_to_seconds at 0x000001E2349CC5E0>, '04:1.000')]
+    identifier: configs.t_test_question_1i.TestQuestion1.test_minutes_seconds [04:00.000]
     part: 1
-    params_failing: '''04:1.000'''
+    params_failing: '''04:00.000'''
     test_result: SU
-    test: 22
+    test: 119
 - model: results.subtest
-  pk: 31
+  pk: 20
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_minutes_seconds [02:15.000]
+    part: 1
+    params_failing: '''02:15.000'''
+    test_result: SU
+    test: 119
+- model: results.subtest
+  pk: 21
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_minutes_seconds [02:05.520]
+    part: 1
+    params_failing: '''02:05.520'''
+    test_result: SU
+    test: 119
+- model: results.subtest
+  pk: 22
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_minutes_seconds [01:59.999]
+    part: 1
+    params_failing: '''01:59.999'''
+    test_result: SU
+    test: 119
+- model: results.subtest
+  pk: 23
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_seconds_only [10.530]
+    part: 1
+    params_failing: '''10.530'''
+    test_result: SU
+    test: 120
+- model: results.subtest
+  pk: 24
   fields:
     identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
-      [(<function time_to_seconds at 0x000001E2349CC5E0>, '04:01.5')]
+      [(<function time_to_seconds at 0x0000021CBBCDB670>, '04:01.5')]
     part: 1
     params_failing: '''04:01.5'''
     test_result: SU
-    test: 25
+    test: 115
 - model: results.subtest
-  pk: 32
+  pk: 25
   fields:
     identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
-      [(<function time_to_seconds at 0x000001E236287B80>, '4:00.000')]
-    part: 1
-    params_failing: '''4:00.000'''
-    test_result: SU
-    test: 26
-- model: results.subtest
-  pk: 33
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
-      [(<function time_to_seconds at 0x000001E236287C10>, '01:61.000')]
-    part: 1
-    params_failing: '''01:61.000'''
-    test_result: SU
-    test: 27
-- model: results.subtest
-  pk: 34
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
-      [(<function time_to_seconds at 0x000001E236287AF0>, '04:1.000')]
-    part: 1
-    params_failing: '''04:1.000'''
-    test_result: SU
-    test: 28
-- model: results.subtest
-  pk: 35
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
-      [(<function time_to_seconds at 0x000001E236287AF0>, '04:01.5')]
-    part: 1
-    params_failing: '''04:01.5'''
-    test_result: SU
-    test: 31
-- model: results.subtest
-  pk: 36
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
-      [(<function time_to_seconds at 0x000001E2349CCA60>, '4:00.000')]
+      [(<function time_to_seconds at 0x0000021CBC542E50>, '4:00.000')]
     part: 1
     params_failing: '''4:00.000'''
     test_result: SU
     test: 32
 - model: results.subtest
-  pk: 37
+  pk: 26
   fields:
     identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
-      [(<function time_to_seconds at 0x000001E2349CC670>, '01:61.000')]
+      [(<function time_to_seconds at 0x0000021CBC542F70>, '01:61.000')]
     part: 1
     params_failing: '''01:61.000'''
     test_result: SU
     test: 33
 - model: results.subtest
-  pk: 38
+  pk: 27
   fields:
     identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
-      [(<function time_to_seconds at 0x000001E2349CC8B0>, '04:1.000')]
+      [(<function time_to_seconds at 0x0000021CBBCDB670>, '04:1.000')]
     part: 1
     params_failing: '''04:1.000'''
     test_result: SU
-    test: 34
+    test: 118
+- model: results.subtest
+  pk: 28
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_fractionseconds
+      [(<function track_points at 0x0000021CBC542F70>, '04:01.5', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('04:01.5', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 37
+- model: results.subtest
+  pk: 29
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_minutes
+      [(<function track_points at 0x0000021CBE06A310>, '4:00.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 38
+- model: results.subtest
+  pk: 30
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds
+      [(<function track_points at 0x0000021CBE06A4C0>, '04:1.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('04:1.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 39
+- model: results.subtest
+  pk: 31
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds2
+      [(<function track_points at 0x0000021CBE06A3A0>, '01:61.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('01:61.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 40
+- model: results.subtest
+  pk: 32
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_few_parameters
+      [(<function track_points at 0x0000021CBC848CA0>, '4:00.000', (0.11193, 254.0))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0))
+    test_result: SU
+    test: 41
+- model: results.subtest
+  pk: 33
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_many_parameters
+      [(<function track_points at 0x0000021CBE06A4C0>, '4:00.000', (0.11193, 254.0,
+      1.267, 1.835))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0, 1.267, 1.835))
+    test_result: SU
+    test: 42
+- model: results.subtest
+  pk: 34
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_fractionseconds
+      [(<function track_points at 0x0000021CBE06A4C0>, '04:01.5', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('04:01.5', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 45
+- model: results.subtest
+  pk: 35
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_minutes
+      [(<function track_points at 0x0000021CBE664790>, '4:00.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 46
+- model: results.subtest
+  pk: 36
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds
+      [(<function track_points at 0x0000021CBE664940>, '04:1.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('04:1.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 47
+- model: results.subtest
+  pk: 37
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds2
+      [(<function track_points at 0x0000021CBBCDB8B0>, '01:61.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('01:61.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 48
+- model: results.subtest
+  pk: 38
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_few_parameters
+      [(<function track_points at 0x0000021CBC542B80>, '4:00.000', (0.11193, 254.0))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0))
+    test_result: SU
+    test: 49
 - model: results.subtest
   pk: 39
   fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_fractionseconds
-      [(<function track_points at 0x000001E236287940>, '04:01.5', (0.11193, 254.0,
-      1.88))]
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_many_parameters
+      [(<function track_points at 0x0000021CBBE4D9D0>, '4:00.000', (0.11193, 254.0,
+      1.267, 1.835))]
     part: 2
-    params_failing: ('04:01.5', (0.11193, 254.0, 1.88))
+    params_failing: ('4:00.000', (0.11193, 254.0, 1.267, 1.835))
     test_result: SU
-    test: 53
+    test: 92
 - model: results.subtest
   pk: 40
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_minutes
-      [(<function track_points at 0x000001E239A75790>, '4:00.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('4:00.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 54
-- model: results.subtest
-  pk: 41
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds
-      [(<function track_points at 0x000001E239A754C0>, '04:1.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('04:1.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 55
-- model: results.subtest
-  pk: 42
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds2
-      [(<function track_points at 0x000001E239A75700>, '01:61.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('01:61.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 56
-- model: results.subtest
-  pk: 43
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_few_parameters
-      [(<function track_points at 0x000001E239A75790>, '4:00.000', (0.11193, 254.0))]
-    part: 2
-    params_failing: ('4:00.000', (0.11193, 254.0))
-    test_result: SU
-    test: 65
-- model: results.subtest
-  pk: 44
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_many_parameters
-      [(<function track_points at 0x000001E239A754C0>, '4:00.000', (0.11193, 254.0,
-      1.267, 1.835))]
-    part: 2
-    params_failing: ('4:00.000', (0.11193, 254.0, 1.267, 1.835))
-    test_result: SU
-    test: 74
-- model: results.subtest
-  pk: 45
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_fractionseconds
-      [(<function track_points at 0x000001E239A754C0>, '04:01.5', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('04:01.5', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 61
-- model: results.subtest
-  pk: 46
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_minutes
-      [(<function track_points at 0x000001E239C1D790>, '4:00.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('4:00.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 62
-- model: results.subtest
-  pk: 47
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds
-      [(<function track_points at 0x000001E23788A1F0>, '04:1.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('04:1.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 63
-- model: results.subtest
-  pk: 48
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds2
-      [(<function track_points at 0x000001E237656EE0>, '01:61.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('01:61.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 64
-- model: results.subtest
-  pk: 49
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_many_parameters
-      [(<function track_points at 0x000001E23788A280>, '4:00.000', (0.11193, 254.0,
-      1.267, 1.835))]
-    part: 2
-    params_failing: ('4:00.000', (0.11193, 254.0, 1.267, 1.835))
-    test_result: SU
-    test: 66
-- model: results.subtest
-  pk: 50
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_fractionseconds
-      [(<function track_points at 0x000001E23788A1F0>, '04:01.5', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('04:01.5', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 69
-- model: results.subtest
-  pk: 51
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_minutes
-      [(<function track_points at 0x000001E23A5D0280>, '4:00.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('4:00.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 70
-- model: results.subtest
-  pk: 52
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds
-      [(<function track_points at 0x000001E239A75790>, '04:1.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('04:1.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 71
-- model: results.subtest
-  pk: 53
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds2
-      [(<function track_points at 0x000001E23A5D01F0>, '01:61.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('01:61.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 72
-- model: results.subtest
-  pk: 54
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_few_parameters
-      [(<function track_points at 0x000001E23A5D0280>, '4:00.000', (0.11193, 254.0))]
-    part: 2
-    params_failing: ('4:00.000', (0.11193, 254.0))
-    test_result: SU
-    test: 73
-- model: results.subtest
-  pk: 55
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_fractionseconds
-      [(<function track_points at 0x000001E234B4F310>, '04:01.5', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('04:01.5', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 77
-- model: results.subtest
-  pk: 56
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_minutes
-      [(<function track_points at 0x000001E23A0F7670>, '4:00.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('4:00.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 78
-- model: results.subtest
-  pk: 57
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds
-      [(<function track_points at 0x000001E23A0F7820>, '04:1.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('04:1.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 79
-- model: results.subtest
-  pk: 58
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds2
-      [(<function track_points at 0x000001E23A0F7700>, '01:61.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('01:61.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 80
-- model: results.subtest
-  pk: 59
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_few_parameters
-      [(<function track_points at 0x000001E23A0F7CA0>, '4:00.000', (0.11193, 254.0))]
-    part: 2
-    params_failing: ('4:00.000', (0.11193, 254.0))
-    test_result: SU
-    test: 81
-- model: results.subtest
-  pk: 60
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_many_parameters
-      [(<function track_points at 0x000001E23A0F7670>, '4:00.000', (0.11193, 254.0,
-      1.267, 1.835))]
-    part: 2
-    params_failing: ('4:00.000', (0.11193, 254.0, 1.267, 1.835))
-    test_result: SU
-    test: 82
-- model: results.subtest
-  pk: 61
   fields:
     identifier: configs.t_test_question_1ii.TestQuestion2.test_points [13.480, (9.23076,
       26.7, 1.835)]
     part: 2
     params_failing: '''13.480, (9.23076, 26.7, 1.835)'''
     test_result: SU
-    test: 117
+    test: 127
 - model: results.subtest
-  pk: 62
+  pk: 41
   fields:
     identifier: configs.t_test_question_1ii.TestQuestion2.test_points [11.500, (9.23076,
       26.7, 1.835)]
     part: 2
     params_failing: '''11.500, (9.23076, 26.7, 1.835)'''
     test_result: SU
-    test: 117
+    test: 127
 - model: results.subtest
-  pk: 63
+  pk: 42
   fields:
     identifier: configs.t_test_question_1ii.TestQuestion2.test_points [23.000, (4.99087,
       42.5, 1.81)]
     part: 2
     params_failing: '''23.000, (4.99087, 42.5, 1.81)'''
     test_result: SU
-    test: 117
+    test: 127
 - model: results.subtest
-  pk: 64
+  pk: 43
   fields:
     identifier: configs.t_test_question_1ii.TestQuestion2.test_points [23.680, (4.99087,
       42.5, 1.81)]
     part: 2
     params_failing: '''23.680, (4.99087, 42.5, 1.81)'''
     test_result: SU
-    test: 117
+    test: 127
 - model: results.subtest
-  pk: 65
+  pk: 44
   fields:
     identifier: configs.t_test_question_1ii.TestQuestion2.test_points [02:40.550,
       (0.11193, 254.0, 1.88)]
     part: 2
     params_failing: '''02:40.550, (0.11193, 254.0, 1.88)'''
     test_result: SU
-    test: 117
+    test: 127
 - model: results.subtest
-  pk: 66
+  pk: 45
   fields:
     identifier: configs.t_test_question_1ii.TestQuestion2.test_points [02:11.310,
       (0.11193, 254.0, 1.88)]
     part: 2
     params_failing: '''02:11.310, (0.11193, 254.0, 1.88)'''
     test_result: SU
-    test: 117
+    test: 127
 - model: results.subtest
-  pk: 67
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_zero_points [27.480,
-      (9.23076, 26.7, 1.835)]
-    part: 2
-    params_failing: '''27.480, (9.23076, 26.7, 1.835)'''
-    test_result: SU
-    test: 118
-- model: results.subtest
-  pk: 68
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_zero_points [42.501,
-      (4.99087, 42.5, 1.81)]
-    part: 2
-    params_failing: '''42.501, (4.99087, 42.5, 1.81)'''
-    test_result: SU
-    test: 118
-- model: results.subtest
-  pk: 69
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_zero_points [04:14.001,
-      (0.11193, 254.0, 1.88)]
-    part: 2
-    params_failing: '''04:14.001, (0.11193, 254.0, 1.88)'''
-    test_result: SU
-    test: 118
-- model: results.subtest
-  pk: 70
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
-      [(<function time_to_seconds at 0x000001E23A0F7670>, '04:01.5')]
-    part: 1
-    params_failing: '''04:01.5'''
-    test_result: SU
-    test: 85
-- model: results.subtest
-  pk: 71
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
-      [(<function time_to_seconds at 0x000001E23CFA0D30>, '4:00.000')]
-    part: 1
-    params_failing: '''4:00.000'''
-    test_result: SU
-    test: 86
-- model: results.subtest
-  pk: 72
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
-      [(<function time_to_seconds at 0x000001E23CFA0EE0>, '01:61.000')]
-    part: 1
-    params_failing: '''01:61.000'''
-    test_result: SU
-    test: 87
-- model: results.subtest
-  pk: 73
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
-      [(<function time_to_seconds at 0x000001E23CFA0E50>, '04:1.000')]
-    part: 1
-    params_failing: '''04:1.000'''
-    test_result: SU
-    test: 88
-- model: results.subtest
-  pk: 74
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_seconds_only [10.530]
-    part: 1
-    params_failing: '''10.530'''
-    test_result: SU
-    test: 110
-- model: results.subtest
-  pk: 75
+  pk: 46
   fields:
     identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_fractionseconds
-      [(<function track_points at 0x000001E23CFA0EE0>, '04:01.5', (0.11193, 254.0,
+      [(<function track_points at 0x0000021CBBE4D9D0>, '04:01.5', (0.11193, 254.0,
       1.88))]
     part: 2
     params_failing: ('04:01.5', (0.11193, 254.0, 1.88))
     test_result: SU
-    test: 91
+    test: 95
 - model: results.subtest
-  pk: 76
+  pk: 47
   fields:
     identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_minutes
-      [(<function track_points at 0x000001E23CFA0E50>, '4:00.000', (0.11193, 254.0,
+      [(<function track_points at 0x0000021CBF203B80>, '4:00.000', (0.11193, 254.0,
       1.88))]
     part: 2
     params_failing: ('4:00.000', (0.11193, 254.0, 1.88))
     test_result: SU
-    test: 92
+    test: 54
 - model: results.subtest
-  pk: 77
+  pk: 48
   fields:
     identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds
-      [(<function track_points at 0x000001E23DBA5790>, '04:1.000', (0.11193, 254.0,
+      [(<function track_points at 0x0000021CBF203CA0>, '04:1.000', (0.11193, 254.0,
       1.88))]
     part: 2
     params_failing: ('04:1.000', (0.11193, 254.0, 1.88))
     test_result: SU
-    test: 93
+    test: 55
 - model: results.subtest
-  pk: 78
+  pk: 49
   fields:
     identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds2
-      [(<function track_points at 0x000001E23DBA5670>, '01:61.000', (0.11193, 254.0,
+      [(<function track_points at 0x0000021CBBE4D9D0>, '01:61.000', (0.11193, 254.0,
       1.88))]
     part: 2
     params_failing: ('01:61.000', (0.11193, 254.0, 1.88))
     test_result: SU
-    test: 94
+    test: 98
 - model: results.subtest
-  pk: 79
+  pk: 50
   fields:
     identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_few_parameters
-      [(<function track_points at 0x000001E23CFA0EE0>, '4:00.000', (0.11193, 254.0))]
+      [(<function track_points at 0x0000021CBE664820>, '4:00.000', (0.11193, 254.0))]
     part: 2
     params_failing: ('4:00.000', (0.11193, 254.0))
     test_result: SU
-    test: 95
+    test: 57
 - model: results.subtest
-  pk: 80
+  pk: 51
   fields:
     identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_many_parameters
-      [(<function track_points at 0x000001E23A5D0280>, '4:00.000', (0.11193, 254.0,
+      [(<function track_points at 0x0000021CBF203CA0>, '4:00.000', (0.11193, 254.0,
       1.267, 1.835))]
     part: 2
     params_failing: ('4:00.000', (0.11193, 254.0, 1.267, 1.835))
     test_result: SU
+    test: 58
+- model: results.subtest
+  pk: 52
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_fractionseconds
+      [(<function track_points at 0x0000021CBF203CA0>, '04:01.5', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('04:01.5', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 61
+- model: results.subtest
+  pk: 53
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_minutes
+      [(<function track_points at 0x0000021CBF53D160>, '4:00.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 62
+- model: results.subtest
+  pk: 54
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds
+      [(<function track_points at 0x0000021CBF53D280>, '04:1.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('04:1.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 63
+- model: results.subtest
+  pk: 55
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds2
+      [(<function track_points at 0x0000021CBF203CA0>, '01:61.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('01:61.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 64
+- model: results.subtest
+  pk: 56
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_few_parameters
+      [(<function track_points at 0x0000021CBF6E1EE0>, '4:00.000', (0.11193, 254.0))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0))
+    test_result: SU
+    test: 65
+- model: results.subtest
+  pk: 57
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_many_parameters
+      [(<function track_points at 0x0000021CBF6E1F70>, '4:00.000', (0.11193, 254.0,
+      1.267, 1.835))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0, 1.267, 1.835))
+    test_result: SU
+    test: 66
+- model: results.subtest
+  pk: 58
+  fields:
+    identifier: configs.t_test_question_1iii.TestQuestion3.test_too_few_entries [(<function
+      compute_score at 0x0000021CC16478B0>, 'Liliane Blotty, 42.501, 27.480')]
+    part: 3
+    params_failing: '''Liliane Blotty, 42.501, 27.480'''
+    test_result: SU
+    test: 84
+- model: results.subtest
+  pk: 59
+  fields:
+    identifier: configs.t_test_question_1iii.TestQuestion3.test_too_many_entries [(<function
+      compute_score at 0x0000021CBF6E1EE0>, 'Liliane Blotty, 42.501, 27.480, 04:14.001,
+      01:00.500')]
+    part: 3
+    params_failing: '''Liliane Blotty, 42.501, 27.480, 04:14.001, 01:00.500'''
+    test_result: SU
+    test: 85
+- model: results.subtest
+  pk: 60
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_fractionseconds
+      [(<function track_points at 0x0000021CC16478B0>, '04:01.5', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('04:01.5', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 87
+- model: results.subtest
+  pk: 61
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_minutes
+      [(<function track_points at 0x0000021CC1A49D30>, '4:00.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 88
+- model: results.subtest
+  pk: 62
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds
+      [(<function track_points at 0x0000021CC1A49E50>, '04:1.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('04:1.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 89
+- model: results.subtest
+  pk: 63
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds2
+      [(<function track_points at 0x0000021CC16478B0>, '01:61.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('01:61.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 90
+- model: results.subtest
+  pk: 64
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_few_parameters
+      [(<function track_points at 0x0000021CBF2039D0>, '4:00.000', (0.11193, 254.0))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0))
+    test_result: SU
+    test: 91
+- model: results.subtest
+  pk: 65
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_minutes
+      [(<function track_points at 0x0000021CC21D01F0>, '4:00.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0, 1.88))
+    test_result: SU
     test: 96
 - model: results.subtest
-  pk: 81
+  pk: 66
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds
+      [(<function track_points at 0x0000021CC21D0040>, '04:1.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('04:1.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 97
+- model: results.subtest
+  pk: 67
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_few_parameters
+      [(<function track_points at 0x0000021CC21D01F0>, '4:00.000', (0.11193, 254.0))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0))
+    test_result: SU
+    test: 99
+- model: results.subtest
+  pk: 68
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_many_parameters
+      [(<function track_points at 0x0000021CC21D0040>, '4:00.000', (0.11193, 254.0,
+      1.267, 1.835))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0, 1.267, 1.835))
+    test_result: SU
+    test: 100
+- model: results.subtest
+  pk: 69
   fields:
     identifier: configs.t_test_question_1iii.TestQuestion3.test_point_1 [Jessica ENNIS-HILL,
       22.830, 12.540, 02:08.650]
     part: 3
     params_failing: '''Jessica ENNIS-HILL, 22.830, 12.540, 02:08.650'''
     test_result: SU
-    test: 119
+    test: 129
 - model: results.subtest
-  pk: 82
+  pk: 70
   fields:
     identifier: configs.t_test_question_1iii.TestQuestion3.test_point_2 [Katarina
       JOHNSON-THOMPSON, 23.730, 13.480, 02:10.760]
     part: 3
     params_failing: '''Katarina JOHNSON-THOMPSON, 23.730, 13.480, 02:10.760'''
     test_result: SU
-    test: 120
+    test: 130
 - model: results.subtest
-  pk: 83
+  pk: 71
   fields:
     identifier: configs.t_test_question_1iii.TestQuestion3.test_point_3 [Louise HAZEL,
       24.480, 13.480, 02:18.780]
     part: 3
     params_failing: '''Louise HAZEL, 24.480, 13.480, 02:18.780'''
     test_result: SU
-    test: 121
+    test: 131
 - model: results.subtest
-  pk: 84
+  pk: 72
   fields:
     identifier: configs.t_test_question_1iii.TestQuestion3.test_too_few_entries [(<function
-      compute_score at 0x000001E23F41FF70>, 'Liliane Blotty, 42.501, 27.480')]
+      compute_score at 0x0000021CC215AD30>, 'Liliane Blotty, 42.501, 27.480')]
     part: 3
     params_failing: '''Liliane Blotty, 42.501, 27.480'''
-    test_result: SU
-    test: 102
+    test_result: E
+    test: 106
 - model: results.subtest
-  pk: 85
+  pk: 73
   fields:
     identifier: configs.t_test_question_1iii.TestQuestion3.test_too_many_entries [(<function
-      compute_score at 0x000001E23DD7C700>, 'Liliane Blotty, 42.501, 27.480, 04:14.001,
+      compute_score at 0x0000021CC21D01F0>, 'Liliane Blotty, 42.501, 27.480, 04:14.001,
       01:00.500')]
     part: 3
     params_failing: '''Liliane Blotty, 42.501, 27.480, 04:14.001, 01:00.500'''
-    test_result: SU
-    test: 103
+    test_result: F
+    test: 107
 - model: results.subtest
-  pk: 86
+  pk: 74
   fields:
     identifier: configs.t_test_question_1iii.TestQuestion3.test_zero_point [Liliane
       Blotty, 42.501, 27.480, 04:14.001]
     part: 3
     params_failing: '''Liliane Blotty, 42.501, 27.480, 04:14.001'''
     test_result: SU
-    test: 124
+    test: 134
 - model: results.subtest
-  pk: 87
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_fractionseconds_format
-      [(<function time_to_seconds at 0x000001E23DBA5670>, '04:01.5')]
-    part: 1
-    params_failing: '''04:01.5'''
-    test_result: SU
-    test: 105
-- model: results.subtest
-  pk: 88
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
-      [(<function time_to_seconds at 0x000001E23A5D0C10>, '4:00.000')]
-    part: 1
-    params_failing: '''4:00.000'''
-    test_result: SU
-    test: 106
-- model: results.subtest
-  pk: 89
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
-      [(<function time_to_seconds at 0x000001E23A5D0430>, '01:61.000')]
-    part: 1
-    params_failing: '''01:61.000'''
-    test_result: SU
-    test: 107
-- model: results.subtest
-  pk: 90
-  fields:
-    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds_format
-      [(<function time_to_seconds at 0x000001E23A5D0B80>, '04:1.000')]
-    part: 1
-    params_failing: '''04:1.000'''
-    test_result: SU
-    test: 108
-- model: results.subtest
-  pk: 91
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_fractionseconds
-      [(<function track_points at 0x000001E23A5D0430>, '04:01.5', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('04:01.5', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 111
-- model: results.subtest
-  pk: 92
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_minutes
-      [(<function track_points at 0x000001E23A5D0B80>, '4:00.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('4:00.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 112
-- model: results.subtest
-  pk: 93
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds
-      [(<function track_points at 0x000001E2408915E0>, '04:1.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('04:1.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 113
-- model: results.subtest
-  pk: 94
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds2
-      [(<function track_points at 0x000001E240891670>, '01:61.000', (0.11193, 254.0,
-      1.88))]
-    part: 2
-    params_failing: ('01:61.000', (0.11193, 254.0, 1.88))
-    test_result: SU
-    test: 114
-- model: results.subtest
-  pk: 95
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_few_parameters
-      [(<function track_points at 0x000001E2408913A0>, '4:00.000', (0.11193, 254.0))]
-    part: 2
-    params_failing: ('4:00.000', (0.11193, 254.0))
-    test_result: SU
-    test: 115
-- model: results.subtest
-  pk: 96
-  fields:
-    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_many_parameters
-      [(<function track_points at 0x000001E23F41FDC0>, '4:00.000', (0.11193, 254.0,
-      1.267, 1.835))]
-    part: 2
-    params_failing: ('4:00.000', (0.11193, 254.0, 1.267, 1.835))
-    test_result: SU
-    test: 116
-- model: results.subtest
-  pk: 97
+  pk: 75
   fields:
     identifier: configs.t_test_question_1iii.TestQuestion3.test_too_few_entries [(<function
-      compute_score at 0x000001E23F41FEE0>, 'Liliane Blotty, 42.501, 27.480')]
+      compute_score at 0x0000021CC4C10C10>, 'Liliane Blotty, 42.501, 27.480')]
     part: 3
     params_failing: '''Liliane Blotty, 42.501, 27.480'''
     test_result: SU
-    test: 122
+    test: 112
 - model: results.subtest
-  pk: 98
+  pk: 76
   fields:
     identifier: configs.t_test_question_1iii.TestQuestion3.test_too_many_entries [(<function
-      compute_score at 0x000001E2409CB4C0>, 'Liliane Blotty, 42.501, 27.480, 04:14.001,
+      compute_score at 0x0000021CC215AA60>, 'Liliane Blotty, 42.501, 27.480, 04:14.001,
       01:00.500')]
     part: 3
     params_failing: '''Liliane Blotty, 42.501, 27.480, 04:14.001, 01:00.500'''
     test_result: SU
+    test: 113
+- model: results.subtest
+  pk: 77
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_minutes_format
+      [(<function time_to_seconds at 0x0000021CC4F841F0>, '4:00.000')]
+    part: 1
+    params_failing: '''4:00.000'''
+    test_result: SU
+    test: 116
+- model: results.subtest
+  pk: 78
+  fields:
+    identifier: configs.t_test_question_1i.TestQuestion1.test_invalid_seconds2_format
+      [(<function time_to_seconds at 0x0000021CC4F84310>, '01:61.000')]
+    part: 1
+    params_failing: '''01:61.000'''
+    test_result: SU
+    test: 117
+- model: results.subtest
+  pk: 79
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_fractionseconds
+      [(<function track_points at 0x0000021CC55AEE50>, '04:01.5', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('04:01.5', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 121
+- model: results.subtest
+  pk: 80
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_minutes
+      [(<function track_points at 0x0000021CC72095E0>, '4:00.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 122
+- model: results.subtest
+  pk: 81
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds
+      [(<function track_points at 0x0000021CC7209700>, '04:1.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('04:1.000', (0.11193, 254.0, 1.88))
+    test_result: SU
     test: 123
+- model: results.subtest
+  pk: 82
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_seconds2
+      [(<function track_points at 0x0000021CC55AEE50>, '01:61.000', (0.11193, 254.0,
+      1.88))]
+    part: 2
+    params_failing: ('01:61.000', (0.11193, 254.0, 1.88))
+    test_result: SU
+    test: 124
+- model: results.subtest
+  pk: 83
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_few_parameters
+      [(<function track_points at 0x0000021CC72095E0>, '4:00.000', (0.11193, 254.0))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0))
+    test_result: SU
+    test: 125
+- model: results.subtest
+  pk: 84
+  fields:
+    identifier: configs.t_test_question_1ii.TestQuestion2.test_invalid_format_too_many_parameters
+      [(<function track_points at 0x0000021CC7209700>, '4:00.000', (0.11193, 254.0,
+      1.267, 1.835))]
+    part: 2
+    params_failing: ('4:00.000', (0.11193, 254.0, 1.267, 1.835))
+    test_result: SU
+    test: 126
+- model: results.subtest
+  pk: 85
+  fields:
+    identifier: configs.t_test_question_1iii.TestQuestion3.test_too_few_entries [(<function
+      compute_score at 0x0000021CC21D0B80>, 'Liliane Blotty, 42.501, 27.480')]
+    part: 3
+    params_failing: '''Liliane Blotty, 42.501, 27.480'''
+    test_result: SU
+    test: 132
+- model: results.subtest
+  pk: 86
+  fields:
+    identifier: configs.t_test_question_1iii.TestQuestion3.test_too_many_entries [(<function
+      compute_score at 0x0000021CC72095E0>, 'Liliane Blotty, 42.501, 27.480, 04:14.001,
+      01:00.500')]
+    part: 3
+    params_failing: '''Liliane Blotty, 42.501, 27.480, 04:14.001, 01:00.500'''
+    test_result: SU
+    test: 133

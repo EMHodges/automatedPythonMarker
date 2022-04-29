@@ -6,6 +6,8 @@ from django.core.management.base import BaseCommand
 
 from django.core import serializers
 
+from app_customcmd.management.functions.delete_from_databases import delete_databases_content
+
 
 class Command(BaseCommand):
 
@@ -13,7 +15,8 @@ class Command(BaseCommand):
         parser.add_argument('id', nargs="+", type=str)
 
     def handle(self, *args, **kwargs):
-        id = kwargs['id'][0]
+        delete_databases_content()
+        id = kwargs['id'][0] + ".yaml"
 
         fixture_file = os.path.join("data", id)
         with open(fixture_file) as stream:

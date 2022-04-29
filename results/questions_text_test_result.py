@@ -32,6 +32,7 @@ class QuestionsTextTestResult(QuestionsTestResult):
         self.create_result(test, ResultsEnums.SUCCESS, "Success")
 
     def addError(self, test: QuestionsTestCase, err) -> None:
+        print(err)
         err_name = err[0].__name__
         if err_name == 'SyntaxError':
             self._addSyntaxError(test)

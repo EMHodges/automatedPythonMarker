@@ -23,7 +23,7 @@ def lint_answer(number, submission, question_part):
 def get_lint_errors():
     clear_pylint_cache()
     pylint_output = StringIO()
-    args = [TMP_FILE, '--errors-only']
+    args = [TMP_FILE, '--errors-only', '--known-standard-library=re']
     lint.Run(args, reporter=JSONReporter(pylint_output), exit=False)
     return pylint_output.getvalue()
 

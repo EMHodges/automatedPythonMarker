@@ -1,11 +1,6 @@
-import _thread
 import ast
 import functools
 import os
-import threading
-from contextlib import contextmanager
-
-import timeout_decorator
 
 from automatedPythonMarker.settings import resource_path
 from questions.models import QuestionComposite, SubQuestionComposite
