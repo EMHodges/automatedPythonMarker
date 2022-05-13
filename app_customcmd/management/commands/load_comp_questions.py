@@ -9,7 +9,7 @@ from questions.models import QuestionComposite, SubQuestionComposite
 from collections import defaultdict
 
 from results.models import Result
-
+import math
 
 class DuplicateQuestionNumberException(Exception):
     """Raise when multiple question files have the same question number"""
