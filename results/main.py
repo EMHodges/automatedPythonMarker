@@ -1,16 +1,13 @@
-import os
 import shutil
 import unittest
 
 import roman
 
-from automatedPythonMarker.settings import resource_path
+from configs.constants import TMP_FILE
 from questions.models import QuestionComposite, SubQuestionComposite
 from results.apps import QUESTION_RUNNERS, MODEL_ANSWERS
 from static_lint.lint_answer import lint_answer
 from submission.models import Submission
-
-TMP_FILE = resource_path(os.path.join('static_lint', 'code_to_lint.py'))
 
 
 def run_tests(answer, question_number, question_part, submission):

@@ -3,6 +3,7 @@ import PyInstaller.__main__
 import shutil
 
 from app_customcmd.management.functions.delete_from_databases import delete_answers
+from configs.constants import TMP_FILE
 
 
 def run_windows():
@@ -49,4 +50,4 @@ class Command(BaseCommand):
     def _remove_generated_files():
         shutil.rmtree('build/', ignore_errors=True)
         shutil.rmtree('dist/', ignore_errors=True)
-        shutil.rmtree('static_lint/code_to_lint.py', ignore_errors=True)
+        shutil.rmtree(TMP_FILE, ignore_errors=True)

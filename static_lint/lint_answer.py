@@ -1,16 +1,12 @@
 import json
-import os
 import re
 from io import StringIO
-from automatedPythonMarker.settings import resource_path
 from pylint.reporters.json_reporter import JSONReporter
 
+from configs.constants import TMP_FILE
 from static_lint.models import StaticLint
 from pylint import lint
 from astroid import MANAGER
-
-TMP_FILE = resource_path(os.path.join('static_lint', 'code_to_lint.py'))
-LINT_RULES_FILE = os.path.join('static_lint', '.pylintrc')
 
 
 def lint_answer(number, submission, question_part):
